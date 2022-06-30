@@ -13,8 +13,8 @@ GENDER = [
     ('O', 'Other')
 ]
 
-class CustomUser(AbstractUser):
-    user_type = models.Charfield(choices=USER_TYPES, max_length=1)
+class User(AbstractUser):
+    user_type = models.CharField(choices=USER_TYPES, max_length=1)
     gender = models.CharField(choices=GENDER,  max_length=1, null=True, blank=True)
     phone = PhoneNumberField(null=True, blank=True)
 
@@ -28,5 +28,5 @@ class CustomUser(AbstractUser):
     def is_patient(self):
         if self.user_type == 'P':
             return True
-            
+
         return False

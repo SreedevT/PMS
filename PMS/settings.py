@@ -28,7 +28,7 @@ DEBUG = True
 ALLOWED_HOSTS = []
 
 # Phone numeber field
-PHONENUMER_DEFAULT_REGION = 'IN'
+PHONENUMBER_DEFAULT_REGION = 'IN'
 PHONENUMBER_DB_FORMAT = 'NATIONAL'
 
 
@@ -41,6 +41,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'accounts',
+    'phonenumber_field',
 ]
 
 MIDDLEWARE = [
@@ -51,8 +53,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'accounts',
-    'phonenumber_field',
+    
 ]
 
 ROOT_URLCONF = 'PMS.urls'
@@ -86,6 +87,7 @@ DATABASES = {
     }
 }
 
+AUTH_USER_MODEL = 'accounts.User'
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
