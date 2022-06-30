@@ -1,0 +1,14 @@
+{% extends 'base.html'%}
+
+{% load bootstrap5 %}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+
+{% block content %}
+    <p class="text-center text-primary">This is the home page!</p>
+    {% if user.is_authenticated %}
+        <p class="text-center text-success">Welcome, {{user.first_name}} {{user.last_name}}!</p>
+    {% else %}
+        <p class="text-center text-danger">You are not logged in!</p>
+    {% endif %}
+{% endblock %}
