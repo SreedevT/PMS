@@ -2,18 +2,19 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser
 from phonenumber_field.modelfields import PhoneNumberField
 
-USER_TYPES = [
-    ('D', 'Doctor'),
-    ('P', 'Patient'),
-]
-
-GENDER = [
-    ('M', 'Male'),
-    ('F', 'Female'),
-    ('O', 'Other')
-]
 
 class User(AbstractUser):
+    USER_TYPES = [
+        ('D', 'Doctor'),
+        ('P', 'Patient'),
+    ]
+
+    GENDER = [
+        ('M', 'Male'),
+        ('F', 'Female'),
+        ('O', 'Other')
+    ]
+    
     user_type = models.CharField(choices=USER_TYPES, max_length=1)
     gender = models.CharField(choices=GENDER,  max_length=1, null=True, blank=True)
     phone = PhoneNumberField(null=True, blank=True)
