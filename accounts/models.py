@@ -4,19 +4,27 @@ from phonenumber_field.modelfields import PhoneNumberField
 
 
 class User(AbstractUser):
+    DOCTOR = 'D'
+    PATIENT = 'P'
+
     USER_TYPES = [
-        ('D', 'Doctor'),
-        ('P', 'Patient'),
+        (DOCTOR, 'Doctor'),
+        (PATIENT, 'Patient'),
     ]
 
+    MALE = 'M'
+    FEMALE = 'F'
+    OTHER = 'O'
+    PREFER_NOT_TO_SAY = 'N'
     GENDER = [
-        ('M', 'Male'),
-        ('F', 'Female'),
-        ('O', 'Other')
+        (MALE, 'Male'),
+        (FEMALE, 'Female'),
+        (OTHER, 'Other'),
+        (PREFER_NOT_TO_SAY, 'Prefer not to say')
     ]
     
-    user_type = models.CharField(choices=USER_TYPES, max_length=1)
-    gender = models.CharField(choices=GENDER,  max_length=1, null=True, blank=True)
+    user_type = models.CharField(choices=USER_TYPES, max_length=1, default=PATIENT)
+    gender = models.CharField(choices=GENDER,  max_length=1, default=PREFER_NOT_TO_SAY)
     phone = PhoneNumberField(null=True, blank=True)
 
 
