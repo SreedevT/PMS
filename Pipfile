@@ -5,6 +5,8 @@ name = "pypi"
 
 [packages]
 django = "*"
+django-bootstrap-v5 = "*"
+django-phonenumber-field = {extras = ["phonenumberslite"], version = "*"}
 
 [dev-packages]
 
