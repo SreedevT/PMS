@@ -7,8 +7,9 @@
 {% block content %}
     <p class="text-center text-primary">This is the home page!</p>
     {% if user.is_authenticated %}
-        <p class="text-center text-success">Welcome, {{user.first_name}} {{user.last_name}}!</p>
+        <p class="text-center text-success fs-1">Welcome, {{user.get_full_name}}!</p>
+        <p class="text-center text-info fs-3">Your gender is {{user.get_gender}}</p>
     {% else %}
-        <p class="text-center text-danger">You are not logged in!</p>
+        <p class="text-center text-danger fs-1">You are not logged in!</p>
     {% endif %}
 {% endblock %}
