@@ -2,10 +2,10 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib.auth import login
 from .forms import UserCreateForm
-from .models import User
 
 def home(request):
-    return render(request, 'home.html', context={'user': request.user})
+    # context = {'user': request.user} #? context may not be needed for authenticated users, see: https://stackoverflow.com/questions/13713077/get-user-information-in-django-templates
+    return render(request, 'home.html')
 
 def register(request):
     if request.method == 'POST':
