@@ -39,3 +39,14 @@ class User(AbstractUser):
             return True
 
         return False
+
+    def get_gender(self):
+        match self.gender:
+            case self.MALE:
+                return 'Male'
+            case self.FEMALE:
+                return 'Female'
+            case self.OTHER:
+                return 'Other'
+            case self.PREFER_NOT_TO_SAY:
+                return 'Prefer not to say'
