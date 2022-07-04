@@ -7,6 +7,8 @@ name = "pypi"
 django = "*"
 django-bootstrap-v5 = "*"
 django-phonenumber-field = {extras = ["phonenumberslite"], version = "*"}
+pillow = "*"
+windows-curses = "*"
 
 [dev-packages]
 
