@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'accounts',
     'phonenumber_field',
     'bootstrap5',
+    'profiles',
 ]
 
 MIDDLEWARE = [
