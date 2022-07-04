@@ -11,6 +11,7 @@
       <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav">
             <a class="nav-link active" aria-current="page" href="{% url 'accounts:home' %}">Home</a>
+            
             {% if user.is_authenticated %}
                 <a class="nav-link" href="{% url 'accounts:logout' %}">Logout</a>
             {% else %}
