@@ -15,8 +15,12 @@ class PatientProfile(models.Model):
         ('AB+', 'AB+'),
     ]
 
-    user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True, limit_choices_to={'user_type': 'P'})
-    profile_pic = models.ImageField(upload_to='profile_pics/patients', blank=True)
+    user = models.OneToOneField(
+        User, on_delete=models.CASCADE, 
+        primary_key=True, limit_choices_to={'user_type': 'P'}, 
+        related_name='patprofile', #* related_name is used to give alternate name to the reverse relationship
+        )
+    profile_pic = models.ImageField(upload_to='images/profiles/patients', null=True, blank=True)
     dob = models.DateField(null=True, blank=True)
     blood_group = models.CharField(max_length=3, choices=BLOOD_GROUPS)
     allergies = models.TextField(blank=True, null=True)
