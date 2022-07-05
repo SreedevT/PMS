@@ -21,7 +21,7 @@ class PatientProfile(models.Model):
         related_name='patprofile', #* related_name is used to give alternate name to the reverse relationship
         )
     profile_pic = models.ImageField(upload_to='images/profiles/patients', null=True, blank=True)
-    dob = models.DateField(null=True, blank=True)
+    dob = models.DateField(blank=True, null=True) #TODO -remove blank=True, null=True
     blood_group = models.CharField(max_length=3, choices=BLOOD_GROUPS)
     allergies = models.TextField(blank=True, null=True)
 
