@@ -13,7 +13,9 @@
     {% if user.is_authenticated %}
         <p class="text-center text-success fs-1">Welcome, {{user.get_full_name}}!</p>
         <p class="text-center text-info fs-3">Your gender is {{user.get_gender}}</p>
-        <img src="{{user.patprofile.profile_pic.url}}" alt="profile-picture" class="rounded-circle mx-auto d-block" width="100" height="100">
+        {% if user.patprofile.profile_pic %}
+            <img src="{{user.patprofile.profile_pic.url}}" alt="profile-picture" class="rounded-circle mx-auto d-block" width="100" height="100">
+        {% endif %}
     {% else %}
         <p class="text-center text-danger fs-1">You are not logged in!</p>
     {% endif %}
