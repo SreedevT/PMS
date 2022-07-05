@@ -4,7 +4,7 @@ Create a virtual environment
 `pipenv shell`
 
 Install requirements
-`pip install -r requirements.txt`
+`pipenv install`
 
 Run django server
 `python manage.py runserver`
