@@ -1,5 +1,7 @@
 Clone repo or download files
 
+If pipenv not installed: `pip install pipenv`
+
 Create a virtual environment 
 `pipenv shell`
 
