@@ -1,4 +1,5 @@
 from curses.ascii import US
+from pydoc import classname
 from django.db import models
 from accounts.models import User
 
@@ -28,26 +29,16 @@ class PatientProfile(models.Model):
     def __str__(self) -> str:
         return f"{self.user.username}'s profile"
 
+class Department(models.Model):
+    
+    name = models.CharField(max_length=100)
+    
+    def __str__(self) -> str:
+        return self.name
+
 
 
 class DoctorProfile(models.Model):
-
-
-    DEPARTMENTS = [
-        ('Cardiology', 'Cardiology'),
-        ('Dermatology', 'Dermatology'),
-        ('ENT', 'ENT'),
-        ('Gastroentrology', 'Gastroentrology'),
-        ('Gynacology', 'Gynacology'),
-        ('General Medicine', 'General Medicine'),
-        ('Neurology', 'Neurology'),
-        ('Nephrology', 'Nephrology'),
-        ('Ophthalmology', 'Ophthalmology'),
-        ('Orthopedic', 'Orthopedic'),
-        ('Oncology', 'Oncology'),
-        ('Pediatrics', 'Pediatrics'),
-        ('Psychiatry', 'Psychiatry'),
-    ]
 
     user = models.OneToOneField(
         User, on_delete=models.CASCADE, 
@@ -56,10 +47,17 @@ class DoctorProfile(models.Model):
         )
     profile_pic = models.ImageField(upload_to='images/profiles/doctors', null=True, blank=True)
     qualification = models.CharField(max_length=100, blank=True, null=True)
-    department = models.CharField(max_length=100, choices=DEPARTMENTS)
+    department= models.ForeignKey(Department, on_delete=models.CASCADE, blank=True, null=True)
 
 
     def __str__(self) -> str:
         return f"{self.user.username}'s profile"
     
     
+
+class Medicine(models.Model):
+    name = models.CharField(max_length=100)
+    price = models.IntegerField(blank=True, null=True)
+    
+    def __str__(self) -> str:
+        return self.name
