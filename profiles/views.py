@@ -23,3 +23,20 @@ def profile(request, pk):
     else:
         form = PatientProfileUpdateForm(instance=profile)
     return render(request, 'profile.html', {'form': form})
+
+def doctor_profile(request, pk):
+    user = User.objects.get(pk=pk)
+
+    if DoctorProfile.objects.filter(user=user).exists():
+        profile = DoctorProfile.objects.get(user=user)
+    else:
+        profile = DoctorProfile.objects.create(user=user)
+
+    if request.method == 'POST':
+        form = DoctorProfileUpdateForm(request.POST, instance=profile, files=request.FILES) #* files is used to upload files
+        if form.is_valid():
+            form.save()
+            return redirect('accounts:home')
+    else:
+        form = DoctorProfileUpdateForm(instance=profile)
+    return render(request, 'profile.html', {'form': form})

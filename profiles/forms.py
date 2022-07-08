@@ -9,3 +9,9 @@ class PatientProfileUpdateForm(forms.ModelForm):
         widgets = {
             'dob': forms.DateInput(),
         }
+
+class DoctorProfileUpdateForm(forms.ModelForm):
+    class Meta:
+        model = DoctorProfile
+        fields = ('profile_pic', 'qualification', 'department')
+        
