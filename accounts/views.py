@@ -14,19 +14,20 @@ def home(request):
     #* we can access the profile object by using the user object
     #! Not needed 
     # profile = PatientProfile.objects.get(user=request.user)
+    user = request.user
+    if user.is_superuser:
+        return render(request, 'home_no_entry.html')
+        
     return render(request, 'home.html')
 
 def register(request):
-    if request.method == 'POST':
-        form = UserCreateForm(request.POST)
-        print(form.is_valid())
-        if form.is_valid():
-            user = form.save()
-            login(request, user)
-            return redirect('success')
-    else:
+    if request.method != 'POST':
         form = UserCreateForm()
-    return render(request, 'register.html', {'form': form})
+    
+    form = UserCreateForm(request.POST)
+    if form.is_valid():
+        user = form.save()
+        login(request, user)
+        return redirect('accounts:home')
 
-def success(request):
-    return HttpResponse('Success!')
+    return render(request, 'register.html', {'form': form})
