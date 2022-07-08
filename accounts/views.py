@@ -15,6 +15,7 @@ def home(request):
     #! Not needed 
     # profile = PatientProfile.objects.get(user=request.user)
     user = request.user
+    # Restricted home page for admins, prompts to logout
     if user.is_superuser:
         return render(request, 'home_no_entry.html')
         
