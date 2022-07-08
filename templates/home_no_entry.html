@@ -1,0 +1,11 @@
+{% extends 'base.html'%}
+{% load bootstrap5 %}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+
+{% block content %}
+    <p class="text-center fs-1">Logged into superuser account</p>
+    <div class="text-center">
+        <a class="btn btn-danger" href="{% url 'accounts:logout' %}">Please Logout</a>
+    </div>
+{% endblock %}
