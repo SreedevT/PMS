@@ -29,7 +29,6 @@ class PatientProfile(models.Model):
     def __str__(self) -> str:
         return f"{self.user.username}'s profile"
 
-
 class Department(models.Model):
     
     name = models.CharField(max_length=100)
