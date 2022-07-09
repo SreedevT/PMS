@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
+from django.contrib.auth.decorators import login_required
 from accounts.models import User
 from .models import *
 from .forms import *
@@ -7,8 +8,12 @@ from .forms import *
 def test(request):
     return HttpResponse("THIS TEST")
 
-def profile(request, pk):
-    user = User.objects.get(pk=pk)
+@login_required(login_url='accounts:login')
+def profile(request):
+    user = request.user
+    if user.is_doctor():
+        return redirect('profiles:doctor-profile')
+
 
     if PatientProfile.objects.filter(user=user).exists():
         profile = PatientProfile.objects.get(user=user)
@@ -24,8 +29,13 @@ def profile(request, pk):
         form = PatientProfileUpdateForm(instance=profile)
     return render(request, 'profile.html', {'form': form})
 
-def doctor_profile(request, pk):
-    user = User.objects.get(pk=pk)
+
+@login_required(login_url='accounts:login')
+def doctor_profile(request):
+    user = request.user
+    if user.is_patient():
+        return redirect('profiles:profile')
+
 
     if DoctorProfile.objects.filter(user=user).exists():
         profile = DoctorProfile.objects.get(user=user)
