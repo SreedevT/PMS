@@ -7,7 +7,7 @@ class PatientProfileUpdateForm(forms.ModelForm):
         fields = ('profile_pic', 'dob', 'blood_group', 'allergies')
 
         widgets = {
-            'dob': forms.DateInput(),
+            'dob': forms.SelectDateWidget(),
         }
 
 class DoctorProfileUpdateForm(forms.ModelForm):
