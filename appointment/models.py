@@ -16,7 +16,7 @@ class Appointment(models.Model):
 class Priscription(models.Model):
     appointment = models.OneToOneField(Appointment, on_delete=models.CASCADE)
     medicine = models.ManyToManyField(Medicine)
-    quantity = models.IntegerField()
+    # quantity = models.IntegerField() #? Dont know how to get quantity for each medicine
     instructions = models.TextField()
 
     def __str__(self):
