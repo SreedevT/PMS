@@ -2,6 +2,7 @@ from curses.ascii import US
 from pydoc import classname
 from django.db import models
 from accounts.models import User
+from hospital.models import Department
 
 class PatientProfile(models.Model):
 
@@ -29,13 +30,6 @@ class PatientProfile(models.Model):
     def __str__(self) -> str:
         return f"{self.user.username}'s profile"
 
-class Department(models.Model):
-    
-    name = models.CharField(max_length=100)
-    
-    def __str__(self) -> str:
-        return self.name
-
 
 class DoctorProfile(models.Model):
 
@@ -51,12 +45,3 @@ class DoctorProfile(models.Model):
 
     def __str__(self) -> str:
         return f"{self.user.username}'s profile"
-    
-
-class Medicine(models.Model):
-    name = models.CharField(max_length=100)
-    price = models.IntegerField(blank=True, null=True)
-    # quantity = models.IntegerField(blank=True, null=True) #TODO - implement stock management
-    
-    def __str__(self) -> str:
-        return self.name
