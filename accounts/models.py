@@ -25,7 +25,7 @@ class User(AbstractUser):
     
     user_type = models.CharField(choices=USER_TYPES, max_length=1, default=PATIENT)
     gender = models.CharField(choices=GENDER,  max_length=1, default=PREFER_NOT_TO_SAY)
-    phone = PhoneNumberField(null=True, blank=True) #*
+    phone = PhoneNumberField(null=True, blank=True) 
 
 
     def is_doctor(self):

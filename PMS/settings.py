@@ -52,6 +52,8 @@ INSTALLED_APPS = [
     'phonenumber_field',
     'bootstrap5',
     'profiles',
+    'hospital',
+    'appointment',
 ]
 
 MIDDLEWARE = [
