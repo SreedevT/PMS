@@ -1,5 +1,6 @@
 from django.db import models
 from accounts.models import User
+from hospital.models import Medicine
 
 class Appointment(models.Model):
     doctor = models.ForeignKey(User,on_delete=models.CASCADE, limit_choices_to={'user_type': 'D'}, related_name='doctor')
@@ -11,3 +12,12 @@ class Appointment(models.Model):
 
     def __str__(self):
         return f"{self.doctor.get_full_name()}'s appointment with {self.patient.username}"
+
+class Priscription(models.Model):
+    appointment = models.OneToOneField(Appointment, on_delete=models.CASCADE)
+    medicine = models.ManyToManyField(Medicine)
+    quantity = models.IntegerField()
+    instructions = models.TextField()
+
+    def __str__(self):
+        return f"{self.appointment.patient.username}'s prescription on {self.appointment.date}"
