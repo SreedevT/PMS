@@ -1,0 +1,266 @@
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>PMS</title>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    </head>
+    <body>
+        <header>
+            <div class="row bg-info text-white">
+                <div class="col-md-6 pl-3" ><h3>Patient Management system</h3>
+                </div>
+    
+    
+                
+                <div class="col-md-6">
+                    <nav class="navbar pr-1 navbar-expand-lg navbar-dark bg-dark">
+                        <a class="navbar-brand" href="http://127.0.0.1:5500/miniproject/home.html"><button>Home</button></a>
+                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                          <span class="navbar-toggler-icon"></span>
+                        </button>
+                      
+                        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                          <ul class="navbar-nav mr-auto">
+                            
+                           
+                            
+                            <li class="nav-item dropdown">
+                              <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                 <img src="class='fas fa-user-circle' style='font-size:36px" class="emg rounded-circle">Login
+                              </a>
+                              <div class="dropdown-menu text-dark bg-info" aria-labelledby="navbarDropdown">
+                                
+                                <a class="dropdown-item" href="http://127.0.0.1:5500/miniproject/login.html">login</a>
+                              </div>  
+                            </li> 
+                            <a class="navbar-brand" href="http://127.0.0.1:5500/miniproject/doc.html">Book an appoinment</a>
+                            <a class="navbar-brand" href="#">
+                              <img src="data:image/jpeg;base64,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" class="emg rounded-circle">
+                              Emergency</a>
+                              <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                   <img src=" data:image/png;base64,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" class="emg rounded-circle">Contact
+                                </a>
+                                <div class="dropdown-menu text-dark bg-info" aria-labelledby="navbarDropdown">
+                                  <a class="dropdown-item" href="#">
+                                    Phone number:9895223267</a>
+                                  <a class="dropdown-item" href="mailto:yadukrishna2240@gmail.com">Email</a>
+                                </div>  
+                              </li>   
+                          </ul>
+                          
+                        </div>
+                      </nav>
+                </div>
+    
+    
+    
+            </div>
+        </header>
+        <section>
+            <div class="bckimg" style="background-image: url('https://wallpaperaccess.com/full/1282794.jpg');">
+                <div class="container ">
+                    <div class="row">
+                        <section class="h-100 h-custom gradient-custom-2">
+                            <div class="container py-5 h-100">
+                              <div class="row d-flex justify-content-center align-items-center h-100">
+                                <div class="col-12">
+                                  <div class="card card-registration card-registration-2" style="border-radius: 15px;">
+                                    <div class="card-body p-0">
+                                      <div class="row g-0">
+                                        <div class="col-lg-6">
+                                          <div class="p-5">
+                                            <h3 class="fw-normal mb-5" style="color: #4835d4;">General Infomation</h3>
+                          
+                                            <div class="mb-4 pb-2">
+                                              <select class="select">
+                                                <option value="1">Select deparment</option>
+                                                <option value="2"> Cardiology</option>
+                                                <option value="3">Dermatology</option>
+                                                <option value="4">ENT</option>
+                                                <option value="5">Gastroentrology</option>
+                                                <option value="6"> Gyneocology</option>
+                                                <option value="7">Opthalmology</option>
+                                                <option value="8">Oncology</option>
+                                                <option value="8">Neurology</option>
+                                                <option value="8">ENT</option>
+                                              </select>
+                                            </div>
+                          
+                                            <div class="row">
+                                              <div class="col-md-6 mb-4 pb-2">
+                          
+                                                <div class="form-outline">
+                                                  <input type="text" id="form3Examplev2" class="form-control form-control-lg" />
+                                                  <label class="form-label" for="form3Examplev2">First name</label>
+                                                </div>
+                          
+                                              </div>
+                                              <div class="col-md-6 mb-4 pb-2">
+                          
+                                                <div class="form-outline">
+                                                  <input type="text" id="form3Examplev3" class="form-control form-control-lg" />
+                                                  <label class="form-label" for="form3Examplev3">Last name</label>
+                                                </div>
+                          
+                                              </div>
+                                            </div>
+                          
+                                            <div class="mb-4 pb-2">
+                                              Age
+                                            <input type="number">
+                                                
+                                             
+                                            </div>
+                          
+                                            
+                          
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    Height
+                                                    <input type="text">
+                                                    Wight
+                                                    <input type="text">
+                                                </div>
+                                              
+                                              <div class="col-md-6">
+                          
+                                                <select class="select">
+                                                  <option value="1">Blood group</option>
+                                                  <option value="2">A+</option>
+                                                  <option value="3">B+</option>
+                                                  <option value="4">A-</option>
+                                                  <option value="2">B-</option>
+                                                  <option value="3">AB=</option>
+                                                  <option value="4">AB-</option>
+                                                  <option value="2">O+</option>
+                                                  <option value="3">O-</option>
+                                                </select>
+                          
+                                              </div>
+                                            </div>
+                          
+                                          </div>
+                                        </div>
+                                        <div class="col-lg-6 bg-indigo text-dark">
+                                          <div class="p-5">
+                                            <h3 class="fw-normal mb-5 text-blue">Contact Details</h3>
+                          
+                                            <div class="mb-4 pb-2">
+                                              <div class="form-outline form-white">
+                                                <input type="text" id="form3Examplea2" class="form-control form-control-lg" />
+                                                <label class="form-label" for="form3Examplea2">Street + Nr</label>
+                                              </div>
+                                            </div>
+                          
+                                            <div class="mb-4 pb-2">
+                                              <div class="form-outline form-white">
+                                                <input type="text" id="form3Examplea3" class="form-control form-control-lg" />
+                                                <label class="form-label" for="form3Examplea3">Additional Information</label>
+                                              </div>
+                                            </div>
+                          
+                                            <div class="row">
+                                              <div class="col-md-5 mb-4 pb-2">
+                          
+                                                <div class="form-outline form-white">
+                                                  <input type="text" id="form3Examplea4" class="form-control form-control-lg" />
+                                                  <label class="form-label" for="form3Examplea4">Zip Code</label>
+                                                </div>
+                          
+                                              </div>
+                                              <div class="col-md-7 mb-4 pb-2">
+                          
+                                                <div class="form-outline form-white">
+                                                  <input type="text" id="form3Examplea5" class="form-control form-control-lg" />
+                                                  <label class="form-label" for="form3Examplea5">Place</label>
+                                                </div>
+                          
+                                              </div>
+                                            </div>
+                          
+                                            <div class="mb-4 pb-2">
+                                              <div class="form-outline form-white">
+                                                <input type="text" id="form3Examplea6" class="form-control form-control-lg" />
+                                                <label class="form-label" for="form3Examplea6">Country</label>
+                                              </div>
+                                            </div>
+                          
+                                            <div class="row">
+                                              <div class="col-md-5 mb-4 pb-2">
+                          
+                                                <div class="form-outline form-white">
+                                                  <input type="text" id="form3Examplea7" class="form-control form-control-lg" />
+                                                  <label class="form-label" for="form3Examplea7">Code +</label>
+                                                </div>
+                          
+                                              </div>
+                                              <div class="col-md-7 mb-4 pb-2">
+                          
+                                                <div class="form-outline form-white">
+                                                  <input type="text" id="form3Examplea8" class="form-control form-control-lg" />
+                                                  <label class="form-label" for="form3Examplea8">Phone Number</label>
+                                                </div>
+                          
+                                              </div>
+                                            </div>
+                          
+                                            <div class="mb-4">
+                                              <div class="form-outline form-white">
+                                                <input type="text" id="form3Examplea9" class="form-control form-control-lg" />
+                                                <label class="form-label" for="form3Examplea9">Your Email</label>
+                                              </div>
+                                            </div>
+                          
+                                            <div class="form-check d-flex justify-content-start mb-4 pb-3">
+                                              <input class="form-check-input me-3" type="checkbox" value="" id="form2Example3c" />
+                                              <label class="form-check-label text-white" for="form2Example3">
+                                                I do accept the <a href="#!" class="text-white"><u>Terms and Conditions</u></a> of your
+                                                site.
+                                              </label>
+                                            </div>
+                          
+                                            <button type="button" class="btn btn-light btn-lg"
+                                              data-mdb-ripple-color="bg-indigo">Register</button>
+                          
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </section>
+
+                    </div>
+
+                </div>
+            
+            
+            
+            </div>
+
+
+        </section>
+
+
+
+
+
+
+
+
+        <style>
+            .emg{
+  width: 20px;
+  height: 25px;
+}
+        </style>
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    </body>
+</html>
+
