@@ -20,7 +20,7 @@ class UserCreateForm(UserCreationForm):
         super().__init__(*args, **kwargs) #super calls the parent class. parent callses init is called first
         self.fields["username"].label = "Username" #.label is how it shows up in from as the input name ie. field name
         self.fields["email"].label = "Email address"
-        self.fields["phone"].lable = "Phone number" #? WHY
+        self.fields["phone"].label = "Phone number" #? WHY
         self.fields['username'].widget.attrs.update(
             {'class': 'form-control', 'placeholder': 'Username'}
         )

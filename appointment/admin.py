@@ -1,5 +1,5 @@
 from django.contrib import admin
-from appointment.models import Appointment, Priscription
+from appointment.models import Appointment, Prescription
 
 admin.site.register(Appointment)
-admin.site.register(Priscription)
+admin.site.register(Prescription)
