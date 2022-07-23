@@ -1,4 +1,3 @@
-from atexit import register
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 from .models import User
@@ -9,4 +8,4 @@ fields = list(UserAdmin.fieldsets)
 fields.insert(2, ('Other Info', {'fields': ('user_type', 'gender', 'phone')}))
 UserAdmin.fieldsets = tuple(fields)
 
-admin.site.register(User, UserAdmin)
+admin.site.register(User, UserAdmin) #
