@@ -13,7 +13,7 @@ class Appointment(models.Model):
     def __str__(self):
         return f"{self.doctor.get_full_name()}'s appointment with {self.patient.username}"
 
-class Priscription(models.Model):
+class Prescription(models.Model):
     appointment = models.OneToOneField(Appointment, on_delete=models.CASCADE)
     medicine = models.ManyToManyField(Medicine)
     # quantity = models.IntegerField() #? Dont know how to get quantity for each medicine
