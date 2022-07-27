@@ -16,32 +16,34 @@ class UserCreateForm(UserCreationForm):
             'gender': forms.RadioSelect(),
         }
 
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs) #super calls the parent class. parent callses init is called first
-        self.fields["username"].label = "Username" #.label is how it shows up in from as the input name ie. field name
-        self.fields["email"].label = "Email address"
-        self.fields["phone"].label = "Phone number" #? WHY
-        self.fields['username'].widget.attrs.update(
-            {'class': 'form-control', 'placeholder': 'Username'}
-        )
-        self.fields['password1'].widget.attrs.update(
-            {'class': 'form-control', 'placeholder': 'Password'}
-        )
-        self.fields['password2'].widget.attrs.update(
-            {'class': 'form-control', 'placeholder': 'Confirm Password'}
-        )
-        self.fields['first_name'].widget.attrs.update(
-            {'class': 'form-control', 'placeholder': 'First Name'}
-        )
-        self.fields['last_name'].widget.attrs.update(
-            {'class': 'form-control', 'placeholder': 'Last Name'}
-        )
-        self.fields['email'].widget.attrs.update(
-            {'class': 'form-control', 'placeholder': 'Email'}
-        )
-        self.fields['phone'].widget.attrs.update(
-            {'class': 'form-control', 'placeholder': 'Phone'}
-        )
+    # def __init__(self, *args, **kwargs):
+    #     super().__init__(*args, **kwargs) #super calls the parent class. parent callses init is called first
+    #     self.fields["username"].label = "Username" #.label is how it shows up in from as the input name ie. field name
+    #     self.fields["email"].label = "Email address"
+    #     self.fields["phone"].label = "Phone number" #? WHY
+    #     self.fields['username'].widget.attrs.update(
+    #         {'class': 'form-control', 'placeholder': 'Username'}
+    #     )
+    #     self.fields['password1'].widget.attrs.update(
+    #         {'class': 'form-control', 'placeholder': 'Password'}
+    #     )
+    #     self.fields['password2'].widget.attrs.update(
+    #         {'class': 'form-control', 'placeholder': 'Confirm Password'}
+    #     )
+    #     self.fields['first_name'].widget.attrs.update(
+    #         {'class': 'form-control', 'placeholder': 'First Name'}
+    #     )
+    #     self.fields['last_name'].widget.attrs.update(
+    #         {'class': 'form-control', 'placeholder': 'Last Name'}
+    #     )
+    #     self.fields['email'].widget.attrs.update(
+    #         {'class': 'form-control', 'placeholder': 'Email'}
+    #     )
+    #     self.fields['phone'].widget.attrs.update(
+    #         {'class': 'form-control', 'placeholder': 'Phone'}
+    #     )
+
+
         # self.fields['user_type'].widget.attrs.update(
         #     {'class': 'form-control', 'placeholder': 'User Type'}
         # )
@@ -57,8 +59,8 @@ class CustomLoginForm(AuthenticationForm):
     super().__init__(*args, **kwargs)
 
     self.fields['username'].widget.attrs.update(
-        {'class': 'form-control', 'placeholder': 'Username'}
+        {'class': 'form-control form-control-lg', 'placeholder': 'Username'}
     )
     self.fields['password'].widget.attrs.update(
-        {'class': 'form-control', 'placeholder': 'Password'}
+        {'class': 'form-control form-control-lg', 'placeholder': 'Password'}
     )
