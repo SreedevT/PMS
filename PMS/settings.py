@@ -49,11 +49,12 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'accounts',
-    'phonenumber_field',
-    'bootstrap4',
     'profiles',
     'hospital',
     'appointment',
+    'phonenumber_field',
+    'bootstrap4',
+    'widget_tweaks',
 ]
 
 MIDDLEWARE = [
