@@ -9,6 +9,7 @@ django-phonenumber-field = {extras = ["phonenumberslite"], version = "*"}
 pillow = "*"
 windows-curses = "*"
 django-bootstrap4 = "*"
+django-widget-tweaks = "*"
 
 [dev-packages]
 
