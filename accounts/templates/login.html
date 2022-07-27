@@ -1,3 +1,5 @@
+{% load widget_tweaks %}
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -7,16 +9,10 @@
     <body>
         <header id="header1">
             <div class="row bg-info text-white">
-                
-    
-    
-                
                 <div class="col-md-12">
                     <nav class="navbar  navbar-expand-lg navbar-dark bg-dark">
-                        <a class="navbar-brand" href="http://127.0.0.1:5500/miniproject/home.html">
+                        <a class="navbar-brand" href="{% url 'accounts:home'%}">
                           <button class="button">Home</button></a>
-                    
-       
                 </nav>
 
         </div>
@@ -34,7 +30,8 @@
                               <div class="col-md-12 col-12 align-items-center" >
                                 <div class="card-body p-4 p-lg-5 text-black">
                   
-                                  <form>
+                                  <form method="post">
+                                    {% csrf_token %}
                   
                                     <div class="d-flex align-items-center mb-3 pb-1">
                                       <i class="fas fa-cubes fa-2x me-3" style="color: #ff6219;"></i>
@@ -44,21 +41,21 @@
                                     <h5 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Sign into your account</h5>
                   
                                     <div class="form-outline mb-4">
-                                      <input type="email" id="form2Example17" class="form-control form-control-lg" />
-                                      <label class="form-label" for="form2Example17">Email address</label>
+                                        <label for="{{ form.username.id_for_label }}" class="">{{ form.username.label }}</label>
+                                        {% render_field form.username class="form-control form-control-lg "  placeholder="Username" %}
                                     </div>
                   
                                     <div class="form-outline mb-4">
-                                      <input type="password" id="form2Example27" class="form-control form-control-lg" />
-                                      <label class="form-label" for="form2Example27">Password</label>
+                                        <label for="{{ form.password.id_for_label }}" class="">{{ form.password.label }}</label>
+                                        {% render_field form.password class="form-control form-control-lg "  placeholder="Password" %}
                                     </div>
                   
                                     <div class="pt-1 mb-4">
-                                      <button class="btn btn-dark btn-lg btn-block" type="button">Login</button>
+                                      <button class="btn btn-dark btn-lg btn-block" type="submit">Login</button>
                                     </div>
                   
                                     <a class="small text-muted" href="#!">Forgot password?</a>
-                                    <p class="mb-5 pb-lg-2" style="color: #393f81;">Don't have an account? <a href="http://127.0.0.1:5500/miniproject/regi.html"
+                                    <p class="mb-5 pb-lg-2" style="color: #393f81;">Don't have an account? <a href="{% url 'accounts:register' %}"
                                         style="color: #393f81;">Register here</a></p>
                                     <a href="#!" class="small text-muted">Terms of use.</a>
                                     <a href="#!" class="small text-muted">Privacy policy</a>
