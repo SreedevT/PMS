@@ -3,6 +3,7 @@ from hospital.models import Department
 from accounts.models import User
 
 def doctor_list(request):
+    context = {}
     depts = Department.objects.all()
     doctors = User.objects.filter(user_type='D')
     context = {'depts': depts, 'doctors': doctors}
