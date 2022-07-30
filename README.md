@@ -1,15 +1,21 @@
 Clone repo or download files
 
+Open directory in VSCode as root
+
 If pipenv not installed: `pip install pipenv`
 
 Create a virtual environment 
 `pipenv shell`
 
 Install requirements
-`pipenv install`
+`pipenv sync`
 
 Run django server
-`python manage.py runserver`
+`pymanage.py runserver`
+
+
+IF ANY CAHNGES MADE TO THE DATABASE
+
 
 Make migrations  
 `python manage.py makemigrations`  

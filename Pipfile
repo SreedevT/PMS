@@ -5,10 +5,12 @@ name = "pypi"
 
 [packages]
 django = "*"
-django-bootstrap-v5 = "*"
 django-phonenumber-field = {extras = ["phonenumberslite"], version = "*"}
 pillow = "*"
 windows-curses = "*"
+django-bootstrap4 = "*"
+django-widget-tweaks = "*"
+django-debug-toolbar = "*"
 
 [dev-packages]
 
