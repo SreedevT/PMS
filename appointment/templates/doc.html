@@ -107,7 +107,7 @@
             <div id="bgimg">
                 <div class="container container-fluid">
 {% for dept in depts %}
-                    <div class="card-main" id="main-dept1" style="width: 68rem;">
+                    <div class="card-main" id="department" style="width: 68rem;">
                         <div class="card-body">
                             <h5 class="card-title-main "><B>{{dept.name}}</B></h5>
                             <h6 class="card-subtitle mb-2 text-muted">List of doctors available</h6>
@@ -122,10 +122,15 @@
                                         <div class="card-body">
                                             <h5 class="card-title">{{doctor.get_full_name}}</h5>
                                             <p class="card-text">{{doctor.docprofile.qualification}}</p>
-                                            <!-- <form action="" mothod="post" > -->
-                                                
-                                                <a href="#" type="submit" class="btn btn-primary">Book an appointment</a>
-                                            <!-- </form> -->
+                                            <form action="{% url 'appointment:test' %}" method="post" id="appointment-form">
+                                                {% csrf_token %}
+                                                <!-- * This implementation also works -->
+                                                <!-- <input type="hidden" name="id" value="doctor.id"/>  -->
+                                                <!-- <input type="submit" class="btn btn-primary" value="Book an appointment"> -->
+                                                <button type="submit" name="id" value="{{doctor.id}}" form="appointment-form" class="btn btn-primary">
+                                                    Book an appointment
+                                                </button>
+                                            </form>
                                         </div>
                                     </div>
                                 </div>
