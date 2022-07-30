@@ -74,59 +74,11 @@
                                       </a>
   
                                       <div class="dropdown-menu  bg-secondary text-white " aria-labelledby="navbarDropdown">
-  
+{% for department in departments %}
                                           <a class="dropdown-item"
   
-                                              href="appointment#department1">Cardiology</a>
-  
-                                          <a class="dropdown-item"
-  
-                                              href="http://127.0.0.1:5500/miniproject/doc.html#main-dept2">Dermatology</a>
-  
-                                          <a class="dropdown-item"
-  
-                                              href="http://127.0.0.1:5500/miniproject/doc.html#main-dept3">ENT</a>
-  
-                                          <a class="dropdown-item"
-  
-                                              href="http://127.0.0.1:5500/miniproject/doc.html#main-dept4">Gastroenterology</a>
-  
-                                          <a class="dropdown-item"
-  
-                                              href="http://127.0.0.1:5500/miniproject/doc.html#main-dept5">Gynecology</a>
-  
-                                          <a class="dropdown-item"
-  
-                                              href="http://127.0.0.1:5500/miniproject/doc.html#main-dept6">General Medicine</a>
-  
-                                          <a class="dropdown-item"
-  
-                                              href="http://127.0.0.1:5500/miniproject/doc.html#main-dept7">Orthopaedics</a>
-  
-                                          <a class="dropdown-item"
-  
-                                              href="http://127.0.0.1:5500/miniproject/doc.html#main-dept8">Ophthalmology</a>
-  
-                                          <a class="dropdown-item"
-  
-                                              href="http://127.0.0.1:5500/miniproject/doc.html#main-dept9">Oncology</a>
-  
-                                          <a class="dropdown-item"
-  
-                                              href="http://127.0.0.1:5500/miniproject/doc.html#main-dept10">Neurology</a>
-  
-                                          <a class="dropdown-item"
-  
-                                              href="http://127.0.0.1:5500/miniproject/doc.html#main-dept11">Nephrology</a>
-  
-                                          <a class="dropdown-item"
-  
-                                              href="http://127.0.0.1:5500/miniproject/doc.html#main-dept12">Pediatrics</a>
-  
-                                          <a class="dropdown-item"
-  
-                                              href="http://127.0.0.1:5500/miniproject/doc.html#main-dept13">Psychiatry</a>
-  
+                                              href="appointment#department{{forloop.counter}}">{{department.name}}</a>
+{% endfor %}
                                       </div>
   
                                   </li>
