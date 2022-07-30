@@ -14,7 +14,7 @@ Install requirements
 `pipenv sync`
 
 Run django server
-`pymanage.py runserver`
+`py manage.py runserver`
 
 
 
@@ -25,5 +25,5 @@ IF ANY CAHNGES MADE TO THE DATABASE
 
 
 Make migrations  
-`python manage.py makemigrations`  
-`python manage.py migrate`  
+`py manage.py makemigrations`  
+`py manage.py migrate`  
