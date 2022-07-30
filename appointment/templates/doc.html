@@ -107,7 +107,7 @@
             <div id="bgimg">
                 <div class="container container-fluid">
 {% for dept in depts %}
-                    <div class="card-main" id="department" style="width: 68rem;">
+                    <div class="card-main" id="department{{ forloop.counter }}" style="width: 68rem;"> <!--* forloop.counter doc https://docs.djangoproject.com/en/4.0/ref/templates/builtins/#for-->
                         <div class="card-body">
                             <h5 class="card-title-main "><B>{{dept.name}}</B></h5>
                             <h6 class="card-subtitle mb-2 text-muted">List of doctors available</h6>
