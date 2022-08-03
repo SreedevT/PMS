@@ -45,3 +45,9 @@ class DoctorProfile(models.Model):
 
     def __str__(self) -> str:
         return f"{self.user.username}'s profile"
+
+class AvailableTime(models.Model):
+    
+
+    def __str__(self) -> str:
+        return f"{self.doctor.user.get_full_name()}'s working days"
