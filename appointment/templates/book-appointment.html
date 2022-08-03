@@ -1,465 +1,136 @@
+{% load static %}
+
+{% load bootstrap4 %}
+{% bootstrap_css %}
+{% bootstrap_javascript jquery='full' %}
+{% bootstrap_messages %}
+
 <!DOCTYPE html>
 <html>
     <head>
-        <title>PMS</title>
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <title>Login</title>
+        <link rel="shortcut icon" href="{% static 'images/logo.png' %}" type= "image/x-icon" />
     </head>
     <body>
         <header id="header1">
             <div class="row bg-info text-white">
                 <div class="col-md-12">
-                    <nav class="navbar  navbar-expand-lg navbar-dark bg-dark">
-                        <a class="navbar-brand" href="http://127.0.0.1:5500/miniproject/home.html">
-                          <button class="button">Home</button></a>
-                        </nav>
-        </div>
+                    <nav class="navbar  navbar-expand-lg "  style="background-color:#4c4774fa;">
+                        <a class="navbar-brand" href="{% url 'accounts:home'%}">
+                          <button class="button">Home</button>
+                        </a>
+                    </nav>
+                </div>
+            </div>
         </header>
         <div class="row">
             <div  class="col-md-12 col-12">
-               
- 
-<link href="https://cdn01.jotfor.ms/static/formCss.css?3.3.34798" rel="stylesheet" type="text/css" />
-<link type="text/css" rel="stylesheet" href="https://cdn02.jotfor.ms/css/styles/nova.css?3.3.34798" />
-<style type="text/css">@media print{.form-section{display:inline!important}.form-pagebreak{display:none!important}.form-section-closed{height:auto!important}.page-section{position:initial!important}}</style>
- 
-<style type="text/css">
- 
-    .form-label-left{
-        width:150px;
-    }
-    .form-line{
-        padding-top:12px;
-        padding-bottom:12px;
-    }
-    .form-label-right{
-        width:150px;
-    }
-    .form-all{
-        width:580px;
-        color:#555 !important;
-        font-family:"Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", Verdana, sans-serif;
-        font-size:14px;
-    }
-    .form-radio-item label, .form-checkbox-item label, .form-grading-label, .form-header{
-        color: false;
-    }
- 
-</style>
- 
-<style type="text/css" id="form-designer-style">
-    /* Injected CSS Code */
-@import "//support.PMS.com/themes/css/buttons/form-submit-button-blue.css";
-.form-all {
-  font-family: "Lucida Grande", sans-serif;
-}
- 
-  /*PREFERENCES STYLE*//*__INSPECT_SEPERATOR__*/
-.form-all {
-    -moz-box-sizing : border-box;
-    -webkit-box-sizing : border-box;
-    box-sizing : border-box;
-}
- 
-[data-type="control_head"] {
-    padding-bottom : 20px;
-}
- 
-/*responsive fields*/
-[data-type="control_textbox"] .form-textbox,
-[data-type="control_fullname"] .form-textbox,
-[data-type="control_email"] .form-textbox,
-[data-type="control_textarea"] .form-textarea,
-[data-type="control_dropdown"] .form-dropdown {
-    width : 100% !important;
-    max-width : none !important;
-}
- 
-.form-textbox, .form-textarea, .form-dropdown {
-    max-width : none !important;
-    box-shadow : none;
-    outline : none;
-    box-sizing : border-box;
-    -webkit-box-sizing : border-box;
-    -moz-box-sizing : border-box;
-    font-family : inherit;
-}
- 
-[data-type="control_dropdown"] .form-input,
-[data-type="control_dropdown"] .form-input-wide {
-    width : 100%;
-}
- 
-/*input focus*/
-.form-line-active input:focus, .form-line-active textarea:focus, .form-line-active select:focus {
-    box-shadow : none;
-}
- 
-/*reset error*/
-.form-line-error {
-    box-shadow : none;
-}
- 
-.form-line-active {
-    color : inherit !important;
-}
- 
-/*responsive content -wide or shrink*/
-.form-input {
-    width : 65% !important;
-    max-width : none !important;
-}
- 
-/*remove sepatators on date and phone*/
-.phone-separate, .date-separate {
-    display : none;
-}
- 
-/*responsive phone fields*/
-[data-type="control_phone"] input[name$="[area]"] {
-    width : 100%;
-}
- 
-[data-type="control_phone"] input[name$="[phone]"] {
-    width : 100%;
-}
- 
-[data-type="control_phone"] input[name$="[full]"] {
-    width : 100%;
-}
- 
-[data-type="control_phone"] .form-sub-label-container {
-    width : 40%;
-    float : left;
-    box-sizing : border-box;
-    margin-right : 0;
-    padding-right : 12px;
-}
- 
-/*responsive phone field*/
-[data-type="control_phone"] .form-sub-label-container + .form-sub-label-container {
-    width : 60%;
-    margin-right : 0;
-    padding-right : 0;
-    padding-left : 12px;
-}
- 
-/*responsive full address fields*/
-.form-address-city, .form-address-line, .form-address-postal,
-.form-address-state, .form-address-table,
-.form-address-table .form-sub-label-container, .form-address-table select {
-    width : 100%;
-    max-width : 100%;
-}
- 
-[data-type="control_address"] input[name$="[city]"],
-[data-type="control_address"] input[name$="[postal]"] {
-    width : 90% !important;
-}
- 
-[data-type="control_address"] input[name$="[area]"] {
-    width : 60%;
-}
- 
-/*reset submit button*/
-[data-type="control_button"] {
-    background : transparent !important;
-}
- 
-.form-submit-button,
-.form-submit-reset,
-.form-submit-print {
-    outline : none;
-}
- 
-/*remove other checkbox*/
-.form-checkbox-other,
-.form-radio-other {
-    visibility : hidden !important;
-}
- 
-/*shruken fields*/
-.form-line-column {
-    width : 50%;
-}
- 
-.form-line-column .form-label-top {
-    width : 100% !important;
-}
- 
-/*fix form builder display*/
-div#stage.form-all {
-    max-width : none !important;
-    margin-right : 0;
-}
- 
-div#stage .form-input {
-    width : 64% !important;
-}
- 
-/*remove first pagebreak back button*/
-.form-all .page-section:first-child .form-pagebreak .form-pagebreak-back-container {
-    display : none !important;
-}
- 
-/* responsive pagebreak */
-.form-pagebreak-back-container {
-    width : 50% !important;
-    text-align : left;
-    box-sizing : border-box;
-    -webkit-box-sizing : border-box;
-    float : left;
-}
- 
-.form-pagebreak-next-container {
-    width : 50% !important;
-    text-align : right;
-    box-sizing : border-box;
-    -webkit-box-sizing : border-box;
-    float : left;
-}
- 
-/*******NEW responsive tableless address field ******/
-[data-type="control_address"] .form-address-line input {
-    width: 100%;
-}
-[data-type="control_address"] .form-sub-label-container {
-    margin: 0;
-}
-[data-type="control_address"] .form-address-table
-.form-address-line-wrapper +
-.form-address-line-wrapper +
-.form-address-line-wrapper {
-    width:100%;
-}
-[data-type="control_address"] .form-address-table
-.form-address-line-wrapper +
-.form-address-line-wrapper +
-.form-address-line-wrapper .form-address-line{
-    width:50%;
-    float:left;
-    display:inline-block;
-    box-sizing:border-box;
-}
-.form-address-city-line,
-.form-address-zip-line{
-    padding-right:4px;
-}
- 
-    /* Injected CSS Code */
-</style>
- 
-<form  class="PMS-form" action="https://submit.PMS.com/submit/222071769211451/" method="post" name="form_222071769211451" id="222071769211451" accept-charset="utf-8" autocomplete="on">
-  <input type="hidden" name="formID" value="222071769211451" />
-  <input type="hidden" id="JWTContainer" value="" />
-  <input type="hidden" id="cardinalOrderNumber" value="" />
-  <div role="main" class="form-all" >
-    <ul class="form-section page-section">
-      <li id="cid_19" class="form-input-wide" data-type="control_head">
-        <div class="form-header-group  header-default">
-          <div class="header-text httal htvam">
-            <h2 id="header_19" class="form-header" data-component="header">
-              Patients Personal Details
-            </h2>
-            <div id="subHeader_19" class="form-subHeader">
-              Fill the form below and we will get back soon to you for more updates.
-            </div>
-          </div>
-        </div>
-      </li>
-      <li class="form-line jf-required" data-type="control_textbox" id="id_4">
-        <label class="form-label form-label-left form-label-auto" id="label_4" for="input_4">
-          Full Name
-          <span class="form-required">
-            *
-          </span>
-        </label>
-        <div id="cid_4" class="form-input jf-required">
-          <input type="text" id="input_4" name="q4_fullName4" data-type="input-textbox" class="form-textbox validate[required]" data-defaultvalue="" size="30" value="" placeholder=" " data-component="textbox" aria-labelledby="label_4" required="" />
-        </div>
-      </li>
-      <li class="form-line jf-required" data-type="control_dropdown" id="id_22">
-        <label class="form-label form-label-left form-label-auto" id="label_22" for="input_22">
-          Gender
-          <span class="form-required">
-            *
-          </span>
-        </label>
-        <div id="cid_22" class="form-input jf-required">
-          <select class="form-dropdown validate[required]" id="input_22" name="q22_gender" style="width:150px" data-component="dropdown" required="">
-            <option value="">  </option>
-            <option value="Male"> Male </option>
-            <option value="Female"> Female </option>
-            <option value="Not willing to Disclose"> Not willing to Disclose </option>
-          </select>
-        </div>
-      </li>
-      <li class="form-line" data-type="control_phone" id="id_23">
-        <label class="form-label form-label-left form-label-auto" id="label_23" for="input_23_area"> Phone Number </label>
-        <div id="cid_23" class="form-input">
-          <div data-wrapper-react="true">
-            <span class="form-sub-label-container" style="vertical-align:top" data-input-type="areaCode">
-              <input type="tel" id="input_23_area" name="q23_phoneNumber23[area]" class="form-textbox" data-defaultvalue="" autoComplete="section-input_23 tel-area-code" value="" data-component="areaCode" aria-labelledby="label_23 sublabel_23_area" />
-              <span class="phone-separate" aria-hidden="true">
-                 -
-              </span>
-              <label class="form-sub-label" for="input_23_area" id="sublabel_23_area" style="min-height:13px" aria-hidden="false"> Area Code </label>
-            </span>
-            <span class="form-sub-label-container" style="vertical-align:top" data-input-type="phone">
-              <input type="tel" id="input_23_phone" name="q23_phoneNumber23[phone]" class="form-textbox" data-defaultvalue="" autoComplete="section-input_23 tel-local" value="" data-component="phone" aria-labelledby="label_23 sublabel_23_phone" />
-              <label class="form-sub-label" for="input_23_phone" id="sublabel_23_phone" style="min-height:13px" aria-hidden="false"> Phone Number </label>
-            </span>
-          </div>
-        </div>
-      </li>
-      <li class="form-line jf-required" data-type="control_birthdate" id="id_9">
-        <label class="form-label form-label-left form-label-auto" id="label_9" for="input_9">
-          Date of Birth
-          <span class="form-required">
-            *
-          </span>
-        </label>
-        <div id="cid_9" class="form-input jf-required">
-          <div data-wrapper-react="true">
-            <span class="form-sub-label-container" style="vertical-align:top">
-              <form >
-               
-                <input type="date" id="dob" name="dob">
-               
-              </form>
-            </span>
-          </div>
-        </div>
-      </li>
-      <li class="form-line jf-required" data-type="control_address" id="id_20">
-        <label class="form-label form-label-left form-label-auto" id="label_20" for="input_20undefined">
-          Address
-          <span class="form-required">
-            *
-          </span>
-        </label>
-        <div id="cid_20" class="form-input jf-required">
-          <div summary="" class="form-address-table jsTest-addressField">
-            <div class="form-address-line-wrapper jsTest-address-line-wrapperField">
-              <span class="form-address-line form-address-street-line jsTest-address-lineField">
-                <span class="form-sub-label-container" style="vertical-align:top">
-                  <input type="text" id="input_20_addr_line1" name="q20_address[addr_line1]" class="form-textbox validate[required] form-address-line" data-defaultvalue="" autoComplete="section-input_20 address-line1" value="" data-component="address_line_1" aria-labelledby="label_20 sublabel_20_addr_line1" />
-                  <label class="form-sub-label" for="input_20_addr_line1" id="sublabel_20_addr_line1" style="min-height:13px" aria-hidden="false"> Street Address </label>
-                </span>
-              </span>
-            </div>
-            <div class="form-address-line-wrapper jsTest-address-line-wrapperField">
-              <span class="form-address-line form-address-street-line jsTest-address-lineField">
-                <span class="form-sub-label-container" style="vertical-align:top">
-                  <input type="text" id="input_20_addr_line2" name="q20_address[addr_line2]" class="form-textbox form-address-line" data-defaultvalue="" autoComplete="section-input_20 off" value="" data-component="address_line_2" aria-labelledby="label_20 sublabel_20_addr_line2" />
-                  <label class="form-sub-label" for="input_20_addr_line2" id="sublabel_20_addr_line2" style="min-height:13px" aria-hidden="false"> Street Address Line 2 </label>
-                </span>
-              </span>
-            </div>
-            <div class="form-address-line-wrapper jsTest-address-line-wrapperField">
-              <span class="form-address-line form-address-city-line jsTest-address-lineField ">
-                <span class="form-sub-label-container" style="vertical-align:top">
-                  <input type="text" id="input_20_city" name="q20_address[city]" class="form-textbox validate[required] form-address-city" data-defaultvalue="" autoComplete="section-input_20 address-level2" value="" data-component="city" aria-labelledby="label_20 sublabel_20_city" />
-                  <label class="form-sub-label" for="input_20_city" id="sublabel_20_city" style="min-height:13px" aria-hidden="false"> City </label>
-                </span>
-              </span>
-              <span class="form-address-line form-address-state-line jsTest-address-lineField ">
-                <span class="form-sub-label-container" style="vertical-align:top">
-                  <input type="text" id="input_20_state" name="q20_address[state]" class="form-textbox validate[required] form-address-state" data-defaultvalue="" autoComplete="section-input_20 address-level1" value="" data-component="state" aria-labelledby="label_20 sublabel_20_state" />
-                  <label class="form-sub-label" for="input_20_state" id="sublabel_20_state" style="min-height:13px" aria-hidden="false"> State / Province </label>
-                </span>
-              </span>
-            </div>
-            <div class="form-address-line-wrapper jsTest-address-line-wrapperField">
-              <span class="form-address-line form-address-zip-line jsTest-address-lineField ">
-                <span class="form-sub-label-container" style="vertical-align:top">
-                  <input type="text" id="input_20_postal" name="q20_address[postal]" class="form-textbox form-address-postal" data-defaultvalue="" autoComplete="section-input_20 postal-code" value="" data-component="zip" aria-labelledby="label_20 sublabel_20_postal" />
-                  <label class="form-sub-label" for="input_20_postal" id="sublabel_20_postal" style="min-height:13px" aria-hidden="false"> Postal / Zip Code </label>
-                </span>
-              </span>
-              <span class="form-address-line form-address-country-line jsTest-address-lineField ">
-                <span class="form-sub-label-container" style="vertical-align:top">
-                  <select class="form-dropdown validate[required] form-address-country noTranslate" name="q20_address[country]" id="input_20_country" data-component="country" required="" aria-labelledby="label_20 sublabel_20_country" autoComplete="section-input_20 country">
-                    <option value=""> Please Select </option>
-                    <option value="United States"> United States </option>
-                   
-                    <option value="India"> India </option>
- 
-                  </select>
-                  <label class="form-sub-label" for="input_20_country" id="sublabel_20_country" style="min-height:13px" aria-hidden="false"> Country </label>
-                </span>
-              </span>
-            </div>
-          </div>
-        </div>
-      </li>
-      <li class="form-line" data-type="control_email" id="id_24">
-        <label class="form-label form-label-left form-label-auto" id="label_24" for="input_24"> E-mail Address </label>
-        <div id="cid_24" class="form-input">
-          <input type="email" id="input_24" name="q24_emailAddress" class="form-textbox validate[Email]" data-defaultvalue="" size="30" value="" placeholder="ex: myname@example.com" data-component="email" aria-labelledby="label_24" />
-        </div>
-      </li>
-      <li class="form-line jf-required" data-type="control_radio" id="id_10">
-        <label class="form-label form-label-top" id="label_10" for="input_10">
-          Have you previously attended our facility
-          <span class="form-required">
-            *
-          </span>
-        </label>
-        <div id="cid_10" class="form-input-wide jf-required">
-          <div class="form-multiple-column" data-columncount="2" role="group" aria-labelledby="label_10" data-component="radio">
-            <span class="form-radio-item">
-              <span class="dragger-item">
-              </span>
-              <input type="radio" aria-describedby="label_10" class="form-radio validate[required]" id="input_10_0" name="q10_haveYou" value="Yes" required="" />
-              <label id="label_input_10_0" for="input_10_0"> Yes </label>
-            </span>
-            <span class="form-radio-item">
-              <span class="dragger-item">
-              </span>
-              <input type="radio" aria-describedby="label_10" class="form-radio validate[required]" id="input_10_1" name="q10_haveYou" value="No" required="" />
-              <label id="label_input_10_1" for="input_10_1"> No </label>
-            </span>
-          </div>
-        </div>
-      </li>
-      <li class="form-line" data-type="control_textarea" id="id_21">
-        <label class="form-label form-label-top" id="label_21" for="input_21"> If Yes, state on which condition and when? </label>
-        <div id="cid_21" class="form-input-wide">
-          <textarea id="input_21" class="form-textarea" name="q21_ifYes" cols="40" rows="6" data-component="textarea" aria-labelledby="label_21"></textarea>
-        </div>
-      </li>
-      <li class="form-line" data-type="control_appointment" id="id_25">
-        <label class="form-label form-label-top" id="label_25" for="input_25">Appointment </label>
-        <div id="cid_25" class="form-input-wide">
-            <form >
-               
-                <input type="date" id="book" name="book">
-               
-              </form>
-        </div>
-      </li>
-      <li class="form-line" data-type="control_button" id="id_2">
-        <div id="cid_2" class="form-input-wide">
-          <div style="text-align:center" data-align="center" class="form-buttons-wrapper form-buttons-center   jsTest-button-wrapperField">
-            <button id="input_2" type="submit" class="form-submit-button submit-button jf-form-buttons jsTest-submitField" data-component="button" data-content="">
-              Book Appointment
-            </button>
-          </div>
-        </div>
-      </li>
-    </ul>
-  </div>
-  </div>
+                <div class="container mt-5">
+                    <div class="row">
+                        <div class="col-md-6 offset-md-3 border p-4 shadow bg-light">
+                            <div class="col-12">
+                                <h3 class="fw-normal text-secondary fs-4 text-uppercase mb-4" style="text-align:center;">Appointment form</h3>
+                            </div>
+<form>
+<br>
+<br>
+    <b>Department:</b><br><br><select>
+        <option>Select department</option>
+        <option>Cardiology</option>
+        <option>Dermatology</option>
+        <option>ENT</option>
+        <option>Gastroenterology</option>
+        <option>Gynecology</option>
+        <option>General Medicine</option>
+        <option>Orthopaedics</option>
+        <option>Ophthalmology</option>
+        <option>Oncology</option>
+        <option>Neurology</option>
+        <option>Nephrology</option>
+        <option>Pediatrics</option>
+        <option>Psychiatry</option>
+        </select><br><br>
+
+        <b>Doctors available:</b><br><br><select>
+         <option>Select doctor</option>
+         <option>Dr.Raju Paul Manjooran</option>
+         <option>Dr.Sunil Mathew</option>
+         <option>Dr.Thomas K.J</option>
+         <option>Dr.Dominic Antony</option>
+         <option>Dr.Sunitha Mary Mathew</option>
+         <option>Dr.Marco J. Pauly</option>
+         <option>Dr.Felix Johns</option>
+         <option>Dr.Rebecca Mathews</option>
+         <option>Dr.Tulasi Varma</option>
+         <option>Dr.Aravind Balakrishnan</option>
+         <option>Dr.Raju Ninan</option>
+         <option>Dr.Mohammed Raffique</option>
+         <option>Dr.Randeep Guleria</option>
+         <option>Dr.Rabindra Chatterji</option>
+         <option>Dr.Cyril Joseph</option>
+         <option>Dr.Kavitha Kumari</option>
+         <option>Dr.Premlal K</option>
+         <option>Dr.Ahmed Shah</option>
+         <option>Dr.Ashraf V V</option>
+         <option>Dr.Mercy John Idicula</option>
+         <option>Dr.Koshy Philip</option>
+         <option>Dr.Jaison Jacob</option>
+         <option>Dr.Ravi Menon</option>
+         <option>Dr.Divya Louis</option>
+         <option>Dr.Fredrick Johnson</option>
+         <option>Dr.T.V.Devarajan</option>
+        </select><br><br>
+      
+        <b>Appointment date:</b><br><br><input type="date"><br><br>
+        <b>Time slot:</b><br>
+     
+     <input type="radio" name="Time slot" value="9.00-10.00 am"> 9.00-10.00 am<br>
+     <input type="radio" name="Time slot" value="10.10-11.00 am"> 10.10-11.00 am<br>
+     <input type="radio" name="Time slot" value="11.05- 11.55 am"> 11.05- 11.55 am <br>
+     <input type="radio" name="Time slot" value="12.10- 1.00 am"> 12.10- 1.00 am <br>
+     <br><br>
+  <b> Reason for taking appointment</b>
+                <div id="cid_21" class="form-input-wide" style="height: 35px;">
+                    <textarea id="input_21" class="form-textarea" name="q21_ifYes" cols="40" rows="6" data-component="textarea" aria-labelledby="label_21"></textarea>
+                  </div>
+  <br><br><br><br><br><br><br><br>
+                  <button class="button1">Book Appointment</button>
+     <br><br><br><br><br>
 </form>
+
             </div>
         </div>
     </body>
- <style>
-        .form-all{
- 
-        margin-left: 461px;
+    <style>
+        .button {
+            border-radius: 12px;
+            border: 2px;
+            font-size: 1rem;
+            padding: 0.4rem;
+          }
+          
+          .button:hover {
+            background-color: #4CAF50; /* Green */
+            color: white;
+          }
+        .button1 {
+          background-color: #08d405;
+          border: none;
+          color: white;
+          border-radius: 12px;
+          padding: 16px 32px;
+          text-align: center;
+          font-size: 16px;
+          margin: 4px 2px;
+          opacity: 0.6;
+          transition: 0.1s;
+          display: inline-block;
+          text-decoration: none;
+          cursor: pointer;
         }
-    </style>
- 
+        
+        .button1:hover {
+  box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+}
+        </style>
 </html>
- 

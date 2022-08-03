@@ -11,6 +11,7 @@ def doctor_list(request):
 
 
 def test(request):
+    context = {}
     id = request.POST['id']
     doctor = User.objects.get(id=id)
-    return HttpResponse(f'Test {doctor.get_full_name()}')
+    return render(request, 'book-appointment.html')
