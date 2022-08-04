@@ -2,11 +2,20 @@ from django.db import models
 from accounts.models import User
 from hospital.models import Medicine
 
+
 class Appointment(models.Model):
+    TIME_SLOT = [
+    (1, '9:00-10:00'),
+    (2, '10:00-11:00'),
+    (3, '11:00-12:00'),
+    (4, '13:00-14:00'),
+    ]
+
     doctor = models.ForeignKey(User,on_delete=models.CASCADE, limit_choices_to={'user_type': 'D'}, related_name='doctor')
     patient = models.ForeignKey(User,on_delete=models.CASCADE, limit_choices_to={'user_type': 'P'})
     date =  models.DateField()
-    time = models.TimeField()
+    start_time = models.TimeField(null=True)
+    end_time = models.TimeField(null=True)
     reason = models.TextField()
     status = models.BooleanField(default=False)
 

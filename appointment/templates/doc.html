@@ -122,12 +122,12 @@
                                         <div class="card-body">
                                             <h5 class="card-title">{{doctor.get_full_name}}</h5>
                                             <p class="card-text">{{doctor.docprofile.qualification}}</p>
-                                            <form action="{% url 'appointment:test' %}" method="post" id="doc-select-form">
+                                            <form action="{% url 'appointment:book-appointment-test' %}" method="post" id="book-appointment-form">
                                                 {% csrf_token %}
                                                 <!-- * This implementation also works -->
                                                 <!-- <input type="hidden" name="id" value="doctor.id"/>  -->
                                                 <!-- <input type="submit" class="btn btn-primary" value="Book an appointment"> -->
-                                                <button type="submit" name="id" value="{{doctor.id}}" form="doc-select-form" class="btn btn-primary">
+                                                <button type="submit" name="id" value="{{doctor.id}}" form="book-appointment-form" class="btn btn-primary">
                                                     Book an appointment
                                                 </button>
                                             </form>
