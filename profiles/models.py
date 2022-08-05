@@ -1,5 +1,4 @@
-from curses.ascii import US
-from pydoc import classname
+from datetime import date
 from django.db import models
 from accounts.models import User
 from hospital.models import Department
@@ -29,6 +28,12 @@ class PatientProfile(models.Model):
 
     def __str__(self) -> str:
         return f"{self.user.username}'s profile"
+
+    def get_age(self):
+        birthdate = self.dob
+        today = date.today()
+        age = today.year - birthdate.year - ((today.month, today.day) < (birthdate.month, birthdate.day))
+        return age
 
 
 class DoctorProfile(models.Model):
