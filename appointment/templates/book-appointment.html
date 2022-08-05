@@ -3,7 +3,6 @@
 {% load bootstrap4 %}
 {% bootstrap_css %}
 {% bootstrap_javascript jquery='full' %}
-{% bootstrap_messages %}
 
 <!DOCTYPE html>
 <html>
@@ -12,17 +11,9 @@
         <link rel="shortcut icon" href="{% static 'images/logo.png' %}" type= "image/x-icon" />
     </head>
     <body>
-        <header id="header1">
-            <div class="row bg-info text-white">
-                <div class="col-md-12">
-                    <nav class="navbar  navbar-expand-lg "  style="background-color:#4c4774fa;">
-                        <a class="navbar-brand" href="{% url 'accounts:home'%}">
-                          <button class="button">Home</button>
-                        </a>
-                    </nav>
-                </div>
-            </div>
-        </header>
+
+        {% include 'navbar-simple.html' %} <!--* navbar-simple.html is the navbar template-->
+
         <div class="row">
             <div  class="col-md-12 col-12">
                 <div class="container mt-5">
@@ -32,50 +23,39 @@
                                 <h3 class="fw-normal text-secondary fs-4 text-uppercase mb-4" style="text-align:center;">Appointment form</h3>
                             </div>
 
-        <b>Doctors available:</b><br><br><select>
-         <option>Select doctor</option>
-         <option>Dr.Raju Paul Manjooran</option>
-         <option>Dr.Sunil Mathew</option>
-         <option>Dr.Thomas K.J</option>
-         <option>Dr.Dominic Antony</option>
-         <option>Dr.Sunitha Mary Mathew</option>
-         <option>Dr.Marco J. Pauly</option>
-         <option>Dr.Felix Johns</option>
-         <option>Dr.Rebecca Mathews</option>
-         <option>Dr.Tulasi Varma</option>
-         <option>Dr.Aravind Balakrishnan</option>
-         <option>Dr.Raju Ninan</option>
-         <option>Dr.Mohammed Raffique</option>
-         <option>Dr.Randeep Guleria</option>
-         <option>Dr.Rabindra Chatterji</option>
-         <option>Dr.Cyril Joseph</option>
-         <option>Dr.Kavitha Kumari</option>
-         <option>Dr.Premlal K</option>
-         <option>Dr.Ahmed Shah</option>
-         <option>Dr.Ashraf V V</option>
-         <option>Dr.Mercy John Idicula</option>
-         <option>Dr.Koshy Philip</option>
-         <option>Dr.Jaison Jacob</option>
-         <option>Dr.Ravi Menon</option>
-         <option>Dr.Divya Louis</option>
-         <option>Dr.Fredrick Johnson</option>
-         <option>Dr.T.V.Devarajan</option>
-        </select><br><br>
-      
-        <b>Appointment date:</b><br><br><input type="date"><br><br>
-        <b>Time slot:</b><br>
-     
-     <input type="radio" name="Time slot" value="9.00-10.00 am"> 9.00-10.00 am<br>
-     <input type="radio" name="Time slot" value="10.10-11.00 am"> 10.10-11.00 am<br>
-     <input type="radio" name="Time slot" value="11.05- 11.55 am"> 11.05- 11.55 am <br>
-     <input type="radio" name="Time slot" value="12.10- 1.00 am"> 12.10- 1.00 am <br>
-     <br><br>
-  <b> Reason for taking appointment</b>
-                <div id="cid_21" class="form-input-wide" style="height: 35px;">
-                    <textarea id="input_21" class="form-textarea" name="q21_ifYes" cols="40" rows="6" data-component="textarea" aria-labelledby="label_21"></textarea>
-                  </div>
-  <br><br><br><br><br><br><br><br>
-                  <button class="button1">Book Appointment</button>
+                        <div class="row">
+                            <div class="col-6">
+                                <b>Doctor: {{doctor.get_full_name}}</b>
+                            </div>
+                            <div class="col-6">
+                                <b>Department: {{doctor.docprofile.department.name}}</b>
+                            </div>
+                        </div>
+                        <form class="pt-5" action="{% url 'appointment:booked-test' %}" method="post" id="appointbook">
+                            {% csrf_token%}
+                            <input type="hidden" name="doctor" value="{{doctor.id}}">
+                            <div class="form-group">
+                                <label for="date"><b>Appointment Date:</b></label>
+                                <input type="date" id="date" name="date">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="time"><b>Appointment Time:</b></label>
+                                <br>
+                                <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                    {% for _,slot in time_slot%} <!-- * Tuple unpacking  -->
+                                        <label class="btn btn-warning">
+                                          <input type="radio" name="slot" id="slot{{forloop.counter}}" autocomplete="off" value="{{slot}}">{{slot}}
+                                        </label>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        <b> Reason for taking appointment</b>
+                                        <div id="reason" class="form-input-wide" style="height: 35px;">
+                                            <textarea id="input_21" class="form-textarea" name="reason" cols="40" rows="6" data-component="textarea"></textarea>
+                                        </div>
+                        <br><br><br><br><br><br><br><br>
+                                        <button class="button1">Book Appointment</button>
                         </form>
                         </div>
                     </div>
@@ -84,35 +64,43 @@
         </div>
     </body>
     <style>
+        .btn {
+            border: 2px;
+            font-size: 1rem;
+            padding: 0.7rem;
+            margin: 0.7rem;
+        }
+
         .button {
             border-radius: 12px;
             border: 2px;
             font-size: 1rem;
             padding: 0.4rem;
-          }
+        }
           
-          .button:hover {
+        .button:hover {
             background-color: #4CAF50; /* Green */
             color: white;
-          }
+        }
+
         .button1 {
-          background-color: #08d405;
-          border: none;
-          color: white;
-          border-radius: 12px;
-          padding: 16px 32px;
-          text-align: center;
-          font-size: 16px;
-          margin: 4px 2px;
-          opacity: 0.6;
-          transition: 0.1s;
-          display: inline-block;
-          text-decoration: none;
-          cursor: pointer;
+            background-color: #08d405;
+            border: none;
+            color: white;
+            border-radius: 12px;
+            padding: 16px 32px;
+            text-align: center;
+            font-size: 16px;
+            margin: 4px 2px;
+            opacity: 0.6;
+            transition: 0.1s;
+            display: inline-block;
+            text-decoration: none;
+            cursor: pointer;
         }
         
         .button1:hover {
-  box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
-}
+            box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+        }
         </style>
 </html>

@@ -41,8 +41,9 @@
                                     <td>{{appointment.id}}</td>
                                     <td>{{appointment.patient.get_full_name}}</td>
                                     <td>
-                                        <form action="{% url 'appointment:view-details' %}">
-                                            <button class="btn btn-primary" type="submit">View</button>
+                                        <form action="{% url 'appointment:view-appointment' %}" method="post">
+                                            {% csrf_token %}
+                                            <button class="btn btn-primary" type="submit" name="id" value={{appointment.id}}>View</button>
                                         </form>
                                     </td>
                                 </tr>

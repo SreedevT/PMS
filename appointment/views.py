@@ -24,14 +24,14 @@ def test(request):
     doctor = User.objects.get(id=id)
     return render(request, 'book-appointment.html')
 
-def book_appointment_test(request):
+def book_appointment(request):
     context = {}
 
     if request.method == 'POST':
         id = request.POST['id']
         doctor = User.objects.get(id=id)
         context = {'doctor': doctor}
-        return render(request, 'book-appointment-test.html', context=context)
+        return render(request, 'book-appointment.html', context=context)
 
 def appointment_test(request):
     #* Django model instances: https://docs.djangoproject.com/en/4.0/ref/models/instances/#django.db.models.Model.save
@@ -64,7 +64,7 @@ def pending_appointments(request):
         return HttpResponse("NOT ALLOWED")
         #! Display 403 Forbidden page
 
-    appointments = Appointment.objects.filter(doctor=user)
+    appointments = Appointment.objects.filter(doctor=user, status=False)
     print(list(appointments))
     # print(list(appointments)[0].patient)
     context = {'appointments':appointments}
@@ -76,6 +76,6 @@ def view_appointment(request):
 
     app_id = request.POST['id']
     appointment = Appointment.objects.get(pk=app_id)
-    medicines = Medicine.objects.defer('name')
+    medicines = Medicine.objects.all()
     context = {'appointment':appointment, 'medicines':medicines}
     return render(request, 'view-appointment.html', context=context)
