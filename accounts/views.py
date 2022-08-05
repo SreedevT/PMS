@@ -31,4 +31,4 @@ def register(request):
         login(request, user)
         return redirect('accounts:home')
 
-    return render(request, 'reg.html', {'form': form})
+    return render(request, 'sign-up.html', {'form': form})

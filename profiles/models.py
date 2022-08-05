@@ -38,10 +38,16 @@ class DoctorProfile(models.Model):
         primary_key=True, limit_choices_to={'user_type': 'D'}, 
         related_name='docprofile', #* related_name is used to give alternate name to the reverse relationship
         )
-    profile_pic = models.ImageField(upload_to='images/profiles/doctors', null=True, blank=True)
+    profile_pic = models.ImageField(upload_to='images/profiles/doctors')
     qualification = models.CharField(max_length=100, blank=True, null=True)
-    department = models.ForeignKey(Department, on_delete=models.CASCADE, blank=True, null=True)
+    department = models.ForeignKey(Department, on_delete=models.CASCADE)
 
 
     def __str__(self) -> str:
         return f"{self.user.username}'s profile"
+
+class AvailableTime(models.Model):
+    
+
+    def __str__(self) -> str:
+        return f"{self.doctor.user.get_full_name()}'s working days"

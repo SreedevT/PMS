@@ -84,6 +84,7 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'PMS.context_processors.get_departments',
+                'PMS.context_processors.get_time_slots',
             ],
         },
     },
