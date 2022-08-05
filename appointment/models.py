@@ -19,6 +19,11 @@ class Appointment(models.Model):
     reason = models.TextField()
     status = models.BooleanField(default=False)
 
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(fields=['patient', 'doctor', 'date'], name='unique_booking')
+        ]
+
     def __str__(self):
         return f"{self.doctor.get_full_name()}'s appointment with {self.patient.username}"
 

@@ -2,7 +2,7 @@
 <html>
     <head>
         <title>
-            pending
+            Pending Appointments
         </title>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     </head>
@@ -19,112 +19,44 @@
         </header>
         <section style="height: auto;">
             <div class="container-fluid">
-               
-                    <div class="row " style="background-color: #8889a347;">
-                        <div class="col-md-12 col-12" style="align-items: center;"><h3><b>Pending Application</b></h3></div>
-
-                    
-                
+                <div class="row " style="background-color: #8889a347;">
+                    <div class="col-md-12 col-12" style="align-items: center;"><h3><b>Pending Apppointments</b></h3></div>
                 <br>
                 <br>
-                <br>
-                
+                <br>            
                     <div class="col-md-12 col-12" style="align-items: center;">
                         <table class="table table-striped">
                             <thead>
                               <tr>
                                 <th scope="col" width="10%">#</th>
-                                <th scope="col"  width="10%"><h4> No</h4></th>
+                                <th scope="col"  width="10%"><h4>No</h4></th>
                                 <th scope="col" width="50%"><h4>Name</h4></th>
                                 <th scope="col"><h4>View Details</h4></th>
                               </tr>
                             </thead>
                             <tbody>
-                              <tr>
-                                <th scope="row">1</th>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                              </tr>
-                              <tr>
-                                <th scope="row">2</th>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                              </tr>
-                              <tr>
-                                <th scope="row">3</th>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                              </tr>
-                              <tr>
-                                <th scope="row">3</th>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                              </tr>
-                              <tr>
-                                <th scope="row">3</th>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                              </tr>
-                              <tr>
-                                <th scope="row">3</th>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                              </tr>
-                              <tr>
-                                <th scope="row">3</th>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                              </tr>
-                              <tr>
-                                <th scope="row">3</th>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                              </tr>
-                              <tr>
-                                <th scope="row">3</th>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                              </tr>
-                              <tr>
-                                <th scope="row">3</th>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                              </tr>
-                              <tr>
-                                <th scope="row">3</th>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                              </tr>
-                              <tr>
-                                <th scope="row">3</th>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                              </tr>
-
+{% for appointment in appointments %}
+                                <tr>
+                                    <th scope="row">1</th>
+                                    <td>{{appointment.id}}</td>
+                                    <td>{{appointment.patient.get_full_name}}</td>
+                                    <td>
+                                        <form action="{% url 'appointment:view-details' %}">
+                                            <button class="btn btn-primary" type="submit">View</button>
+                                        </form>
+                                    </td>
+                                </tr>
+{% endfor %}
                             </tbody>
                           </table>
-            </div>
-
+                    </div>
+                </div>
             </div>
         </section>
-        <style>
-            table{
-            margin-top: 14px;
-            }
-            
-            
-        </style>
     </body>
+<style>
+    table{
+    margin-top: 14px;
+    }
+</style>
 </html>
