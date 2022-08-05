@@ -31,12 +31,39 @@ def appointment_test(request):
     #* Django model instances: https://docs.djangoproject.com/en/4.0/ref/models/instances/#django.db.models.Model.save
     context = {}
     if request.method == 'POST':
-        slot = request.POST['slot']
-        print(slot)
-        # appointment = Appointment.objects.create(
-        #     doctor = request.POST['doctor']
-        #     patient = request.POST['user']
-        #     date = request.POST['date']
-        #     reason = request.POST['reason']
-        # )
-    return render(request, 'book-appointment-test.html', context=context)
+        strslot = request.POST['slot']
+        # print(strslot)
+        list_slot = strslot.split('-')
+        # print(list_slot)
+        
+        doctor_id = request.POST['doctor']
+
+        appointment = Appointment.objects.create(
+            doctor = User.objects.get(pk=doctor_id),
+            patient = request.user,
+            date = request.POST['date'],
+            reason = request.POST['reason'],
+            start_time=list_slot[0],
+            end_time=list_slot[1],
+            status=False,
+        )
+        context={'appointment':appointment}
+    # return render(request, 'book-appointment-test.html', context=context)
+    return render(request, 'test.html', context=context)
+
+def pending_appointments(request):
+    context = {}
+    user = request.user
+    if not user.is_doctor():
+        return HttpResponse("NOT ALLOWED")
+        #! Display 403 Forbidden page
+
+    appointments = Appointment.objects.filter(doctor=user)
+    print(list(appointments))
+    # print(list(appointments)[0].patient)
+    context = {'appointments':appointments}
+
+    return render(request, 'pending-appointment.html', context=context)
+
+def view_details(request):
+    pass
