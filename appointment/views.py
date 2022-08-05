@@ -2,11 +2,17 @@ from django.shortcuts import render, HttpResponse
 from hospital.models import Department
 from accounts.models import User
 from .models import Appointment
+from hospital.models import Medicine
 
 def doctor_list(request):
     context = {}
     depts = Department.objects.all()
     doctors = User.objects.filter(user_type='D')
+    # doctors = User.objects.raw('''
+    #             SELECT id 
+    #             FROM accounts_user
+    #             WHERE user_type="D"
+    # ''')
     context = {'depts': depts, 'doctors': doctors}
     print(list(depts))
     return render(request, 'doc.html', context=context)
@@ -65,5 +71,11 @@ def pending_appointments(request):
 
     return render(request, 'pending-appointment.html', context=context)
 
-def view_details(request):
-    pass
+def view_appointment(request):
+    context={}
+
+    app_id = request.POST['id']
+    appointment = Appointment.objects.get(pk=app_id)
+    medicines = Medicine.objects.defer('name')
+    context = {'appointment':appointment, 'medicines':medicines}
+    return render(request, 'view-appointment.html', context=context)
