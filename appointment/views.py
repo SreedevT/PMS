@@ -1,4 +1,5 @@
-from django.shortcuts import render, HttpResponse
+from django.shortcuts import render, HttpResponse, redirect
+from django.contrib.auth.decorators import login_required
 from hospital.models import Department
 from accounts.models import User
 from .models import Appointment
@@ -18,24 +19,28 @@ def doctor_list(request):
     return render(request, 'doc.html', context=context)
 
 
-def test(request):
-    context = {}
-    id = request.POST['id']
-    doctor = User.objects.get(id=id)
-    return render(request, 'book-appointment.html')
+# def test(request):
+#     context = {}
+#     id = request.POST['id']
+#     doctor = User.objects.get(id=id)
+#     return render(request, 'book-appointment.html')
 
-def book_appointment(request):
+@login_required(login_url='accounts:login')
+def appointment_form(request):
     context = {}
 
     if request.method == 'POST':
         id = request.POST['id']
         doctor = User.objects.get(id=id)
         context = {'doctor': doctor}
-        return render(request, 'book-appointment.html', context=context)
+        return render(request, 'appointment-form.html', context=context)
 
-def appointment_test(request):
+def appointment_book(request):
     #* Django model instances: https://docs.djangoproject.com/en/4.0/ref/models/instances/#django.db.models.Model.save
     context = {}
+    if request.method != 'POST':
+        #! Display slect doctor message on 'doc.html'
+        return redirect('appointment:doc-list')
     if request.method == 'POST':
         strslot = request.POST['slot']
         # print(strslot)
@@ -54,8 +59,8 @@ def appointment_test(request):
             status=False,
         )
         context={'appointment':appointment}
-    # return render(request, 'book-appointment-test.html', context=context)
-    return render(request, 'test.html', context=context)
+        return render(request, 'test.html', context=context)
+    
 
 def pending_appointments(request):
     context = {}
