@@ -31,7 +31,7 @@
                                 <b>Department: {{doctor.docprofile.department.name}}</b>
                             </div>
                         </div>
-                        <form class="pt-5" action="{% url 'appointment:booked-test' %}" method="post" id="appointbook">
+                        <form class="pt-5" action="{% url 'appointment:appointment-book' %}" method="post" id="appointbook">
                             {% csrf_token%}
                             <input type="hidden" name="doctor" value="{{doctor.id}}">
                             <div class="form-group">
