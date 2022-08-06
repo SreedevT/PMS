@@ -63,6 +63,18 @@
             </div>
         </div>
     </body>
+
+    <!--* This script diables previous dates using JQuery, more info: https://devnote.in/how-to-disable-previous-dates-in-date-picker-using-jquery/ -->
+    <script language="javascript">
+        var today = new Date();
+        var dd = String(today.getDate()).padStart(2, '0');
+        var mm = String(today.getMonth() + 1).padStart(2, '0');
+        var yyyy = today.getFullYear();
+    
+        today = yyyy + '-' + mm + '-' + dd;
+        $('#date').attr('min',today);
+    </script>
+
     <style>
         .btn {
             border: 2px;
@@ -102,5 +114,5 @@
         .button1:hover {
             box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
         }
-        </style>
+    </style>
 </html>

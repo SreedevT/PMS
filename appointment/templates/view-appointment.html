@@ -102,7 +102,7 @@
                                     <tr>
                                         <th scope="row">FOLLOW-UP</th>
                                         <td>
-                                            <input type="date">
+                                            <input type="date" id="date" name="date">
                                         </td>
 
                                     </tr>
@@ -172,8 +172,20 @@
         }
     </style>
     
+    <!--* Scrpit for searching medicine -->
     <script>
         $('.select2').select2();
+    </script>
+
+    <!--* This script diables previous dates using JQuery, more info: https://devnote.in/how-to-disable-previous-dates-in-date-picker-using-jquery/ -->
+    <script language="javascript">
+        var today = new Date();
+        var dd = String(today.getDate()).padStart(2, '0');
+        var mm = String(today.getMonth() + 1).padStart(2, '0');
+        var yyyy = today.getFullYear();
+    
+        today = yyyy + '-' + mm + '-' + dd;
+        $('#date_picker').attr('min',today);
     </script>
 
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
