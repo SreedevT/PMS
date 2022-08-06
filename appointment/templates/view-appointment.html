@@ -1,6 +1,9 @@
+{% load bootstrap4 %}
+{% bootstrap_css %}
+{% bootstrap_javascript jquery=True %}
+
 <!DOCTYPE html>
 <html>
-
 <head>
     <title>
         View Details
@@ -26,51 +29,51 @@
 
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
-                        <button class="btn btn-dark"> VIEW PAST HISTORY</button>
+                    <button class="btn btn-dark">VIEW PAST MEDICAL RECORDS</button>
                     </li>
                 </ul>
-
             </div>
         </nav>
     </header>
 
     <body class="hm-gradient">
-            <div class="table-responsive-md">
+
                 <div class="container mt-4">
 
                     <div class="card mb-4">
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-md-12">
-                                    <div class="pt-3 pb-5 text-center"><h2>DETAILS</h2></div>
-                                    <div class="row">
-                                        <div class="col-md-3">
-                                            <img src="{{appointment.patient.patprofile.profile_pic.url}}">
-                                        </div>
-                                    </div>
-                                    <div class="input-group md-form form-sm form-2 pl-0">
+                        <h3 class="pt-2 pb-3 text-center">DETAILS</h3>
 
-                                    </div>
                                 </div>
                             </div>
 
+                            <div class="col-md-2">
+                                <img class="profile"
+                                    src="{{appointment.patient.patprofile.profile_pic.url}}"
+                                    alt="profile-picture" class="image-fluid">
+                            </div>
+                            
                             <table class="table table-borderless" style="margin-top: -150px;">
                                 <tbody>
                                     <tr>
 
                                         <th scope="row"></th>
-                                        <td scope="row" style="padding-right:166px;">{{appointment.patient.get_full_name}}</td>
+                                        <th scope="row">Name</th>
+                                        <td style="padding-right:166px;">{{appointment.patient.get_full_name}}</td>
 
                                     </tr>
                                     <tr>
+                                        <th scope="row"></th>
                                         <th scope="row">Gender</th>
                                         <td>{{appointment.patient.get_gender}}</td>
 
                                     </tr>
                                     <tr>
+                                        <th scope="row"></th>
                                         <th scope="row">Age</th>
-                                        <td>{{appointment.patient.patprofile.get_age}}</td>
-
+                                        <td>19</td>
                                     </tr>
                                     <tr>
                                         <th scope="row">REASON</th>
@@ -83,19 +86,20 @@
                                         <td>
                                             <div class="row">
                                                 <form class="col-md-4">
-                                                    <label>
+                                                    <!-- <label>
                                                         <h6 style="margin-bottom:-6px;"> Medicines</h6>
                                                     </label>
                                                     <select class="form-control select2">
-{% for medicine in medicines%}
+{#% for medicine in medicines%}
                                                         <option>{{medicine}}</option>
-{% endfor %}
-                                                    </select>
+{% endfor %#}
+                                                    </select> -->
+                                                    {% bootstrap_form form %}
                                                 </form>
                                             </div>
                                             <div class="form-group">
                                                 <textarea class="form-control rounded-0" rows="4"
-                                                    style="margin-top:4px ;"></textarea>
+                                        style="margin-top:4px ; width: 143%;"></textarea>
                                             </div>
                                         </td>
                                     </tr>
@@ -120,6 +124,7 @@
             width: 100px; 
             margin-bottom: 9px;
         }
+        
         .hm-gradient {
             background-image: linear-gradient(to top, #f3e7e9 0%, #e3eeff 99%, #e3eeff 100%);
         }
@@ -131,7 +136,6 @@
         .bg-dark {
             background-color: #afadad !important;
         }
-
 
         .container {
             background: white;
@@ -158,12 +162,16 @@
             padding-left: 192px;
         }
 
-        .sec1 {
-            margin-top: -6px;
-            margin-left: 310px;
-            padding-right: 600px;
+
+        .profile {
+            width: 133px;
+            margin-left: -10px;
+            margin-bottom: 10px;
         }
 
+        .select2 {
+            width: 207.938px;
+        }
 
         .form {
             margin-bottom: -95px;

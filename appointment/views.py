@@ -4,6 +4,7 @@ from hospital.models import Department
 from accounts.models import User
 from .models import Appointment
 from hospital.models import Medicine
+from .forms import PrescriptionForm
 
 def doctor_list(request):
     context = {}
@@ -78,9 +79,12 @@ def pending_appointments(request):
 
 def view_appointment(request):
     context={}
+    if request.method != 'POST':
+        return redirect('appointment:pending-appointment')
 
     app_id = request.POST['id']
     appointment = Appointment.objects.get(pk=app_id)
-    medicines = Medicine.objects.all()
-    context = {'appointment':appointment, 'medicines':medicines}
+    form = PrescriptionForm()
+    print(form)
+    context = {'appointment':appointment, 'form':form}
     return render(request, 'view-appointment.html', context=context)
