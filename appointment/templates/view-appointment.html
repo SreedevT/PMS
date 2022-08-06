@@ -86,15 +86,14 @@
                                         <td>
                                             <div class="row">
                                                 <form class="col-md-4">
-                                                    <!-- <label>
+                                                    <label>
                                                         <h6 style="margin-bottom:-6px;"> Medicines</h6>
                                                     </label>
                                                     <select class="form-control select2">
-{#% for medicine in medicines%}
+{% for medicine in medicines%}
                                                         <option>{{medicine}}</option>
-{% endfor %#}
-                                                    </select> -->
-                                                    {% bootstrap_form form %}
+{% endfor %}
+                                                    </select>
                                                 </form>
                                             </div>
                                             <div class="form-group">

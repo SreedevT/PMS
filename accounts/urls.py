@@ -7,10 +7,10 @@ app_name = 'accounts' #* Add app_name for namespace
 
 urlpatterns = [
     path('', views.home, name='home'),
-    path('login', auth_views.LoginView.as_view(
+    path('login', views.LoginFormView.as_view(
             template_name='login.html', 
             next_page='accounts:home',), 
-        name='login'),
-    path('logout', auth_views.LogoutView.as_view(template_name='logout.html'), name='logout'),
+            name='login'),
+    path('logout', views.LogoutFormView.as_view(next_page='accounts:home'), name='logout'),
     path('sign-up', views.register, name='register'),
 ]

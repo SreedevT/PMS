@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 from accounts.models import User
 from .models import *
 from .forms import *
@@ -24,6 +25,7 @@ def profile(request):
         form = PatientProfileUpdateForm(request.POST, instance=profile, files=request.FILES) #* files is used to upload files
         if form.is_valid():
             form.save()
+            messages.add_message(request, messages.INFO, 'Profile updated successfully')
             return redirect('accounts:home')
     else:
         form = PatientProfileUpdateForm(instance=profile)
@@ -46,6 +48,7 @@ def doctor_profile(request):
         form = DoctorProfileUpdateForm(request.POST, instance=profile, files=request.FILES) #* files is used to upload files
         if form.is_valid():
             form.save()
+            messages.add_message(request, messages.INFO, 'Profile updated successfully')
             return redirect('accounts:home')
     else:
         form = DoctorProfileUpdateForm(instance=profile)

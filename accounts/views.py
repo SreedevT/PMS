@@ -2,7 +2,21 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib.auth import login
 from .forms import UserCreateForm
+from django.contrib.messages.views import SuccessMessageMixin
+from django.contrib.auth.views import LoginView, LogoutView
+from django.contrib import messages
 from profiles.models import PatientProfile
+
+
+class LoginFormView(SuccessMessageMixin, LoginView):
+    success_message: str = 'You have been logged in successfully.'
+
+class LogoutFormView(LogoutView): #* No idea how it works, but: https://stackoverflow.com/questions/59593854/display-messages-on-logoutview
+
+    def dispatch(self, request, *args, **kwargs):
+        response = super().dispatch(request, *args, **kwargs)
+        messages.add_message(request, messages.SUCCESS, 'Successfully logged out.')
+        return response
 
 def home(request):
     #* user context is passed by default to all templates, need not specify
