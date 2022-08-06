@@ -3,7 +3,6 @@
 {% load bootstrap4 %}
 {% bootstrap_css %}
 {% bootstrap_javascript jquery='full' %}
-{% bootstrap_messages %}
 
 <!DOCTYPE html>
 <html>
@@ -12,17 +11,9 @@
         <link rel="shortcut icon" href="{% static 'images/logo.png' %}" type= "image/x-icon" />
     </head>
     <body>
-        <header id="header1">
-            <div class="row bg-info text-white">
-                <div class="col-md-12">
-                    <nav class="navbar navbar-expand-lg"  style="background-color:#4c4774fa;">
-                        <a class="navbar-brand" href="{% url 'accounts:home'%}">
-                          <button class="button">Home</button>
-                        </a>
-                    </nav>
-                </div>
-            </div>
-        </header>
+
+        {% include 'navbar-simple.html' %} <!--* navbar-simple.html is the navbar template-->
+
         <div class="row">
             <div  class="col-md-12 col-12">
                 <div class="container mt-5">
@@ -40,7 +31,7 @@
                                 <b>Department: {{doctor.docprofile.department.name}}</b>
                             </div>
                         </div>
-                        <form class="pt-5" action="{% url 'appointment:booked-test' %}" method="post" id="appointbook">
+                        <form class="pt-5" action="{% url 'appointment:appointment-book' %}" method="post" id="appointbook">
                             {% csrf_token%}
                             <input type="hidden" name="doctor" value="{{doctor.id}}">
                             <div class="form-group">
@@ -51,17 +42,14 @@
                             <div class="form-group">
                                 <label for="time"><b>Appointment Time:</b></label>
                                 <br>
-                                {% for _,slot in time_slot%} <!-- * Tuple unwrapping  -->
-                                    <input class="btn btn-primary" type="radio" name="slot" value={{slot}}> {{slot}}
-                                {% endfor %}
+                                <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                    {% for _,slot in time_slot%} <!-- * Tuple unpacking  -->
+                                        <label class="btn btn-warning">
+                                          <input type="radio" name="slot" id="slot{{forloop.counter}}" autocomplete="off" value="{{slot}}">{{slot}}
+                                        </label>
+                                    {% endfor %}
+                                </div>
                             </div>
-                                <!-- <b>Time slot:</b><br>
-                            
-                            <input type="radio" name="Time slot" value="9.00-10.00 am"> 9.00-10.00 am<br>
-                            <input type="radio" name="Time slot" value="10.10-11.00 am"> 10.10-11.00 am<br>
-                            <input type="radio" name="Time slot" value="11.05- 11.55 am"> 11.05- 11.55 am <br>
-                            <input type="radio" name="Time slot" value="12.10- 1.00 am"> 12.10- 1.00 am <br>
-                            <br><br> -->
                         <b> Reason for taking appointment</b>
                                         <div id="reason" class="form-input-wide" style="height: 35px;">
                                             <textarea id="input_21" class="form-textarea" name="reason" cols="40" rows="6" data-component="textarea"></textarea>
@@ -75,36 +63,56 @@
             </div>
         </div>
     </body>
+
+    <!--* This script diables previous dates using JQuery, more info: https://devnote.in/how-to-disable-previous-dates-in-date-picker-using-jquery/ -->
+    <script language="javascript">
+        var today = new Date();
+        var dd = String(today.getDate()).padStart(2, '0');
+        var mm = String(today.getMonth() + 1).padStart(2, '0');
+        var yyyy = today.getFullYear();
+    
+        today = yyyy + '-' + mm + '-' + dd;
+        $('#date').attr('min',today);
+    </script>
+
     <style>
+        .btn {
+            border: 2px;
+            font-size: 1rem;
+            padding: 0.7rem;
+            margin: 0.7rem;
+        }
+
         .button {
             border-radius: 12px;
             border: 2px;
             font-size: 1rem;
             padding: 0.4rem;
-          }
+        }
           
-          .button:hover {
+        .button:hover {
             background-color: #4CAF50; /* Green */
             color: white;
-          }
+        }
+
         .button1 {
-          background-color: #08d405;
-          border: none;
-          color: white;
-          border-radius: 12px;
-          padding: 16px 32px;
-          text-align: center;
-          font-size: 16px;
-          margin: 4px 2px;
-          opacity: 0.6;
-          transition: 0.1s;
-          display: inline-block;
-          text-decoration: none;
-          cursor: pointer;
+            background-color: #08d405;
+            border: none;
+            color: white;
+            border-radius: 12px;
+            padding: 16px 32px;
+            text-align: center;
+            font-size: 16px;
+            margin: 4px 2px;
+            opacity: 0.6;
+            transition: 0.1s;
+            display: inline-block;
+            text-decoration: none;
+            cursor: pointer;
         }
         
         .button1:hover {
-  box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
-}
-        </style>
+            box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+        }
+    </style>
 </html>
