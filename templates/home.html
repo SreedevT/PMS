@@ -1,1043 +1,353 @@
-
-  <!DOCTYPE html>
-
+<!DOCTYPE html>
   <html>
-  
       <head>
-  
-          <title>
-  
-              HOME
-  
-          </title>
-  
+          <title>HOME</title>
           <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
-  
               integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-  
-            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-  
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
       </head>
   
       <body>
-  
-          <header>  
-  
-              <div class="row bg-dark text-white">
-  
-                  <div class="col-md-6 pl-3">
-  
-                      <h3><b>PATIENT MANAGEMENT SYSTEM</h3></b>
-  
-                      <br>
-  
-                      <!-- <a>
-  
-                    <img src="https://i.ibb.co/XXQbfY6/logo-help-for-health.png"
-  
-                          class="img1 square square-lg bg-secondary" alt="logo-help-for-health"
-  
-                          style="height:130px; width:170px; margin-top:-33px;"></a> -->
-  
-                  </div>
-  
-                  <div class="col-md-6">
-  
-                      <nav class="navbar  navbar-expand-lg navbar-dark bg-dark">
-  
-                          <button class="navbar-toggler" type="button" data-toggle="collapse"
-  
-                              data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-  
-                              aria-expanded="false" aria-label="Toggle navigation">
-  
-                          <span class="navbar-toggler-icon"></span>
-  
-                          </button>
-  
-                          <div class="collapse navbar-collapse" id="navbarSupportedContent">
-  
-                              <ul class="navbar-nav mr-auto">
-  
-                                  <li class="nav-item dropdown">
-  
-                                      <a class="nav-link dropdown-toggle text-white" href="" id="navbarDropdown" role="button"
-  
-                                          data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
-  
-                                          background="#343a40" onmouseover="this.style.background='  #264445';"
-  
-                                          onmouseout="this.style.background= '';">
-  
-                                          SPECIALITIES
-  
-                                      </a>
-  
-                                      <div class="dropdown-menu  bg-secondary text-white " aria-labelledby="navbarDropdown">
-{% for department in departments %}
-                                          <a class="dropdown-item"
-  
-                                              href="appointment#department{{forloop.counter}}">{{department.name}}</a>
-{% endfor %}
-                                      </div>
-  
-                                  </li>
-  
-                                  <li class="nav-item dropdown">
-  
-                                      <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown"
-  
-                                          role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
-  
-                                          background="#343a40" onmouseover="this.style.background='  #264445';"
-  
-                                          onmouseout="this.style.background= '';">
-  
-                                     <!-- <img src=" data:image/png;base64,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"  
-  
-                                          class="emg rounded-circle" background="#343a40"
-  
-                                          onmouseover="this.style.background='green';"
-  
-                                          onmouseout="this.style.background='#343a40';"> -->
-  
-                                          LOGIN
-  
-                                      </a>
-  
-                                      <div class="dropdown-menu text-dark bg-info" aria-labelledby="navbarDropdown">
-  
-                                          <a class="dropdown-item" href="{% url 'accounts:register' %}">
-  
-                                          Add new registration</a>
-  
-                                          <a class="dropdown-item"
-  
-                                              href="{% url 'accounts:login' %}">Login</a>
-                                            
-                                      </div>
-  
-                                  </li>
-  
-                                  <a class="navbar-brand" href="{% url 'appointment:doc-list'%}"
-  
-                                      background="#343a40" onmouseover="this.style.background='  #264445';"
-  
-                                      onmouseout="this.style.background= '';"> BOOK AN APPOINTMENT</a>
-  
-                                  <li class="nav-item dropdown">
-  
-                                      <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown"
-  
-                                          role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
-  
-                                          background="#343a40" onmouseover="this.style.background='#264445';"
-  
-                                          onmouseout="this.style.background= '';">
-  
-                                    <!--   <img src=" data:image/png;base64,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"
-  
-                                          class="emg rounded-circle" background="#34a40"
-  
-                                          onmouseover="this.style.background='green';"
-  
-                                          onmouseout="this.style.background='#343a40';"> -->
-  
-                                          <i class="fa fa-phone"></i>&nbsp;CONTACT
-  
-                                      </a>
-  
-                                      <div class="dropdown-menu width:30px text-dark bg-info"
-  
-                                          aria-labelledby="navbarDropdown">
-  
-                                          <a class="dropdown-item" href="#">
-  
-                                          Call</a>
-  
-                                          <a class="dropdown-item" href="mailto:yadukrishna2240@gmail.com">Email</a>
-  
-                                      </div>
-  
-                                  </li>
-  
-                                  <a class="navbar-brand" href="http://127.0.0.1:5500/miniproject/page7.html"
-  
-                                      background="#343a40" onmouseover="this.style.background='  #264445';"
-  
-                                      onmouseout="this.style.background= '';">
-  
-                                 <!--  <img src="data:image/jpeg;base64,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"
-  
-                                      class="emg rounded-circle" background="#343a40"
-  
-                                      onmouseover="this.style.background='green';"
-  
-                                      onmouseout="this.style.background='#343a40';">-->
-  
-                                      <i class="fa fa-ambulance" aria-hidden="true"></i></i>EMERGENCY</a>
-  
-                              </ul>
-  
-                          </div>
-  
-                      </nav>
-  
-                  </div>
-  
-              </div>
-  
-              </div>
-  
-          </header>
-  
+          {% include 'navbar.html' %} <!--* navbar.html path /templates/navbar.html-->
           <section style="background-color:  #8aa8ac;">
-  
               <marquee width="100%" direction="left" height="27px">
-  
-                  <B>
-  
-                      <h4 style="background-color:  #8aa8ac; color:  #62696a;"><b>FOURSY GROUP OF HOSPITALS &nbsp &nbsp &nbsp &nbsp BRANCHES AT
-  
-                          COCHIN,BANGLORE,MUMBAI,KANPUR,KOLKATA,DELHI&nbsp &nbsp &nbsp &nbsp CONTACT AT:7012460529</b>
-  
+                  <b>
+                      <h4 style="background-color:  #8aa8ac; color:  #464949;"><b>FOURSY GROUP OF HOSPITALS &nbsp &nbsp &nbsp &nbsp BRANCHES AT
+                          COCHIN,BANGLORE,MUMBAI,DELHI&nbsp &nbsp &nbsp &nbsp CONTACT AT:7012460529</b>
                       </h4>
-  
-                  </B>
-  
-                   
-  
+                    </b>
               </marquee>
-  
               <div>
-  
-                 
-  
-                      <div id="carouselExampleIndicators" class="carousel slide" data-ri de="carousel">
-  
-                         
-  
-                        <ol class="carousel-indicators">
-  
-                          <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-  
-                          <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-  
-                          <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-  
-                        </ol>
-  
+                 <div id="carouselExampleIndicators" class="carousel slide" data-ri de="carousel">
+                 <ol class="carousel-indicators">
+                  <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                   <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                    <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+                 </ol>
                         <div class="carousel-inner">
-  
-                       
-  
-                          <div class="carousel-item active">
-  
-                             
-  
+                        <div class="carousel-item active">
                            <h1 id="text"><b>Making Health<br>Care Better Together</b></h1>
-  
                               <p id="para1">Every day we bring hope and smile to the patients we serve</p>  
                             <div>
                               <a class="btn btn-primary textbtn" href="{% url 'appointment:doc-list' %}">Book an appointment</a>
-  
                               <button class="loginbtn">Login</button>
-                              
                             </div>
                             <img class="d-block w-100" src=" https://t3.ftcdn.net/jpg/02/98/00/12/360_F_298001238_dIwzmWmeR4nQ8HxkZvunXvqJnHgjAwVe.jpg" alt="First slide">
-  
                           </div>
-  
                           <div class="carousel-item">
-  
                             <img class=" d-block w-100" src="https://www.xihealthglobal.com/wp-content/uploads/2020/08/65587-scaled.jpg" alt="Second slide">
-  
                           </div>
-  
                           <div class="carousel-item">
-  
                             <img class="d-block w-100" src="http://gotobeauty.com/wp-content/uploads/2020/06/Doctor-Consultation-Woman.jpg" alt="Third slide">
-  
                           </div>
-  
                         </div>
-  
                         <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-  
-                           
-  
-                           
-  
                           </a>
-  
-                          <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-  
-                           
-  
-                          </a>
-  
-                       
-  
-             
-  
-              </div>
-  
+                     <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                     </a>
+                </div>
               <div class="mainbody">
-  
                   <div class="row1  row " style="margin-left: -230px; margin-top: -365px;">
-  
                       <div class="col-md-4 col-12">
-  
                           <div class="card" style="width: 18rem;  background:#fff"
-  
                               onmouseover="this.style.background=' #e6f9ff';" onmouseout="this.style.background='#fff';" >
-  
                               <img class=" card-img-top"
-  
                                   src="https://media.istockphoto.com/photos/assessment-and-analysis-by-professional-auditing-consultant-concept-picture-id1162629597?k=20&m=1162629597&s=612x612&w=0&h=t7gXu0j4Tk224DH7DFfLC7tP7yTns1ZRj0pe5bTkR4w=">
-  
                               <div class="card-body">
-  
                                   <p class="card-text">
-  
                                   <h3>OUR SERVICES</h3>
-  
                                   <br>
-  
                                   Foursy Group Hospitals ensures to provide the highest quality of care and a transformative
-  
                                   experience for all your healthcare needs.
-  
                                   </p>
-  
                                   <b><a href="">Know more</a></b>
-  
                               </div>
-  
                           </div>
-  
                       </div>
-  
                       <div class="col-md-4 col-12">
-  
                           <div class="card" style="width: 18rem;" background="#fff"
-  
                               onmouseover="this.style.background=' #e6f9ff';" onmouseout="this.style.background='#fff';">
-  
                               <img class="card-img-top"
-  
-                                  src="https://previews.123rf.com/images/epicfail/epicfail1705/epicfail170500040/79138557-thin-line-flat-design-banner-of-business-mission-statement.jpg"
-  
-                                  alt="Card image cap">
-  
+                              src="https://blog.presentationload.com/wp-content/uploads/2020/06/vision-mission.jpg"
+                              alt="Card image cap">
                               <div class="card-body">
-  
                                   <p class="card-text">
-  
                                   <h3>MISSION</h3>
-  
                                   <br>
-  
                                   Because not all wounds are visible, we, are dedicated to healing the unseen. We do that by
-  
-                                  helping our patients overcome
-  
+                                  helping our patients overcome all the ...
                                   </p>
-  
                                   <b><a href="">Know more</a></b>
-  
                               </div>
-  
                           </div>
-  
                       </div>
-  
                       <div class="col-md-4 col-12">
-  
                           <div class="card" style="width: 18rem;" background="#fff"
-  
                               onmouseover="this.style.background=' #e6f9ff';" onmouseout="this.style.background='#fff';">
-  
                               <img class="card-img-top"
-  
-                                  src="https://previews.123rf.com/images/epicfail/epicfail1705/epicfail170500040/79138557-thin-line-flat-design-banner-of-business-mission-statement.jpg"
-  
-                                  alt="Card image cap">
-  
+                              src="https://t3.ftcdn.net/jpg/01/37/90/78/360_F_137907818_LNzsqtQT7OAZ98BuA3T4TKiEbEOY543G.jpg"
+                              alt="Card image cap">
                               <div class="card-body">
-  
                                   <p class="card-text">
-  
                                   <h3>VISION</h3>
-  
                                   <br>
-  
                                   To provide compassionate, accessible, high quality, cost effective healthcare to one all. To
-  
-                                  serve with a patient's first motto </p>
-  
+                                  serve with a patient's first motto... </p>
                                   <b><a href="">Know more</a></b>
-  
                               </div>
-  
                           </div>
-  
                       </div>
-  
                   </div>
-  
                   <div class="row2 row " style="margin-left: -230px; margin-top: -220px;">
-  
                       <div class="col-md-4 col-12">
-  
                           <div class="card" style="width: 18rem;" background="#fff"
-  
                               onmouseover="this.style.background=' #e6f9ff';" onmouseout="this.style.background='#fff';">
-  
                               <img class="card-img-top"
-  
-                                  src="https://www.lifewire.com/thmb/6DrtO40qnoND20afLabJ8MHUN4w=/1614x1105/filters:fill(auto,1)/Maplocation_-5a492a4e482c52003601ea25.jpg">
-  
+                              src="https://www.business2community.com/wp-content/uploads/2015/02/rRlmJDvPnPiayf2pDNN7A6PB-b8cBzkrotS2b1NVgjna2GV6RLtONQlIOaQYAX9nel1axTyOgX82a57RnHdkqTk3Mh6hBqyK3UbR2tGqzQPgF-RhtQrliJthr5a31UJEBeGBxa0.png">
                               <div class="card-body">
-  
                                   <p class="card-text">
-  
                                   <h3><b>Location</b></h3>
-  
                                   <br>
-  
-                                  FOURSY GROUP OF HOSPITALS<br>KALAMASSERY P.O<br>CUSAT<br>
-  
+                                  FOURSY GROUP OF HOSPITALS<br>KALAMASSERY P.O<br>CUSAT<br>COCHIN<br>
                                   </p>
-  
                                   <b><a href="https://goo.gl/maps/4p2ofe2KBKs6wxze8">Know more</a></b>
-  
                               </div>
-  
                           </div>
-  
                       </div>
-  
                       <div class="col-md-4 col-12">
-  
                           <div class="card" style="width: 18rem;" background="#fff"
-  
                               onmouseover="this.style.background=' #e6f9ff';" onmouseout="this.style.background='#fff';">
-  
                               <img class="card-img-top"
-  
-                                  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSQOw2jyBnts8CjQ_hsjb749dN9dZdDoYT3Nw&usqp=CAU">
-  
+                                  src="https://www.aplaceformom.com/images/1147215">
                               <div class="card-body">
-  
                                   <p class="card-text">
-  
-                                  <h3><a>Home care</a></h3>
-  
-                                  <BR>
-  
-                                  The Home Care @ foursy Hospitals aims at bringing personalized and quality healthcare...<Br>
-  
+                                  <h3><b><a>Home Care</a></b></h3>
+                                  <br>
+                                  The Home Care @ Foursy group of hospitals aim for good health and well-being by providing the best care to every patient...<br>
                                   <b><a href="">Know more</a></b>
-  
                                   </p>
-  
                               </div>
-  
                           </div>
-  
                       </div>
-  
                       <div class="col-md-4 col-12">
-  
                           <div class="card" style="width: 18rem;" background="#fff"
-  
                               onmouseover="this.style.background=' #e6f9ff';" onmouseout="this.style.background='#fff';">
-  
-                              <img class="card-img-top " style="height: 163px ; width: 286px;"
-  
-                                  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRlYMccmb2gFK9ZBDU15XPM7n4EATlsCuKf7A&usqp=CAU"
-  
-                                  alt="Card image cap">
-  
-                              <div class="card-body" style="width: 286px; height: 233px;">
-  
+                            <img class="card-img-top"
+                                src="https://sp-ao.shortpixel.ai/client/q_glossy,ret_img/https://sirinahealth.com/wp-content/uploads/2017/09/Lab-2.jpg">
+                            <div class="card-body">
                               <p class="card-text">
-  
-                              <h3><a>Health Packages</a></h3>
-  
+                                    <h3><b><a>Health Packages</a></b></h3>
                               <br>
-  
-                              " Don't ignore the signals from your body, before its too late. Take the step toward
-  
-                              preventiv..."
-  
+                                    Foursy Group of Hospitals, one of Kochi's most trusted health care providers is dedicated to offer you a comprehensive and excellent...
                               <br>
-  
                               <b><a href="">Know more</a></b>
-  
                               </p>
-  
                           </div>
-  
                       </div>
-  
                   </div>
-  
+                     
               </div>
-  
               </div>
-  
           </section>
   
           <section>
-  
               <div class="row">
-  
                   <div class="col-md-12 col-12">
-  
                       <div class="container container-fluid">
-  
                           <h2>
-  
                               <B>Overview</B>
-  
                           </h2>
-  
-                          <p>
-  
-                          <h6>
-  
-                              Foursy Group of Hospitals,Cochin branch set in a soothingly beautiful 40-acre waterfront campus,
-  
+                          <p style="font-family:roboto ;">
+                            <p>
+                                     Foursy Group of Hospitals,Cochin branch set in a soothingly beautiful 40-acre waterfront campus,
                               is a 670-bed quaternary care facility & one of the best hospital in Kochi, Kerala. Fulfilling
-  
                               the vision and dream of beloved chairman, the center has been delivering quality healthcare at
-  
-                              affordable cost through its Centres of Excellence and a multi-specialty hospital since 2000. It
-  
+                             affordable cost through its Centres of Excellence and a multi-specialty hospital since 2000. It
                               is the first JCI accredited quaternary care multispecialty hospital in the state and combines
-  
-                              the best of talent and technology to provide holistic treatment with a multidisciplinary
-  
-                              approach.
-  
-                              Across the years, Foursy Group of Hospitals has evolved into a medical destination - one that
-  
-                              attracts not just thousands of patients across the world; but also attracts and nurtures the
-  
-                              best talent, keeps upgrading technology as well as fosters research, education and a distinctive
-  
-                              work culture that is ethically and socially relevant.
-  
+                             the best of talent and technology to provide holistic treatment with a multidisciplinary
+                             approach.</p>
+                             <p>
+                                     Across the years, Foursy Group of Hospitals has evolved into a medical destination - one that
+                             attracts not just thousands of patients across the world; but also attracts and nurtures the
+                             best talent, keeps upgrading technology as well as fosters research, education and a distinctive
+                              work culture that is ethically and socially relevant.</p>
+                            <p>
                               Kerala’s first quaternary care hospital, Foursy Group of Hospitals has also been accredited by
-  
                               NABH, received NABH certification for Nursing Excellence, Green OT (Green Operation Theatres)
-  
                               Certification by Bureau Veritas all within a year of opening its door to the world.
-  
+                            </p>
+                            <p>
                               With a multidisciplinary treatment approach at its core, Foursy Group of Hospitals offers
-  
                               quality healthcare under Centres of Excellence in Cardiac Sciences, Neurosciences, Orthopaedics
-  
                               & Rheumatology, Nephrology & Urology, Oncology, Women’s Health, Child & Adolescent Health,
-  
                               Gastroenterology & Hepatology, and Multi-Organ Transplantation. The multispecialty hospital
-  
                               inside the campus provides unmatched care by other specialties such as Internal Medicine,
-  
                               Infectious Diseases, Interventional Radiology, ENT, Plastic, Cosmetic & Microvascular Surgery,
-  
                               General Surgery, Psychiatry, Dentistry, Maxillofacial Surgery, Pulmonology, Ophthalmology,
+                              Nuclear Medicine, Centre for Fertility, Dermatology and Cosmetology to name a few.</p>
   
-                              Nuclear Medicine, Centre for Fertility, Dermatology and Cosmetology to name a few.
-  
-                              Some of its clinical programs such as Physical Medicine & Rehabilitation (PMR), Bone Marrow
-  
+                              <p>Some of its clinical programs such as Physical Medicine & Rehabilitation (PMR), Bone Marrow
                               Transplant, Liver Transplant, Kidney Transplant, Parkinson and Movement Disorders treatment
-  
                               including Deep Brain Stimulation (DBS), Spine Surgery, Epilepsy Surgery, Cardiac
-  
                               Electrophysiology benefited hundreds of people across the world. Foursy Minimal Access Robotic
-  
                               Surgery (MARS) program has successfully performed over 1200 robotic-assisted surgeries by
-  
                               transplant surgeons, urologists, and gynecologists. The hospital also is one of the very few in
-  
                               the region to offer full-fledged Extra Corporeal Membrane Oxygenation (ECMO) facilities reviving
-  
-                              critically ill patients.
-  
-                          </h6>
-  
+                              critically ill patients.</p>
                           </p>
-  
                       </div>
-  
                   </div>
-  
               </div>
-  
           </section>
-  
+<br>
+<br>
           <section>
-  
               <div class="row">
-  
-                  <h3><b style="padding-left: 31px;">OUR HOSPITALS</b></h3>
-  
+                  <h3><b style="padding-left: 210px;">OUR HOSPITALS</b></h3>
                   <br>
-  
               </div>
-  
               <div class=" fststhos row">
-  
                   <div class="col-md-6 col-12">
-  
                       <div class="card bg-white text-dark ">
-  
                           <img class="card-img"
-  
-                              src="https://revcycleintelligence.com/images/site/article_headers/_normal/hospital%2C_green.jpg">
-  
+                              src="https://comparemedicaltourism.com/wp-content/uploads/2020/12/Aster-Medcity-9.jpeg">
                           <div class="card-img-overlay">
-  
-                              <h5 class="card-title">Card title</h5>
-  
-                              <p class="card-text">This is a wider card with supporting text below as a natural lead-in to
-  
-                                  additional content. This content is a little bit longer.
-  
-                              </p>
-  
-                              <p class="card-text">Last updated 3 mins ago</p>
-  
+                              <h5 class="card-title"><b>COCHIN BRANCH</b></h5>
+                             
                           </div>
-  
                       </div>
-  
                   </div>
-  
                   <div class="col-md-6 col-12">
-  
                       <div class="card bg-white text-dark">
-  
                           <img class="card-img"
-  
-                              src="https://revcycleintelligence.com/images/site/article_headers/_normal/hospital%2C_green.jpg">
-  
+                              src="https://assetsamerica.com/wp-content/uploads/Lines-of-Business/Hospital-Building/POSTED/B-WI_Columbia-StMarys_Hospital_2_DriDesign_lo-1900x1264.jpg">
                           <div class="card-img-overlay">
-  
-                              <h5 class="card-title">Card title</h5>
-  
-                              <p class="card-text">This is a wider card with supporting text below as a natural lead-in to
-  
-                                  additional content. This content is a little bit longer.
-  
-                              </p>
-  
-                              <p class="card-text">Last updated 3 mins ago</p>
-  
+                              <h5 class="card-title"><b>BANGLORE BRANCH</b></h5>
+                              
                           </div>
-  
                       </div>
-  
                   </div>
-  
               </div>
-  
               <div class=" fststhos row">
-  
                   <div class="col-md-6 col-12">
-  
                       <div class="card bg-white text-dark ">
-  
                           <img class="card-img"
-  
-                              src="https://revcycleintelligence.com/images/site/article_headers/_normal/hospital%2C_green.jpg">
-  
+                              src="https://s3-prod.modernhealthcare.com/s3fs-public/NEWS_180309988_AR_0_XNBIZJVLYMML.jpg">
                           <div class="card-img-overlay">
-  
-                              <h5 class="card-title">Card title</h5>
-  
-                              <p class="card-text">This is a wider card with supporting text below as a natural lead-in to
-  
-                                  additional content. This content is a little bit longer.
-  
-                              </p>
-  
-                              <p class="card-text">Last updated 3 mins ago</p>
-  
+                              <h5 class="card-title"><b>MUMBAI BRANCH</b></h5>
+                    
                           </div>
-  
                       </div>
-  
                   </div>
-  
                   <div class="col-md-6 col-12">
-  
                       <div class="card bg-white text-dark">
-  
                           <img class="card-img"
-  
-                              src="https://revcycleintelligence.com/images/site/article_headers/_normal/hospital%2C_green.jpg">
-  
+                              src="https://healthcare.ascension.org/-/media/project/ascension/healthcare/legacy/markets/wisconsin/locations/se-wi/st-francis/wi_ascensionstfrancis_1600x1064.jpg">
                           <div class="card-img-overlay">
-  
-                              <h5 class="card-title">Card title</h5>
-  
-                              <p class="card-text">This is a wider card with supporting text below as a natural lead-in to
-  
-                                  additional content. This content is a little bit longer.
-  
-                              </p>
-  
-                              <p class="card-text">Last updated 3 mins ago</p>
-  
+                              <h5 class="card-title"><b>DELHI BRANCH</b></h5>
+                           
                           </div>
-  
                       </div>
-  
                   </div>
-  
               </div>
-  
-              <div class=" fststhos row">
-  
-                  <div class="col-md-6 col-12">
-  
-                      <div class="card bg-white text-dark ">
-  
-                          <img class="card-img"
-  
-                              src="https://revcycleintelligence.com/images/site/article_headers/_normal/hospital%2C_green.jpg">
-  
-                          <div class="card-img-overlay">
-  
-                              <h5 class="card-title">Card title</h5>
-  
-                              <p class="card-text">This is a wider card with supporting text below as a natural lead-in to
-  
-                                  additional content. This content is a little bit longer.
-  
-                              </p>
-  
-                              <p class="card-text">Last updated 3 mins ago</p>
-  
-                          </div>
-  
-                      </div>
-  
-                  </div>
-  
-                  <div class="col-md-6 col-12">
-  
-                      <div class="card bg-white text-dark">
-  
-                          <img class="card-img"
-  
-                              src="https://revcycleintelligence.com/images/site/article_headers/_normal/hospital%2C_green.jpg">
-  
-                          <div class="card-img-overlay">
-  
-                              <h5 class="card-title">Card title</h5>
-  
-                              <p class="card-text">This is a wider card with supporting text below as a natural lead-in to
-  
-                                  additional content. This content is a little bit longer.
-  
-                              </p>
-  
-                              <p class="card-text">Last updated 3 mins ago</p>
-  
-                          </div>
-  
-                      </div>
-  
-                  </div>
-  
-              </div>
-  
           </section>
-  
           <footer id="section3" class="pt-3">
-  
               <div class="row bg-info">
-  
                   <div class="col-md-6 col-6">
-  
                       Mobile number :
-  
-                      <a>9895223267</a>
-  
+                      <a>7012460529 ,</a>
                       <a>0499-2789012</a>
-  
                       <br>
-  
                       Email :<a>foursyhospital@gmail.com</a>
-  
                       <a></a>
-  
                   </div>
-  
-                  <div class="col-md-6 col-6">
-  
-                      <div class="div1">
-  
-                          <a href="www.instagram.com"><img src="https://cdn-icons-png.flaticon.com/512/87/87390.png"
-  
-                              width="30px" height="25px" class="pt-2 ">Insta</a><br>
-  
-                          <a href="www.instagram.com"><img src="https://cdn-icons-png.flaticon.com/512/44/44646.png"
-  
-                              width="30px" height="25px" class="pt-2 ">Insta</a>
-  
-                      </div>
-  
-                  </div>
-  
-              </div>
-  
+                </div>
           </footer>
-  
-          <style>
-  
-              .bg-dark{
-  
-                background-color: #3d6364 !important;}
-  
-              .navbar-brand{
-  
-              padding-left:2px;
-  
-              margin-right: 6px;
-  
-             
-  
-              padding-top: 8px;
-  
-              font-size: 1rem;
-  
-              font-weight: 500;
-  
-              }
-  
-              .nav-item{
-  
-                 
-  
-                  background-image: #5d5b59;
-  
-              }
-  
-              .navbar{
-  
-                  background-image: #5d5b59;
-  
-              margin-left: -11px;
-  
-              }
-  
-              .nav-link{
-  
-               background-image: #5d5b59;
-  
-                letter-spacing: 0.5px;
-  
-                font-weight: 500;
-  
-              }
-  
-              .fa{
-  
-               margin-right: 4px;
-  
-               font-size:17px;
-  
-               color:red;
-  
-              }
-  
-              .emg {
-  
-              width: 20px;
-  
-              height: 25px;
-  
-              }
-  
-              .bg-info{
-  
-                  background-color: #3d6364  !important;
-  
-                 
-  
-    ;
-  
-              }
-  
-               .dropdown-item{
-  
-                  background-color: #3d6364  !important;
-  
-                  color: white;
-  
-               }
-  
+          <style>    
               #text{
-  
                   padding-top: 280px;
-  
                   padding-left: 200px;
-  
                   position: absolute;
-  
               }
-  
+
               #para1{
-  
                   padding-top: 375px;
-  
                   padding-left: 200px;
-  
                   position: absolute;
-  
                   font-size:19px;
-  
               }
-  
-   
-  
+
          .textbtn{
-  
               cursor:pointer;
-  
               position: absolute;
-  
               padding-right: 2px;
-  
               margin-top: 411px;
-  
-                  margin-left: 200px;
-  
-                  font-size: 16px;
-  
-                  background-color: rgb(42, 44, 44);
-  
-                  color:rgb(255, 255, 255);
-  
-                  border:none;
-  
-                  border-radius: 12px;
-  
-                  padding: 8px;
-  
+              margin-left: 200px;
+              font-size: 16px;
+              background-color: rgb(42, 44, 44);
+              color:rgb(255, 255, 255);
+              border:none;
+              border-radius: 12px;
+              padding: 8px;
           }
   
           .loginbtn{
+            cursor:pointer;
+            position: absolute;
+            margin-top: 411px;
+            margin-left: 383px;
+            font-size: 16px;
+            background-color: rgb(42, 44, 44);
+            color:rgb(255, 255, 255);
+            border:none;
+            border-radius: 12px;
+            padding: 8px;
+         }  
   
-              cursor:pointer;
-  
-              position: absolute;
-  
-              margin-top: 411px;
-  
-                  margin-left: 383px;
-  
-                  font-size: 16px;
-  
-                  background-color: rgb(42, 44, 44);
-  
-                  color:rgb(255, 255, 255);
-  
-                  border:none;
-  
-                  border-radius: 12px;
-  
-                  padding: 8px;
-  
-          }  
-  
-          .mainbody {
-  
-              width: 101%;
-  
+             .mainbody {
+              width: 100%;
               height: 100%;
-  
               padding-left: 366px;
-  
               padding-top: 323px;
-  
-               image-resolution: 100;
-  
+              image-resolution: 100;
               background-image: url('https://img.freepik.com/premium-photo/blurred-interior-hospital-clinical-with-people-abstract-medical-background_1484-1309.jpg?w=2000');
-  
               }
   
-               .row1 {
-  
+            .row1 {
               padding: 132px;
-  
               padding-left: 0px;
-  
               }
   
               .row2 {
-  
               padding: 132px;
-  
               padding-left: 0px;
-  
               margin-top: 15px;
-  
               }
-  
+
               .card {
-  
               margin-top: 15px;
-  
               }
-  
+
               .card:hover {
-  
               transform: scale(1.04);
-  
               box-shadow: 0 10px 20px  rgba(0, 0, 0, .12), 0 4px 8px rgba(0, 0, 0, .06);
-  
               }
-  
+
               .fststhos {
-  
               padding-left: 10px;
-  
               }
-  
-             
-  
+
           </style>
-  
           <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-  
               integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-  
               crossorigin="anonymous"></script>
-  
+
           <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
-  
               integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-  
               crossorigin="anonymous"></script>
-  
+
           <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
-  
               integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-  
               crossorigin="anonymous"></script>
-  
       </body>
-  
   </html>
-  
-  
-  
-   
