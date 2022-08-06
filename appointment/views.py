@@ -3,6 +3,7 @@ from hospital.models import Department
 from accounts.models import User
 from .models import Appointment
 from hospital.models import Medicine
+from django.contrib import messages
 
 def doctor_list(request):
     context = {}
@@ -54,8 +55,9 @@ def appointment_test(request):
             status=False,
         )
         context={'appointment':appointment}
+        messages.success(request, 'Appointment booked successfully!')
     # return render(request, 'book-appointment-test.html', context=context)
-    return render(request, 'test.html', context=context)
+    return render(request, 'home.html', context=context)
 
 def pending_appointments(request):
     context = {}
