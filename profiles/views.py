@@ -6,9 +6,6 @@ from accounts.models import User
 from .models import *
 from .forms import *
 
-def test(request):
-    return HttpResponse("THIS TEST")
-
 @login_required(login_url='accounts:login')
 def profile(request):
     user = request.user
