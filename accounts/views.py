@@ -43,6 +43,7 @@ def register(request):
     if form.is_valid():
         user = form.save()
         login(request, user)
+        messages.add_message(request, messages.INFO, 'Welcome!!!Your account has been registered successfully.')
         return redirect('accounts:home')
 
     return render(request, 'sign-up.html', {'form': form})
