@@ -85,33 +85,48 @@
                                         <th scope="row">PRESCRIPTION</th>
                                         <td>
                                             <div class="row">
-                                                <form class="col-md-4">
+                                                
+
+                                                <form action="{% url 'appointment:prescription' %}" name="MedicineForm"  method="post" class="col-md-4">
+                                                    {% csrf_token %}
+
+                                                    <input type="hidden" name="app_id" value="{{appointment.id}}">
                                                     <label>
                                                         <h6 style="margin-bottom:-6px;"> Medicines</h6>
                                                     </label>
-                                                    <select class="form-control select2">
+
+                                                    <select name="medicine" id="medicine" multiple="multiple" class="form-control select2"> <!--* multiple attr needed to select multiple values-->
 {% for medicine in medicines%}
-                                                        <option>{{medicine}}</option>
+
+                                                        <option value="{{medicine.id}}">{{medicine.name}}</option>
 {% endfor %}
+                                                    
                                                     </select>
-                                                </form>
+                                                     
+                                                    <input type="submit" value="Med">
+
                                             </div>
                                             <div class="form-group">
                                                 <textarea class="form-control rounded-0" rows="4"
-                                        style="margin-top:4px ; width: 143%;"></textarea>
+                                        style="margin-top:4px ; width: 143%;" name="instruction"></textarea>
                                             </div>
+                                        </form>
+
                                         </td>
                                     </tr>
                                     <tr>
                                         <th scope="row">FOLLOW-UP</th>
                                         <td>
-                                            <input type="date" id="date" name="date">
+                                            <form action="{% url 'appointment:prescription' %}" name="DateForm" method="post">
+                                                {% csrf_token %}
+                                                <input type="date" id="date" name="date">
+                                            </form>
                                         </td>
 
                                     </tr>
                                 </tbody>
                             </table>
-                            <h2><button class="btn btn-primary">SAVE</button></h2>
+                            <h2><button class="btn btn-primary" type form='MedicineForm'>SAVE</button></h2>
                         </div>
                     </div>
                 </div>
@@ -169,7 +184,7 @@
         }
 
         .select2 {
-            width: 207.938px;
+            width: 20rem;
         }
 
         .form {
@@ -181,7 +196,7 @@
     
     <!--* Scrpit for searching medicine -->
     <script>
-        $('.select2').select2();
+        $('.select2').select2(); 
     </script>
 
     <!--* This script diables previous dates using JQuery, more info: https://devnote.in/how-to-disable-previous-dates-in-date-picker-using-jquery/ -->
@@ -192,7 +207,7 @@
         var yyyy = today.getFullYear();
     
         today = yyyy + '-' + mm + '-' + dd;
-        $('#date_picker').attr('min',today);
+        $('#date').attr('min',today);
     </script>
 
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"

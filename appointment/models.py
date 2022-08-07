@@ -29,8 +29,12 @@ class Appointment(models.Model):
 
 class Prescription(models.Model):
     appointment = models.OneToOneField(Appointment, on_delete=models.CASCADE)
-    medicine = models.ManyToManyField(Medicine)
+    medicine = models.ManyToManyField(Medicine) #* More on m2m relationship: https://www.revsys.com/tidbits/tips-using-djangos-manytomanyfield/, 
+    #* https://docs.djangoproject.com/en/4.0/topics/db/models/#relationships-many-to-many
+    #* https://dzone.com/articles/how-to-handle-a-many-to-many-relationship-in-datab
+
     # quantity = models.IntegerField() #? Dont know how to get quantity for each medicine
+    #* Info on quanity: https://docs.djangoproject.com/en/4.0/topics/db/models/#extra-fields-on-many-to-many-relationships
     instructions = models.TextField()
 
     def __str__(self):

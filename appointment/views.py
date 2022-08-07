@@ -1,11 +1,11 @@
 from django.shortcuts import render, HttpResponse, redirect
+from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from hospital.models import Department
 from accounts.models import User
-from .models import Appointment
+from .models import Appointment, Prescription
 from hospital.models import Medicine
-from django.contrib import messages
-from .forms import PrescriptionForm
+from django.db import connection
 
 def doctor_list(request):
     context = {}
@@ -21,11 +21,11 @@ def doctor_list(request):
     return render(request, 'doc.html', context=context)
 
 
-# def test(request):
-#     context = {}
-#     id = request.POST['id']
-#     doctor = User.objects.get(id=id)
-#     return render(request, 'book-appointment.html')
+def test(request):
+    context = {}
+    options = request.POST.getlist('test')
+    print(options)
+    return render(request, 'test.html', context=context)
 
 @login_required(login_url='accounts:login')
 def appointment_form(request):
@@ -62,7 +62,6 @@ def appointment_book(request):
         )
         context={'appointment':appointment}
         messages.success(request, 'Appointment booked successfully!')
-    # return render(request, 'book-appointment-test.html', context=context)
     return render(request, 'home.html', context=context)
 
 def pending_appointments(request):
@@ -73,8 +72,6 @@ def pending_appointments(request):
         #! Display 403 Forbidden page
 
     appointments = Appointment.objects.filter(doctor=user, status=False)
-    print(list(appointments))
-    # print(list(appointments)[0].patient)
     context = {'appointments':appointments}
 
     return render(request, 'pending-appointment.html', context=context)
@@ -86,7 +83,30 @@ def view_appointment(request):
 
     app_id = request.POST['id']
     appointment = Appointment.objects.get(pk=app_id)
-    form = PrescriptionForm()
-    print(form)
-    context = {'appointment':appointment, 'form':form}
+    medicines = Medicine.objects.all()
+    context = {'appointment':appointment, 'medicines':medicines}
     return render(request, 'view-appointment.html', context=context)
+
+def prescription(request):
+    context = {}
+
+    if request.method == 'POST':
+        app_id = request.POST['app_id']
+        appointment = Appointment.objects.get(pk=app_id)
+        medicines = request.POST.getlist('medicine')
+        instruction = request.POST['instruction']
+        print(medicines)
+        print(instruction)
+        prescription = Prescription(
+            appointment=appointment,
+            instructions=instruction,       
+        )
+        prescription.save()
+        prescription.medicine.add(*medicines) #* More info: https://stackoverflow.com/questions/6996176/how-to-create-an-object-for-a-django-model-with-a-many-to-many-field
+        # Set appointment status to true and *save* it
+        # TODO on delete of presciption, set appointment status to false
+        appointment.status = True
+        appointment.save(update_fields=['status']) #* SQL 'UPDATE "appointment_appointment" SET "status" = 1 WHERE "appointment_appointment"."id" = [app_id]'
+        #* Update only status fiend of appointment insted of all fields: https://docs.djangoproject.com/en/4.1/ref/models/instances/#specifying-which-fields-to-save
+        # print(connection.queries)
+    return redirect('appointment:view-appointment')
