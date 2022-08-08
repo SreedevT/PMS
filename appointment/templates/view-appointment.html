@@ -87,7 +87,7 @@
                                             <div class="row">
                                                 
 
-                                                <form action="{% url 'appointment:prescription' %}" name="MedicineForm"  method="post" class="col-md-4">
+                                                <form action="{% url 'appointment:prescription' %}" name="form"  method="post" class="col-md-4">
                                                     {% csrf_token %}
 
                                                     <input type="hidden" name="app_id" value="{{appointment.id}}">
@@ -103,30 +103,27 @@
                                                     
                                                     </select>
                                                      
-                                                    <input type="submit" value="Med">
 
-                                            </div>
-                                            <div class="form-group">
-                                                <textarea class="form-control rounded-0" rows="4"
-                                        style="margin-top:4px ; width: 143%;" name="instruction"></textarea>
-                                            </div>
-                                        </form>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <textarea class="form-control rounded-0" rows="4"
+                                                        style="margin-top:4px ; width: 143%;" name="instruction"></textarea>
+                                                    </div>
 
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">FOLLOW-UP</th>
-                                        <td>
-                                            <form action="{% url 'appointment:prescription' %}" name="DateForm" method="post">
-                                                {% csrf_token %}
-                                                <input type="date" id="date" name="date">
-                                            </form>
-                                        </td>
-
-                                    </tr>
-                                </tbody>
-                            </table>
-                            <h2><button class="btn btn-primary" type form='MedicineForm'>SAVE</button></h2>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">FOLLOW-UP</th>
+                                                <td>
+                                                        {% csrf_token %}
+                                                        <input type="checkbox" name="follow" value="1" onchange="document.getElementById('date').disabled = !this.checked;"> <!--* https://stackoverflow.com/questions/18110865/how-to-disable-enable-a-button-with-a-checkbox-if-checked-->
+                                                        <input type="date" id="date" name="date" disabled="True">
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <input class="btn btn-primary" value="SAVE" type="submit">
+                                </form>
                         </div>
                     </div>
                 </div>
