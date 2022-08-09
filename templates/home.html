@@ -10,6 +10,7 @@
 
 <body>
 
+    
     {% if user.is_doctor %}
     {% include 'navbar-doctor.html' %}
     {% else %}
@@ -38,8 +39,8 @@
                             <h1> <b>Making Health<br>Care Better Together</b></h1>
                             <h4 style="color: #000000e3;">"Hospitals are about healing" -Irwin Redlener</h4>
                             <h5>Every day we bring hope and smile to the patients we serve</h5>
-                            <a class="btn btn-primary" href="{% url 'appointment:doc-list' %}">Book an appointment</a>
-                            <button class="btn btn-primary">Login</button>
+                            <button class="btn btn-primary" href="{% url 'appointment:doc-list' %}">Book an appointment</button>
+                            <button class="btn btn-primary" href="{% url 'accounts:login' %}">Login</button>
                         </div>
                     </div>
                 </div>
@@ -277,9 +278,9 @@
                 <div class="col-xs-12 col-sm-4 col-md-3">
                     <h5 class="txt-upper">Quick links</h5>
                     <ul class="list-unstyled quick-links" style="color: #ffffffbf!important;">
-                        <li><a href="home.html">Home</a></li>
-                        <li><a href="login.html">Login</a></li>
-                        <li><a href="doc.html">Book an appointment</a></li>
+                        <li><a href="{% url 'accounts:home' %}">Home</a></li>
+                        <li><a href="{% url 'accounts:login' %}">Login</a></li>
+                        <li><a href="{% url 'appointment:doc-list' %}">Book an appointment</a></li>
 
 
                     </ul>
@@ -342,6 +343,10 @@
             font-size: 2rem
         }
 
+        header.header button {
+            margin-top: 1rem;
+        }
+
         .header .card {
             border: 0;
             border-radius: 12px;
@@ -364,6 +369,9 @@
             background-image: url('https://img.freepik.com/premium-photo/blurred-interior-hospital-clinical-with-people-abstract-medical-background_1484-1309.jpg?w=2000');
         }
 
+        .row{
+            margin-right: 0px;
+        }
         .row1 {
             padding: 132px;
             padding-left: 0px;
@@ -373,6 +381,7 @@
             padding: 132px;
             padding-left: 0px;
             margin-top: 15px;
+
         }
 
         .card {
@@ -390,7 +399,9 @@
         }
 
         #footer {
+            background: #3d6364 !important;
             padding: 60px 0 18px;
+            margin-top: 15px;
         }
 
         #footer .section-title {
@@ -398,10 +409,6 @@
             color: #007b5e;
             margin-bottom: 50px;
             text-transform: uppercase;
-        }
-
-        #footer {
-            background: #3d6364 !important;
         }
 
         #footer h5 {
