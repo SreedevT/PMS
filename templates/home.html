@@ -39,8 +39,8 @@
                             <h1> <b>Making Health<br>Care Better Together</b></h1>
                             <h4 style="color: #000000e3;">"Hospitals are about healing" -Irwin Redlener</h4>
                             <h5>Every day we bring hope and smile to the patients we serve</h5>
-                            <button class="btn btn-primary" href="{% url 'appointment:doc-list' %}">Book an appointment</button>
-                            <button class="btn btn-primary" href="{% url 'accounts:login' %}">Login</button>
+                            <a class="btn btn-primary" href="{% url 'appointment:doc-list' %}">Book an appointment</a>
+                            <a class="btn btn-primary" href="{% url 'accounts:login' %}">Login</a>
                         </div>
                     </div>
                 </div>
@@ -267,8 +267,8 @@
                 </div>
                 <div class="col-xs-12 col-sm-4 col-md-3 text-white">
                     <h5 class="txt-upper">OP Time</h5>
-                    <p style="color: #ffffffbf!important;"> Mon - Fri: 9:00 am - 4:00 pm
-                        <br> Sat & Sun: 10:00 am - 3:00 pm
+                    <p style="color: #ffffffbf!important;"> Mon - Fri: 9:00 am - 2:00 pm
+                        <br> Sat & Sun: 10:00 am - 1:00 pm
                         <br>
                     </p>
 
@@ -343,7 +343,7 @@
             font-size: 2rem
         }
 
-        header.header button {
+        header.header a {
             margin-top: 1rem;
         }
 
