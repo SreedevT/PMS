@@ -17,7 +17,7 @@ class PatientProfile(models.Model):
     ]
 
     user = models.OneToOneField(
-        User, on_delete=models.CASCADE, 
+        User, on_delete=models.CASCADE, #profile deleted then patient deleted since one to one field
         primary_key=True, limit_choices_to={'user_type': 'P'}, 
         related_name='patprofile', #* related_name is used to give alternate name to the reverse relationship
         )
