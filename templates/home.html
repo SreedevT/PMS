@@ -10,15 +10,15 @@
 
 <body>
 
-    {% include 'messages.html' %}
-    <!--* messages.html path /templates/messages.html-->
-    
     {% if user.is_doctor %}
     {% include 'navbar-doctor.html' %}
     {% else %}
     {% include 'navbar.html' %}
     <!--* navbar.html path /templates/navbar.html-->
     {% endif %}
+
+    {% include 'messages.html' %}
+    <!--* messages.html path /templates/messages.html-->
 
     <section style="background-color:  #8aa8ac;">
         <marquee width="100%" direction="left" height="27px">
