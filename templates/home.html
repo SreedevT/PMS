@@ -10,6 +10,8 @@
 
 <body>
 
+    {% include 'messages.html' %}
+    <!--* messages.html path /templates/messages.html-->
     
     {% if user.is_doctor %}
     {% include 'navbar-doctor.html' %}
@@ -18,8 +20,6 @@
     <!--* navbar.html path /templates/navbar.html-->
     {% endif %}
 
-    {% include 'messages.html' %}
-    <!--* messages.html path /templates/messages.html-->
     <section style="background-color:  #8aa8ac;">
         <marquee width="100%" direction="left" height="27px">
             <b>
@@ -29,6 +29,9 @@
                 </h4>
             </b>
         </marquee>
+
+
+    
         <header class="header text-center">
             <div class="overlay"></div>
             <div class="container" style="max-width: 658px;">

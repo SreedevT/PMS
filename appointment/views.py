@@ -18,7 +18,7 @@ def doctor_list(request):
     #             WHERE user_type="D"
     # ''')
     context = {'depts': depts, 'doctors': doctors}
-    # print(list(depts))
+    messages.info(request, 'Please select a doctor!')
     return render(request, 'doc.html', context=context)
 
 

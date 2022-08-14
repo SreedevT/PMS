@@ -7,15 +7,16 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     </head>
     <body>
+        {% include 'messages.html' %}
 
         {% include 'navbar.html' %}  <!--* navbar.html path /templates/navbar.html-->
-        {% include 'messages.html' %}
 
         <marquee width="90%" direction="left" height="100px">
             <B>
                 <h4><b>FOURSY GROUP OF HOSPITALS &nbsp&nbsp&nbsp&nbsp OP Timing 9am-4pm</b></h4>
             </B>
         </marquee>
+
         <section>
             <div id="bgimg">
                 <div class="container container-fluid">
@@ -27,7 +28,7 @@
                             <div class="row">
     {% for doctor in doctors %}
         {% if doctor.docprofile.department.name == dept.name %}
-                                <div class="col-md-6 col-12 hover-zoom ">
+                                <div class="col-md-6 col-12 hover-zoom">
                                     <div class="card" style="width: 18rem;">
                                         <img class="card-img-top profile-img"
                                             src="{{doctor.docprofile.profile_pic.url}} "
@@ -40,7 +41,7 @@
                                                 <!-- * This implementation also works -->
                                                 <!-- <input type="hidden" name="id" value="doctor.id"/>  -->
                                                 <!-- <input type="submit" class="btn btn-primary" value="Book an appointment"> -->
-                                                <button type="submit" name="id" value="{{doctor.id}}" form="appointment-form" class="btn btn-primary">
+                                                <button type="submit" name="id" value="{{doctor.id}}" form="appointment-form" class="btn btn-primary streated-link">
                                                     Book an appointment
                                                 </button>
                                             </form>
