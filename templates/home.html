@@ -43,7 +43,11 @@
                             <h4 style="color: #000000e3;">"Hospitals are about healing" -Irwin Redlener</h4>
                             <h5>Every day we bring hope and smile to the patients we serve</h5>
                             <a class="btn btn-primary" href="{% url 'appointment:doc-list' %}">Book an appointment</a>
-                            <a class="btn btn-primary" href="{% url 'accounts:login' %}">Login</a>
+                            {% if user.is_authenticated %}
+                                <a class="btn btn-danger" href="{% url 'accounts:logout' %}">Logout</a>
+                            {% else %}
+                                <a class="btn btn-primary" href="{% url 'accounts:login' %}">Login</a>
+                            {% endif %}
                         </div>
                     </div>
                 </div>
