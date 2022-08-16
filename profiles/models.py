@@ -21,7 +21,7 @@ class PatientProfile(models.Model):
         primary_key=True, limit_choices_to={'user_type': 'P'}, 
         related_name='patprofile', #* related_name is used to give alternate name to the reverse relationship
         )
-    profile_pic = models.ImageField(upload_to='images/profiles/patients', null=True, blank=True)
+    profile_pic = models.ImageField(upload_to='images/profiles/patients', null=True, blank=True) #TODO Change directory to /images/patient/username
     dob = models.DateField(blank=True, null=True) #TODO -remove blank=True, null=True
     blood_group = models.CharField(max_length=3, choices=BLOOD_GROUPS)
     allergies = models.TextField(blank=True, null=True)
@@ -43,7 +43,7 @@ class DoctorProfile(models.Model):
         primary_key=True, limit_choices_to={'user_type': 'D'}, 
         related_name='docprofile', #* related_name is used to give alternate name to the reverse relationship
         )
-    profile_pic = models.ImageField(upload_to='images/profiles/doctors')
+    profile_pic = models.ImageField(upload_to='images/profiles/doctors') #TODO Change directory to /images/doctor/username
     qualification = models.CharField(max_length=100, blank=True, null=True)
     department = models.ForeignKey(Department, on_delete=models.CASCADE)
 
