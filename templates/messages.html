@@ -11,10 +11,11 @@
 
 <script>
     setTimeout(function(){
-        if ($('#msg').length>0) {
-            $(".alert").alert('close')
-       }
+        $(".alert").alert('close')
     }, 3000);
+    setTimeout(function(){
+        $("#msg").remove();
+    }, 3500);
 
 </script>
 

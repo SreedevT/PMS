@@ -15,7 +15,7 @@ class LogoutFormView(LogoutView): #* No idea how it works, but: https://stackove
 
     def dispatch(self, request, *args, **kwargs):
         response = super().dispatch(request, *args, **kwargs)
-        messages.add_message(request, messages.SUCCESS, 'Successfully logged out.')
+        messages.add_message(request, messages.SUCCESS, 'Logged out Successfully!')
         return response
 
 def home(request):
