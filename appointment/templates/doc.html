@@ -19,7 +19,6 @@
         </marquee>
 
         <section>
-            <div id="bgimg">
                 <div class="container container-fluid">
 {% for dept in depts %}
                     <div class="card-main" id="department{{ forloop.counter }}" style="width: 68rem;"> <!--* forloop.counter doc https://docs.djangoproject.com/en/4.0/ref/templates/builtins/#for-->
@@ -29,8 +28,8 @@
                             <div class="row">
     {% for doctor in doctors %}
         {% if doctor.docprofile.department.name == dept.name %}
-                                <div class="col-md-6 col-12 hover-zoom">
-                                    <div class="card" style="width: 18rem;">
+                                <div class="col-md-6 col-sm-12 hover-zoom">
+                                    <div class="card">
                                         <img class="card-img-top profile-img"
                                             src="{{doctor.docprofile.profile_pic.url}} "
                                             alt="profile-picture">
@@ -56,8 +55,6 @@
                     </div>
 {% endfor %}
                 </div>
-            </div>
-        </footer>
 
     {% include 'footer.html' %}
     </body>
@@ -67,81 +64,50 @@
         height: 286px;
         object-fit: cover;
     }
-    .emg {
-    width: 20px;
-    height: 25px;
-    }
 
     .card-main {
-    transition-duration:0.5s;
+        margin-top: 20px;
+        transition-duration:0.5s;
     }
 
     .card{
-    transition-duration:0.2s;
+        margin-bottom: 15px;
+        width: 18rem;
+        transition-duration:0.2s;
     }
 
     .card-main:hover {
-    transform: scale(1.025);
-    border-radius: 10px;
-    box-shadow: 0 10px 20px rgba(180, 79, 79, 0.877), 0 4px 8px rgba(185, 99, 99, 0.06);
+        transform: scale(1.025);
+        border-radius: 10px;
+        box-shadow: 0 10px 20px rgba(180, 79, 79, 0.877), 0 4px 8px rgba(185, 99, 99, 0.06);
     }
     .card:hover {
-    transform: scale(1.05);
-    transition-duration:0.2s;
-    box-shadow: 0 10px 20px rgba(0, 0, 0, .12), 0 4px 8px rgba(0, 0, 0, .06);
+        transform: scale(1.05);
+        transition-duration:0.2s;
+        box-shadow: 0 10px 20px rgba(0, 0, 0, .12), 0 4px 8px rgba(0, 0, 0, .06);
     }
-    #section2 {
-    background: url(http://lorempixel.com/400/400/people/1);
-    animation: chbg 15s infinite alternate;
-    background-size: cover;
-    }
-    @keyframes chbg {
-    0% {
-    background: url(https://www.facebook.com/photo/?fbid=433480488510478&set=a.101880505003813&__tn__=%3C);
-    background-size: cover
-    }
-    25% {
-    background: url(https://scontent.fcok8-1.fna.fbcdn.net/v/t1.6435-9/153371063_226611829197346_1049619416537141279_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=174925&_nc_ohc=pOiqm-RJVq4AX8PHHzv&_nc_ht=scontent.fcok8-1.fna&oh=00_AT_vDodwteb2YE9xiA3fPrPDldJHyA0EeItAuRsPFnpy3A&oe=62CD0D59);
-    background-size: cover
-    }
-    50% {
-    background: url(https://scontent.fcok8-1.fna.fbcdn.net/v/t39.30808-6/251378770_393583169166877_8342858123944294717_n.jpg?_nc_cat=107&ccb=1-7&_nc_sid=19026a&_nc_ohc=kZ1I1-IoRzkAX_DQr-l&_nc_ht=scontent.fcok8-1.fna&oh=00_AT9xXOPTdAGpH83y8WVM9-HlLe-gcl95b8iiBS8PACAUrA&oe=62AF47FD);
-    background-size: cover
-    }
-    75% {
-    background: url(https://scontent.fcok8-1.fna.fbcdn.net/v/t39.30808-6/237455997_339555834569611_491239291584516765_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=174925&_nc_ohc=PVvJy9eiYdIAX97vQJu&_nc_ht=scontent.fcok8-1.fna&oh=00_AT9N7_xD-BOJWYSuJdo00r9Xt6zl6sthili4IwDzqsQfKg&oe=62AE54A8);
-    background-size: cover
-    }
-    100% {
-    background: url(https://scontent.fcok8-1.fna.fbcdn.net/v/t39.30808-6/280275938_509750490883477_3428703964081647712_n.jpg?stp=dst-jpg_s960x960&_nc_cat=111&ccb=1-7&_nc_sid=e3f864&_nc_ohc=zgMJsKgJTYgAX9BYD-Y&_nc_ht=scontent.fcok8-1.fna&oh=00_AT-ndD6o3sQFzkzwUOglCsy-3ySvsVBh7kEfRtxIIiZkuw&oe=62AD98E8);
-    background-size: cover
-    }
-    }
+
     .card-title-main {
-    align-items: center;
+        align-items: center;
     }
-    .img1 {
-    width: 129px;
-    height: 75px;
-    padding-bottom: 4px;
-    }
+
     .scroll-to-top {
-    background-color: rgba(255, 253, 253, 0.3);
-    bottom: 5px;
-    color: #000000;
-    display: block;
-    font-size: 18px;
-    height: 44px;
-    line-height: 40px;
-    position: fixed;
-    right: 20px;
-    text-align: center;
-    text-decoration: none;
-    transition: all 1s ease-out;
-    width: 44px;
-    z-index: 99999;
-    border: 2px solid #396cf0;
-    border-radius: 50%;
+        background-color: rgba(255, 253, 253, 0.3);
+        bottom: 5px;
+        color: #000000;
+        display: block;
+        font-size: 18px;
+        height: 44px;
+        line-height: 40px;
+        position: fixed;
+        right: 20px;
+        text-align: center;
+        text-decoration: none;
+        transition: all 1s ease-out;
+        width: 44px;
+        z-index: 99999;
+        border: 2px solid #396cf0;
+        border-radius: 50%;
     }
 </style>
 
