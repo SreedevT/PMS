@@ -71,16 +71,16 @@ def appointment_book(request, *args):
     messages.success(request, 'Appointment booked successfully!')
     return render(request, 'home.html', context=context)
 
-def pending_appointments(request):
+def pending_appointments(request, status):
     context = {}
     user = request.user
     if not user.is_doctor():
         return HttpResponse("NOT ALLOWED")
         #! Display 403 Forbidden page
 
-    appointments = Appointment.objects.filter(doctor=user, status=False)
+    appointments = Appointment.objects.filter(doctor=user, status=status)
     print(connection.queries)
-    context = {'appointments':appointments}
+    context = {'appointments':appointments, 'status':status} #* Status passed in to change heading of page (Completed/Pending)
 
     return render(request, 'pending-appointment.html', context=context)
 
@@ -103,8 +103,6 @@ def prescription(request):
         appointment = Appointment.objects.get(pk=app_id)
         medicines = request.POST.getlist('medicine')#* ['1', '2']
         instruction = request.POST['instruction']
-        # print(medicines)
-        # print(instruction)
         prescription = Prescription(
             appointment=appointment,
             instructions=instruction,       

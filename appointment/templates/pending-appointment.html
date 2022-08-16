@@ -13,7 +13,13 @@
         <section style="height: auto;">
             <div class="container-fluid">
                 <div class="row " style="background-color: #8889a347;">
+                    
+                    {% if status %}
+                    <div class="col-md-12 col-12" style="align-items: center;"><h3><b>Completed Apppointments</b></h3></div>
+                    {% else %}
                     <div class="col-md-12 col-12" style="align-items: center;"><h3><b>Pending Apppointments</b></h3></div>
+                    {% endif %}
+
                 <br>
                 <br>
                 <br>            
