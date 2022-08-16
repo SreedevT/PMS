@@ -39,15 +39,15 @@
               <tbody>
                 <tr>
                   <th scope="row">NAME</th>
-                  <td>SHAFNA</td>
+                  <td>{{patient.get_full_name}}</td>
                 </tr>
                 <tr>
                   <th scope="row">GENDER</th>
-                  <td>FEMALE </td>
+                  <td>{{patient.get_gender}} </td>
                 </tr>
                 <tr>
                   <th scope="row">AGE</th>
-                  <td>19</td>
+                  <td>{{patient.patprofile.get_age}}</td>
                 </tr>
               </tbody>
             </table>
@@ -70,28 +70,17 @@
               </tr>
             </thead>
             <tbody>
+{% for appointments in appointment %}
               <tr>
-                <td>1</td>
-                <td>1/2/2022</td>
-                <td>Marco J</td>
-                <td>ENT</td>
-                <td>metaphormin</td>
+                <td>{{forloop.counter}}</td>
+                <td>{{appointment.date}}</td>
+                <td>{{appointment.doctor.get_full_name}}/td>
+                <td>{{appointment.doctor.docprofile.department.name}}</td>
+                <td>{{appointment.prescription.medicine.name}}</td>
                 <td><button class="btn btn-primary">view</button></td>
               </tr>
-              <tr>
-                <td>2</td>
-                <td>4/12/2021</td>
-                <td></td>
-                <td></td>
-                <td></td>
-              </tr>
-              <tr>
-                <td>3</td>
-                <td>4/4/2021</td>
-                <td> </td>
-                <td> </td>
-                <td></td>
-              </tr>
+{% endfor %}
+              
             </tbody>
           </table>
           </table>

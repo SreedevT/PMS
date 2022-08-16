@@ -29,7 +29,11 @@
 
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
-                    <button class="btn btn-dark">VIEW PAST MEDICAL RECORDS</button>
+                        <form action="{% url 'appointment:past-history' %}" method="post">
+                            {% csrf_token %}
+                            <input type="hidden" name="pat_id" value="{{appointment.patient.id}}">
+            <button class="btn btn-dark">VIEW PAST MEDICAL RECORDS</button>
+            </form>
                     </li>
                 </ul>
             </div>
