@@ -33,6 +33,11 @@
             <i class="fa fa-user" aria-hidden="true"></i>
             PROFILE
             </a>
+            <a class="navbar-brand" href="{% url 'appointment:test' %}"
+            background="#343a40">
+            <i class="fa fa-calendar-check-o" aria-hidden="true"></i>
+            VIEW APPOINTMENTS
+            </a>
 {% endif %}
 
             <a class="navbar-brand" href="{% url 'appointment:doc-list'%}"

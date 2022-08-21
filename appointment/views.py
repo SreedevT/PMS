@@ -47,7 +47,6 @@ def appointment_book(request, *args):
     #* Django model instances: https://docs.djangoproject.com/en/4.0/ref/models/instances/#django.db.models.Model.save
     context = {}
     if request.method != 'POST':
-        #! Display slect doctor message on 'doc.html'
         messages.add_message(request, messages.ERROR, 'Select a doctor first!')
         return redirect('appointment:doc-list')
 
@@ -103,23 +102,28 @@ def prescription(request):
         appointment = Appointment.objects.get(pk=app_id)
         medicines = request.POST.getlist('medicine')#* ['1', '2']
         instruction = request.POST['instruction']
+
         prescription = Prescription(
             appointment=appointment,
             instructions=instruction,       
         )
         prescription.save()
         prescription.medicine.add(*medicines) #* More info: https://stackoverflow.com/questions/6996176/how-to-create-an-object-for-a-django-model-with-a-many-to-many-field
+        
         # Set appointment status to true and *save* it
         # TODO on delete of presciption, set appointment status to false
         appointment.status = True
         appointment.save(update_fields=['status']) #* SQL 'UPDATE "appointment_appointment" SET "status" = 1 WHERE "appointment_appointment"."id" = [app_id]'
         #* Update only status field of appointment insted of all fields: https://docs.djangoproject.com/en/4.1/ref/models/instances/#specifying-which-fields-to-save
+       
         # print(connection.queries)
         messages.add_message(request, messages.SUCCESS, 'Prescription added successfully!')
 
-        follow = int(request.POST['follow'])
+        follow = request.POST.get('follow', False)
         if follow:
             follow_book(request)
+
+        
 
     return redirect('appointment:pending-appointment')
 

@@ -1,7 +1,15 @@
+import os
 from django.db import models
 from accounts.models import User
 from hospital.models import Medicine
 
+#* More info on upload_to function: https://docs.djangoproject.com/en/4.1/ref/models/fields/#django.db.models.FileField.upload_to
+#TODO Maybe rename files
+# def path_and_rename(instance, filename, upload_to, type):
+#     ext = filename.split('.')[-1]
+#     filename = f'{instance.patient.username}_{instance.date}_{type}.{ext}'
+
+#     return os.path.join(upload_to, filename)
 
 class Appointment(models.Model):
     TIME_SLOT = [
@@ -17,15 +25,20 @@ class Appointment(models.Model):
     start_time = models.TimeField(null=True)
     end_time = models.TimeField(null=True)
     reason = models.TextField()
+    test_report = models.FileField(null=True, blank=True, upload_to='files/report')
+    xray = models.FileField(null=True, blank=True, upload_to='images/xray')
+    ct = models.FileField(null=True, blank=True, upload_to='images/ct')
+    diagnosis = models.TextField(null=True)
     status = models.BooleanField(default=False)
 
     class Meta:
         constraints = [
             models.UniqueConstraint(fields=['patient', 'doctor', 'date'], name='unique_booking')
         ]
+        ordering = ['date', 'start_time']
 
     def __str__(self):
-        return f"{self.doctor.get_full_name()}'s appointment with {self.patient.username}"
+        return f"{self.doctor.get_full_name()}'s appointment with {self.patient.username} on {self.date}"
 
 class Prescription(models.Model):
     appointment = models.OneToOneField(Appointment, on_delete=models.CASCADE)

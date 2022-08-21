@@ -44,56 +44,71 @@
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-md-12">
-                        <h3 class="pt-2 pb-3 text-center">DETAILS</h3>
-
+                                    <h3 class="pt-2 pb-3 text-center">DETAILS</h3>
                                 </div>
                             </div>
 
-                            <div class="col-md-2">
-                                <img class="profile"
-                                    src="{{appointment.patient.patprofile.profile_pic.url}}"
-                                    alt="profile-picture" class="image-fluid">
-                            </div>
-                            
-                            <table class="table table-borderless" style="margin-top: -150px;">
+                            <table class="table">
                                 <tbody>
                                     <tr>
-
-                                        <th scope="row"></th>
-                                        <th scope="row">Name</th>
-                                        <td style="padding-right:166px;">{{appointment.patient.get_full_name}}</td>
+                                        <td rowspan="4" style="text-align: center;" class="col-3" >
+                                            <img class="profile"
+                                                src="{{appointment.patient.patprofile.profile_pic.url}}"
+                                                alt="profile-picture" class="image-fluid">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row" class="">Name</th>
+                                        <td>{{appointment.patient.get_full_name}}</td>
+                                        <th scope="row" >Date</th>
+                                        <td>{{appointment.date}}</td>
 
                                     </tr>
                                     <tr>
-                                        <th scope="row"></th>
                                         <th scope="row">Gender</th>
                                         <td>{{appointment.patient.get_gender}}</td>
+                                        <th scope="row">Time</th>
+                                        <td>{{appointment.start_time}} to {{appointment.end_time}}</td>
 
                                     </tr>
                                     <tr>
-                                        <th scope="row"></th>
                                         <th scope="row">Age</th>
-                                        <td>19</td>
+                                        <td>{{appointment.patient.patprofile.get_age}}</td>
                                     </tr>
+                                </tbody>
+                            </table>
+
+                                                
+<form action="{% url 'appointment:prescription' %}" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+                            <table class="table table-bordered">
+                                <tbody>
                                     <tr>
-                                        <th scope="row">REASON</th>
+                                        <th scope="row">REASON FOR VISIT</th>
                                         <div style="overflow: auto">
-                                            <td style="padding-bottom: 68px;">{{appointment.reason}}</td>
+                                            <td style="padding-bottom: 68px;" colspan="2">{{appointment.reason}}</td>
                                         </div>
                                     </tr>
                                     <tr>
-                                        <th scope="row">PRESCRIPTION</th>
+                                        <th>TEST REPORT</th>
+                                        <th>X-RAY</th>
+                                        <th>CT SCAN</th>
+                                    </tr>
+                                    <tr>
+                                        <td >
+                                            <input type="file" name="report">
+                                        </td>
                                         <td>
-                                            <div class="row">
-                                                
-
-                                                <form action="{% url 'appointment:prescription' %}" name="form"  method="post" class="col-md-4">
-                                                    {% csrf_token %}
+                                            <input type="file" name="xray">
+                                        </td>
+                                        <td>
+                                            <input type="file" name="ct">
+                                        </td>
+                                    <tr>
+                                        <th scope="row">PRESCRIPTION</th>
+                                        <td colspan="2">
 
                                                     <input type="hidden" name="app_id" value="{{appointment.id}}">
-                                                    <label>
-                                                        <h6 style="margin-bottom:-6px;"> Medicines</h6>
-                                                    </label>
 
                                                     <select name="medicine" id="medicine" multiple="multiple" class="form-control select2"> <!--* multiple attr needed to select multiple values-->
 {% for medicine in medicines%}
@@ -102,28 +117,38 @@
 {% endfor %}
                                                     
                                                     </select>
-                                                     
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">INSTRUCTIONS FOR MEDICINE</th>
+                                        <td colspan="2">
+                                            <div class="form-group">
+                                                <textarea class="form-control rounded-0" rows="4"
+                                                style="margin-top:4px ; width: 100%;" name="instruction"></textarea>
+                                            </div>
 
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <textarea class="form-control rounded-0" rows="4"
-                                                        style="margin-top:4px ; width: 143%;" name="instruction"></textarea>
-                                                    </div>
-
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">FOLLOW-UP</th>
-                                                <td>
-                                                        {% csrf_token %}
-                                                        <input type="checkbox" name="follow" value="1" onchange="document.getElementById('date').disabled = !this.checked;"> <!--* https://stackoverflow.com/questions/18110865/how-to-disable-enable-a-button-with-a-checkbox-if-checked-->
-                                                        <input type="date" id="date" name="date" disabled="True">
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                    <input class="btn btn-primary" value="SAVE" type="submit">
-                                </form>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">DIAGNOSIS</th>
+                                        <td colspan="2">
+                                            <div class="form-group">
+                                                <textarea class="form-control" rows="4"
+                                                style="margin-top:4px ; width: 100%;" name="diagnosis"></textarea>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">FOLLOW-UP</th>
+                                        <td colspan="2">
+                                            <input type="checkbox" name="follow" value="1" onchange="document.getElementById('date').disabled = !this.checked;"> <!--* https://stackoverflow.com/questions/18110865/how-to-disable-enable-a-button-with-a-checkbox-if-checked-->
+                                            <input type="date" id="date" name="date" disabled="True">
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <input class="btn btn-primary" value="SAVE" type="submit">
+</form>
                         </div>
                     </div>
                 </div>
@@ -131,9 +156,11 @@
     </body>
 
     <style>
-        img {
-            width: 100px; 
-            margin-bottom: 9px;
+        .table {
+            width: 100%;
+            margin-bottom: 2rem;
+            border: 2px #afadad;
+            vertical-align: middle;
         }
         
         .hm-gradient {
@@ -175,9 +202,9 @@
 
 
         .profile {
-            width: 133px;
-            margin-left: -10px;
-            margin-bottom: 10px;
+            width: 100%;
+            max-width: 10rem;
+            margin-bottom: 0px;
         }
 
         .select2 {
