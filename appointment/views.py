@@ -146,3 +146,14 @@ def follow_book(request):
     )
     messages.success(request, 'Appointment booked successfully!')
     return redirect('appointment:view-appointment')
+
+def past_history(request):
+    context = {}
+    patient_id = request.POST['pat_id']
+    patient = User.objects.get(pk=patient_id)
+    appointments = Appointment.objects.filter(patient=patient)
+    context = {'appointments':appointments, 'patient':patient}
+    return render(request, 'view-past-history.html', context=context)
+
+
+
