@@ -83,7 +83,7 @@
                             </table>
 
                                                 
-<form action="{% url 'appointment:prescription' %}" method="post" enctype="multipart/form-data">
+<form action="{% url 'appointment:result' %}" method="post" enctype="multipart/form-data">
     {% csrf_token %}
                             <table class="table table-bordered">
                                 <tbody>
@@ -100,13 +100,13 @@
                                     </tr>
                                     <tr>
                                         <td >
-                                            <input type="file" name="report">
+                                            {{form.test_report}}
                                         </td>
                                         <td>
-                                            <input type="file" name="xray">
+                                            {{form.xray}}
                                         </td>
                                         <td>
-                                            <input type="file" name="ct">
+                                            {{form.ct}}
                                         </td>
                                     <tr>
                                         <th scope="row">PRESCRIPTION</th>
@@ -136,10 +136,11 @@
                                     <tr>
                                         <th scope="row">DIAGNOSIS</th>
                                         <td colspan="2">
-                                            <div class="form-group">
+                                            <!-- <div class="form-group">
                                                 <textarea class="form-control" rows="4"
                                                 style="margin-top:4px ; width: 100%;" name="diagnosis"></textarea>
-                                            </div>
+                                            </div> -->
+                                            {{form.diagnosis}}
                                         </td>
                                     </tr>
                                     <tr>
