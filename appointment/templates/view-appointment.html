@@ -52,7 +52,7 @@
                                 </div>
                             </div>
 
-                            <table class="table">
+                            <table class="table table-hover">
                                 <tbody>
                                     <tr>
                                         <td rowspan="4" style="text-align: center;" class="col-3" >
@@ -85,7 +85,7 @@
                                                 
 <form action="{% url 'appointment:result' %}" method="post" enctype="multipart/form-data">
     {% csrf_token %}
-                            <table class="table table-bordered">
+                            <table class="table table-bordered table-responsive">
                                 <tbody>
                                     <tr>
                                         <th scope="row">REASON FOR VISIT</th>
@@ -100,35 +100,35 @@
                                     </tr>
                                     <tr>
                                         <td >
-                                            {{form.test_report}}
+                                            {% bootstrap_field form.test_report show_label=False %}
                                         </td>
                                         <td>
-                                            {{form.xray}}
+                                            {% bootstrap_field form.xray show_label=False %}
                                         </td>
                                         <td>
-                                            {{form.ct}}
+                                            {% bootstrap_field form.ct show_label=False %}
                                         </td>
                                     <tr>
                                         <th scope="row">PRESCRIPTION</th>
                                         <td colspan="2">
 
-                                                    <input type="hidden" name="app_id" value="{{appointment.id}}">
+                                            <input type="hidden" name="app_id" value="{{appointment.id}}">
 
-                                                    <select name="medicine" id="medicine" multiple="multiple" class="form-control select2"> <!--* multiple attr needed to select multiple values-->
+                                            <select name="medicine" id="medicine" multiple="multiple" class="form-control select2"> <!--* multiple attr needed to select multiple values-->
 {% for medicine in medicines%}
 
-                                                        <option value="{{medicine.id}}">{{medicine.name}}</option>
+                                                <option value="{{medicine.id}}">{{medicine.name}}</option>
 {% endfor %}
                                                     
-                                                    </select>
+                                            </select>
                                         </td>
                                     </tr>
                                     <tr>
                                         <th scope="row">INSTRUCTIONS FOR MEDICINE</th>
                                         <td colspan="2">
                                             <div class="form-group">
-                                                <textarea class="form-control rounded-0" rows="4"
-                                                style="margin-top:4px ; width: 100%;" name="instruction"></textarea>
+                                                <textarea class="form-control rounded-0"
+                                                style="margin-top:4px ;" name="instruction"></textarea>
                                             </div>
 
                                         </td>
@@ -140,7 +140,7 @@
                                                 <textarea class="form-control" rows="4"
                                                 style="margin-top:4px ; width: 100%;" name="diagnosis"></textarea>
                                             </div> -->
-                                            {{form.diagnosis}}
+                                            {% bootstrap_field form.diagnosis show_label=False %}
                                         </td>
                                     </tr>
                                     <tr>
@@ -173,9 +173,9 @@
         }
 
         .card {
-            border: 0px;
+            border: 0;
         }
-
+        
         .bg-dark {
             background-color: #afadad !important;
         }
