@@ -10,6 +10,7 @@ pillow = "*"
 django-bootstrap4 = "*"
 django-widget-tweaks = "*"
 django-debug-toolbar = "*"
+django-cleanup = "*"
 
 [dev-packages]
 

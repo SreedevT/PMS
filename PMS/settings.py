@@ -56,6 +56,7 @@ INSTALLED_APPS = [
     'bootstrap4',
     'widget_tweaks',
     'debug_toolbar',
+    'django_cleanup.apps.CleanupConfig',
 ]
 
 MIDDLEWARE = [
