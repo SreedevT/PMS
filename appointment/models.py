@@ -25,10 +25,6 @@ class Appointment(models.Model):
     start_time = models.TimeField(null=True)
     end_time = models.TimeField(null=True)
     reason = models.TextField()
-    test_report = models.FileField(null=True, blank=True, upload_to='files/report')
-    xray = models.FileField(null=True, blank=True, upload_to='images/xray')
-    ct = models.FileField(null=True, blank=True, upload_to='images/ct')
-    diagnosis = models.TextField(null=True)
     status = models.BooleanField(default=False)
 
     class Meta:
@@ -39,6 +35,18 @@ class Appointment(models.Model):
 
     def __str__(self):
         return f"{self.doctor.get_full_name()}'s appointment with {self.patient.username} on {self.date}"
+
+
+class Report(models.Model):
+    appointment = models.OneToOneField(Appointment, on_delete=models.CASCADE, related_name='report')
+    test_report = models.FileField(null=True, blank=True, upload_to='files/report')
+    xray = models.FileField(null=True, blank=True, upload_to='files/xray')
+    ct = models.FileField(null=True, blank=True, upload_to='files/ct')
+    diagnosis = models.TextField()
+
+    def __str__(self):
+        return f"{self.appointment.patient.username}'s report on {self.appointment.date}"
+
 
 class Prescription(models.Model):
     appointment = models.OneToOneField(Appointment, on_delete=models.CASCADE)

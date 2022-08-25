@@ -3,7 +3,8 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from hospital.models import Department
 from accounts.models import User
-from .models import Appointment, Prescription
+from .models import Appointment, Prescription, Report
+from .forms import ReportForm
 from hospital.models import Medicine
 from django.db import connection
 from django.contrib import messages
@@ -91,8 +92,27 @@ def view_appointment(request):
     app_id = request.POST['id']
     appointment = Appointment.objects.get(pk=app_id)
     medicines = Medicine.objects.all()
-    context = {'appointment':appointment, 'medicines':medicines}
+    form = ReportForm()
+    context = {'appointment':appointment, 'medicines':medicines, 'form':form}
     return render(request, 'view-appointment.html', context=context)
+
+
+def result(request):
+    if request.method == 'POST':
+        report(request)
+        prescription(request)
+
+        messages.add_message(request, messages.SUCCESS, 'Report & Prescription added successfully!')
+        return redirect('appointment:pending-appointment')
+
+
+
+def report(request):
+    report = Report.objects.create(appointment_id = request.POST['app_id'])
+    form = ReportForm(request.POST, instance=report, files=request.FILES)
+    if form.is_valid():
+        form.save()
+
 
 def prescription(request):
     context = {}
@@ -117,15 +137,11 @@ def prescription(request):
         #* Update only status field of appointment insted of all fields: https://docs.djangoproject.com/en/4.1/ref/models/instances/#specifying-which-fields-to-save
        
         # print(connection.queries)
-        messages.add_message(request, messages.SUCCESS, 'Prescription added successfully!')
 
         follow = request.POST.get('follow', False)
         if follow:
             follow_book(request)
 
-        
-
-    return redirect('appointment:pending-appointment')
 
 def follow_book(request):
     prev_appointment = Appointment.objects.get(id=request.POST['app_id'])
