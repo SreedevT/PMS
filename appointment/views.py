@@ -79,7 +79,7 @@ def pending_appointments(request, status):
         #! Display 403 Forbidden page
 
     appointments = Appointment.objects.filter(doctor=user, status=status)
-    print(connection.queries)
+    # print(connection.queries)
     context = {'appointments':appointments, 'status':status} #* Status passed in to change heading of page (Completed/Pending)
 
     return render(request, 'pending-appointment.html', context=context)
@@ -102,6 +102,16 @@ def result(request):
         report(request)
         prescription(request)
 
+        # Set appointment status to true and *save* it
+        # TODO on delete of presciption, set appointment status to false
+        #* More info: https://docs.djangoproject.com/en/dev/topics/db/sql/#executing-custom-sql-directly
+        cursor = connection.cursor()
+        cursor.execute(''' UPDATE appointment_appointment 
+                          SET status=1
+                          WHERE id=%s ''', [request.POST['app_id']]
+                        )
+        cursor.close()
+        
         messages.add_message(request, messages.SUCCESS, 'Report & Prescription added successfully!')
         return redirect('appointment:pending-appointment')
 
@@ -129,12 +139,6 @@ def prescription(request):
         )
         prescription.save()
         prescription.medicine.add(*medicines) #* More info: https://stackoverflow.com/questions/6996176/how-to-create-an-object-for-a-django-model-with-a-many-to-many-field
-        
-        # Set appointment status to true and *save* it
-        # TODO on delete of presciption, set appointment status to false
-        appointment.status = True
-        appointment.save(update_fields=['status']) #* SQL 'UPDATE "appointment_appointment" SET "status" = 1 WHERE "appointment_appointment"."id" = [app_id]'
-        #* Update only status field of appointment insted of all fields: https://docs.djangoproject.com/en/4.1/ref/models/instances/#specifying-which-fields-to-save
        
         # print(connection.queries)
 

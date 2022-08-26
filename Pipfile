@@ -11,6 +11,7 @@ django-bootstrap4 = "*"
 django-widget-tweaks = "*"
 django-debug-toolbar = "*"
 django-cleanup = "*"
+django-extensions = "*"
 
 [dev-packages]
 

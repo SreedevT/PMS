@@ -57,6 +57,7 @@ INSTALLED_APPS = [
     'widget_tweaks',
     'debug_toolbar',
     'django_cleanup.apps.CleanupConfig',
+    'django_extensions',
 ]
 
 MIDDLEWARE = [

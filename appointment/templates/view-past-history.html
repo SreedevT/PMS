@@ -76,7 +76,15 @@
                 <td>{{appointment.date}}</td>
                 <td>{{appointment.doctor.get_full_name}}/td>
                 <td>{{appointment.doctor.docprofile.department.name}}</td>
-                <td>{{appointment.prescription.medicine.name}}</td>
+                <td>
+                    {% for medicine in appointment.prescription.medicine.all %}
+                        {% if medicine %}
+                            {{medicine}}
+                        {% else %}
+                            No medicine prescribed
+                        {% endif %}
+                    {% endfor %}
+                </td>
                 <td><button class="btn btn-primary">view</button></td>
               </tr>
 {% endfor %}

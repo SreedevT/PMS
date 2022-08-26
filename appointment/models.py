@@ -1,15 +1,28 @@
 import os
-from django.db import models
+from django.db import models, connection
 from accounts.models import User
 from hospital.models import Medicine
 
 #* More info on upload_to function: https://docs.djangoproject.com/en/4.1/ref/models/fields/#django.db.models.FileField.upload_to
-#TODO Maybe rename files
-# def path_and_rename(instance, filename, upload_to, type):
-#     ext = filename.split('.')[-1]
-#     filename = f'{instance.patient.username}_{instance.date}_{type}.{ext}'
-
-#     return os.path.join(upload_to, filename)
+#* Rename uploaded report file: https://stackoverflow.com/questions/15140942/django-imagefield-change-file-name-on-upload
+def path_and_rename(upload_to, field_name):
+    def wrapper(instance, filename):
+        ext = filename.split('.')[-1]
+        
+        department = instance.appointment.doctor.docprofile.department.name
+    #     '''
+    #             SELECT DISTINCT
+    #                 hospital_department.name
+    #             FROM appointment_appointment
+    #             JOIN profiles_doctorprofile
+    #             ON profiles_doctorprofile.user_id = %s
+    #             JOIN hospital_department
+    #             ON hospital_department.id = profiles_doctorprofile.department_id
+    # ''', [app_id]
+        print(connection.queries)
+        filename = f'{instance.appointment.patient.username}_{instance.appointment.date}_{department}_{field_name}.{ext}'
+        return os.path.join(upload_to, filename)
+    return wrapper
 
 class Appointment(models.Model):
     TIME_SLOT = [
@@ -39,9 +52,9 @@ class Appointment(models.Model):
 
 class Report(models.Model):
     appointment = models.OneToOneField(Appointment, on_delete=models.CASCADE, related_name='report')
-    test_report = models.FileField(null=True, blank=True, upload_to='files/report')
-    xray = models.FileField(null=True, blank=True, upload_to='files/xray')
-    ct = models.FileField(null=True, blank=True, upload_to='files/ct')
+    test_report = models.FileField(null=True, blank=True, upload_to=path_and_rename('files/report', 'report'))
+    xray = models.FileField(null=True, blank=True, upload_to=path_and_rename('files/xray', 'xray'))
+    ct = models.FileField(null=True, blank=True, upload_to=path_and_rename('files/ct', 'ct'))
     diagnosis = models.TextField()
 
     def __str__(self):

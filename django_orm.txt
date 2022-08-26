@@ -5,3 +5,4 @@ https://www.javatpoint.com/django-orm-queries
 
 TODO
 1. In past history page there should be filter by doctor and department
+2. Setup forgot password
