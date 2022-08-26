@@ -106,7 +106,7 @@ def result(request):
         # TODO on delete of presciption, set appointment status to false
         #* More info: https://docs.djangoproject.com/en/dev/topics/db/sql/#executing-custom-sql-directly
         cursor = connection.cursor()
-        cursor.execute(''' UPDATE appointment_appointment 
+        cursor.execute(''' UPDATE appointment 
                           SET status=1
                           WHERE id=%s ''', [request.POST['app_id']]
                         )

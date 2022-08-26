@@ -13,12 +13,12 @@ def path_and_rename(instance, filename, upload_to, field_name):
     department = instance.appointment.doctor.docprofile.department.name
 #     '''
 #             SELECT DISTINCT
-#                 hospital_department.name
-#             FROM appointment_appointment
-#             JOIN profiles_doctorprofile
-#             ON profiles_doctorprofile.user_id = %s
-#             JOIN hospital_department
-#             ON hospital_department.id = profiles_doctorprofile.department_id
+#                 department.name
+#             FROM appointment
+#             JOIN doctor_profile
+#             ON doctor_profile.user_id = %s
+#             JOIN department
+#             ON department.id = doctor_profile.department_id
 # ''', [app_id]
     filename = f'{instance.appointment.patient.username}_{instance.appointment.date}_{department}_{field_name}.{ext}'
     return os.path.join(upload_to, filename)
@@ -69,7 +69,7 @@ class Prescription(models.Model):
     class Meta:
         db_table = 'prescription'
         ordering = ['appointment__date', 'appointment__start_time']
-        
+
     appointment = models.OneToOneField(Appointment, on_delete=models.CASCADE)
     medicine = models.ManyToManyField(Medicine) #* More on m2m relationship: https://www.revsys.com/tidbits/tips-using-djangos-manytomanyfield/, 
     #* https://docs.djangoproject.com/en/4.0/topics/db/models/#relationships-many-to-many
