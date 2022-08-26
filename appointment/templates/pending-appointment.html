@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html>
     <head>
@@ -16,9 +17,9 @@
                 <div class="row " style="background-color: #8889a347;">
                     
                     {% if status %}
-                    <div class="col-md-12 col-12" style="align-items: center;"><h3><b>Completed Apppointments</b></h3></div>
+                    <div class="col-md-12" style="align-items: center;"><h3><b>Completed Apppointments</b></h3></div>
                     {% else %}
-                    <div class="col-md-12 col-12" style="align-items: center;"><h3><b>Pending Apppointments</b></h3></div>
+                    <div class="col-md-12" style="align-items: center;"><h3><b>Pending Apppointments</b></h3></div>
                     {% endif %}
 
                 <br>
@@ -30,6 +31,7 @@
                               <tr>
                                 <th scope="col" width="10%">#</th>
                                 <th scope="col"  width="10%"><h4>No</h4></th>
+                                <th scope="col" width="15%"><h4>Photo</h4></th>
                                 <th scope="col" width="20%"><h4>Name</h4></th>
                                 <th scope="col" width="10%"><h4>Date</h4></th>
                                 <th scope="col" width="10%"><h4>Time</h4></th>
@@ -41,6 +43,13 @@
                                 <tr>
                                     <th scope="row">{{forloop.counter}}</th>
                                     <td>{{appointment.id}}</td>
+                                    <td>
+                                        {%if appointment.patient.patprofile.profile_pic %}
+                                            <img src="{{appointment.patient.patprofile.profile_pic.url}}" class="photo">
+                                        {% else %}
+                                            <img src="{% static 'images/default_pic.jpg' %}" class="photo">
+                                        {% endif %}
+                                    </td>
                                     <td>{{appointment.patient.get_full_name}}</td>
                                     <td>{{appointment.date}}</td>
                                     <td>{{appointment.start_time}}</td>
@@ -60,8 +69,19 @@
         </section>
     </body>
 <style>
+
     table{
     margin-top: 14px;
+    }
+
+    th, td{
+        text-align: center;
+    }
+
+    .photo{
+        width: 100px;
+
+        border-radius: 50%;
     }
 </style>
 </html>
