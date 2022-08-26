@@ -16,6 +16,10 @@ class PatientProfile(models.Model):
         ('AB+', 'AB+'),
     ]
 
+    class Meta:
+        db_table = 'patient_profile'
+
+
     user = models.OneToOneField(
         User, on_delete=models.CASCADE, #profile deleted then patient deleted since one to one field
         primary_key=True, limit_choices_to={'user_type': 'P'}, 
@@ -37,6 +41,9 @@ class PatientProfile(models.Model):
 
 
 class DoctorProfile(models.Model):
+    class Meta:
+        db_table = 'doctor_profile'
+
 
     user = models.OneToOneField(
         User, on_delete=models.CASCADE, 
@@ -51,8 +58,3 @@ class DoctorProfile(models.Model):
     def __str__(self) -> str:
         return f"{self.user.username}'s profile"
 
-class AvailableTime(models.Model):
-    
-
-    def __str__(self) -> str:
-        return f"{self.doctor.user.get_full_name()}'s working days"
