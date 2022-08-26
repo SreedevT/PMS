@@ -16,7 +16,7 @@ def profile(request):
     if PatientProfile.objects.filter(user=user).exists():
         profile = PatientProfile.objects.get(user=user)
     else:
-        profile = PatientProfile.objects.create(user=user)
+        profile = PatientProfile(user=user)
 
     if request.method == 'POST':
         form = PatientProfileUpdateForm(request.POST, instance=profile, files=request.FILES) #* files is used to upload files
@@ -39,7 +39,7 @@ def doctor_profile(request):
     if DoctorProfile.objects.filter(user=user).exists():
         profile = DoctorProfile.objects.get(user=user)
     else:
-        profile = DoctorProfile.objects.create(user=user)
+        profile = DoctorProfile(user=user)
 
     if request.method == 'POST':
         form = DoctorProfileUpdateForm(request.POST, instance=profile, files=request.FILES) #* files is used to upload files
