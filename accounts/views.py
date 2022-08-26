@@ -41,6 +41,15 @@ def register(request):
     
     form = UserCreateForm(request.POST)
     if form.is_valid():
+        #* If the registered user is a doctor, make them inactive
+        #* Inactive users cannot login, has to be approved by admin
+        user_type = form.cleaned_data['user_type']
+        if user_type == 'D':
+            form.instance.is_active = False
+            form.save()
+            messages.add_message(request, messages.WARNING, 'Your account has been created. Please wait for admin approval.')
+            return redirect('accounts:home')
+
         user = form.save()
         login(request, user)
         messages.add_message(request, messages.INFO, f'Welcome {user.get_full_name()}!!!Your account has been registered successfully.')
