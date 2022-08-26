@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html>
 
@@ -15,7 +16,7 @@
 
 <header>
   <nav class="navbar navbar-expand-md navbar-dark bg-dark">
-    <a class="navbar-brand" href="#"><button class="btn btn-dark">BACK</button></a>
+    <a class="navbar-brand" href="{% url 'appointment:view-appointment' %}"><button class="btn btn-dark">BACK</button></a>
   </nav>
 </header>
 
@@ -29,7 +30,11 @@
       </div>
 
       <img class="profile"
-        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRwqmFCluFKr7TuWW9Tavkf-7ipit40Vwpa_umHBY6EHA&s"
+        {% if appointment.patient.patprofile.profile_pic %}
+        src="{{appointment.patient.patprofile.profile_pic.url}}"
+        {% else %}
+        src="{% static 'images/default_pic.jpg' %}"
+        {% endif %}
         alt="profile-picture" class="image-fluid">
 
       <body class="bg">
@@ -70,11 +75,11 @@
               </tr>
             </thead>
             <tbody>
-{% for appointments in appointment %}
+{% for appointment in appointments %}
               <tr>
                 <td>{{forloop.counter}}</td>
                 <td>{{appointment.date}}</td>
-                <td>{{appointment.doctor.get_full_name}}/td>
+                <td>{{appointment.doctor.get_full_name}}</td>
                 <td>{{appointment.doctor.docprofile.department.name}}</td>
                 <td>
                     {% for medicine in appointment.prescription.medicine.all %}

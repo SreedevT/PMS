@@ -1,5 +1,6 @@
 {% load bootstrap4 %}
 {% bootstrap_css %}
+{% load static %}
 {% bootstrap_javascript jquery=True %}
 
 <!DOCTYPE html>
@@ -57,7 +58,11 @@
                                     <tr>
                                         <td rowspan="4" style="text-align: center;" class="col-3" >
                                             <img class="profile"
+                                            {% if appointment.patient.patprofile.profile_pic %}
                                                 src="{{appointment.patient.patprofile.profile_pic.url}}"
+                                            {% else %}
+                                                src="{% static 'images/default_pic.jpg' %}"
+                                            {% endif %}
                                                 alt="profile-picture" class="image-fluid">
                                         </td>
                                     </tr>
