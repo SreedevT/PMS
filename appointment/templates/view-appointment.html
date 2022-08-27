@@ -151,8 +151,20 @@
                                     <tr>
                                         <th scope="row">FOLLOW-UP</th>
                                         <td colspan="2">
-                                            <input type="checkbox" name="follow" value="1" onchange="document.getElementById('date').disabled = !this.checked;"> <!--* https://stackoverflow.com/questions/18110865/how-to-disable-enable-a-button-with-a-checkbox-if-checked-->
+                                            <input type="checkbox" name="follow" id="follow" value="1" onchange="document.getElementById('date').disabled = !this.checked;"> <!--* https://stackoverflow.com/questions/18110865/how-to-disable-enable-a-button-with-a-checkbox-if-checked-->
                                             <input type="date" id="date" name="date" disabled="True">
+                                        </td>
+                                    </tr>
+                                    <tr id="slot-row">
+                                        <th scope="row">SLOT</th>
+                                        <td colspan="2">
+                                            <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                                {% for _,slot in time_slot%} <!-- * Tuple unpacking  -->
+                                                    <div class="btn btn-warning">
+                                                      <input type="radio" name="slot" id="slot{{forloop.counter}}" value="{{slot}}">{{slot}}
+                                                    </div>
+                                                {% endfor %}
+                                            </div>
                                         </td>
                                     </tr>
                                 </tbody>
@@ -242,6 +254,20 @@
     
         today = yyyy + '-' + mm + '-' + dd;
         $('#date').attr('min',today);
+
+        const checkbox = document.getElementById('follow');
+        const box = document.getElementById('slot-row');
+
+        checkbox.addEventListener('click', function handleClick() {
+        if (checkbox.checked) {
+            const slot = document.getElementByName('slot');
+            slot.required = true;
+            box.style.display = 'block';
+        } else {
+            slot.required = false;
+            box.style.display = 'none';
+        }
+        });
     </script>
 
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
