@@ -1,11 +1,11 @@
 from django.shortcuts import render, redirect
+from django.db import connection
 from django.http import HttpResponse
 from django.contrib.auth import login
 from .forms import UserCreateForm
 from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib.auth.views import LoginView, LogoutView
 from django.contrib import messages
-from profiles.models import PatientProfile
 
 
 class LoginFormView(SuccessMessageMixin, LoginView):
@@ -19,6 +19,7 @@ class LogoutFormView(LogoutView): #* No idea how it works, but: https://stackove
         return response
 
 def home(request):
+    
     #* user context is passed by default to all templates, need not specify
     #! Not needed
     # context = {'user': request.user} #? context may not be needed for authenticated users, see: 
@@ -32,6 +33,19 @@ def home(request):
     # Restricted home page for admins, prompts to logout
     if user.is_superuser:
         return render(request, 'home_no_entry.html')
+
+    if user.is_doctor:
+        cursor = connection.cursor()
+        cursor.execute('''
+                            SELECT appointment.status,  COUNT(*)
+                            FROM appointment
+                            WHERE appointment.doctor_id = %s
+                            GROUP BY appointment.status''', [user.id])
+        row = cursor.fetchall() #* fetchall() returns a list of tuples [(False, 4), (True, 2)]
+        pending_count = row[False][1]
+        completed_count = row[True][1]
+        context = {'pending_count': pending_count, 'completed_count': completed_count}
+        return render(request, 'home.html', context=context)
         
     return render(request, 'home.html')
 
