@@ -75,7 +75,7 @@
               </tr>
             </thead>
             <tbody>
-{% for appointment in appointments %}
+            {% for appointment in appointments %}
               <tr>
                 <td>{{forloop.counter}}</td>
                 <td>{{appointment.date}}</td>
@@ -90,7 +90,7 @@
                         {% endif %}
                     {% endfor %}
                 </td>
-                <td><button class="btn btn-primary">view</button></td>
+                <td><a href="{% url 'appointment:past-prescription' %}"  ><button class="btn btn-primary">view</button></a></td>
               </tr>
 {% endfor %}
               

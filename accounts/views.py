@@ -34,7 +34,7 @@ def home(request):
     if user.is_superuser:
         return render(request, 'home_no_entry.html')
 
-    if user.is_doctor:
+    if user.is_authenticated and user.is_doctor():
         cursor = connection.cursor()
         cursor.execute('''
                             SELECT appointment.status,  COUNT(*)

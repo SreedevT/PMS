@@ -11,5 +11,6 @@ urlpatterns = [
     path('doctor/completed-appointments', views.pending_appointments, {'status': True}, name='completed-appointment'),#* More info : https://django-book.readthedocs.io/en/latest/chapter08.html#passing-extra-options-to-view-functions
     path('doctor/view-appointment', views.view_appointment, name='view-appointment'),
     path('doctor/result', views.result, name='result'),
-    path('doctor/view-past-history',views.past_history,name='past-history')
+    path('doctor/view-past-history',views.past_history,name='past-history'),
+    path('doctor/view-past-prescription',views.past_prescription,name='past-prescription')
 ]

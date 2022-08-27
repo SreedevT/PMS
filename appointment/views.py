@@ -176,4 +176,5 @@ def past_history(request):
     return render(request, 'view-past-history.html', context=context)
 
 
-
+def past_prescription(request):
+   return render(request,'past-prescription.html')
