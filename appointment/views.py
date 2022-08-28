@@ -10,6 +10,9 @@ from django.db import connection, IntegrityError
 from django.contrib import messages
 
 def doctor_list(request):
+    user = request.user
+    if user.is_doctor():
+        messages.add_message(request, messages.ERROR, 'Please sign in as patient to view this page!')
     context = {}
     depts = Department.objects.all()
     doctors = User.objects.filter(user_type='D')
@@ -55,7 +58,7 @@ def appointment_book(request, *args):
 
     # if POST request
     strslot = request.POST['slot']
-    list_slot = strslot.split('-') #!['9:00', '10:00']
+    list_slot = strslot.split('-') #!Like ['9:00', '10:00']
     
     doctor_id = request.POST['doctor']
     doctor = User.objects.get(pk=doctor_id)
@@ -201,19 +204,24 @@ def follow_book(request):
     doctor = prev_appointment.doctor
     patient = prev_appointment.patient
     reason = prev_appointment.reason
+    date = request.post['date']
     #! IF timeslots are implemented for each doctor, use doctor_id to get timeslots
-    start_time = "9:00"
-    end_time = "10:00"
-    Appointment.objects.create(
-        doctor = doctor,
-        patient = patient,
-        date = request.POST['date'],
-        reason = reason,
-        start_time = start_time,
-        end_time = end_time,
-        status = False,
-    )
-    messages.success(request, 'Appointment booked successfully!')
+    strslot = request.POST['slot']
+    list_slot = strslot.split('-') #!Like ['9:00', '10:00']
+    try:
+        Appointment.objects.create(
+            doctor = doctor,
+            patient = patient,
+            date = date,
+            reason = reason,
+            start_time = list_slot[0],
+            end_time = list_slot[1],
+            status = False,
+        )
+    except IntegrityError:
+        messages.add_message(request, messages.ERROR, f'Booking already exists on {date}!')
+        return redirect('appointment:pending-appointment')
+    messages.success(request, 'Follow up appointment booked successfully!')
     return redirect('appointment:view-appointment')
 
 def past_history(request):
