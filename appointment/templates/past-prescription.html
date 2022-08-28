@@ -46,7 +46,7 @@
                             </tbody>
                         </table>
 
-                        <table class="table table-borderless table-hover" style="margin-top: -9px;">
+                        <table class="table table-bordered table-hover" style="margin-top: -9px;">
                             <tbody>
                                 <tr>
                                     <th class="w-25" scope="row">Doctor</th>
@@ -72,15 +72,7 @@
                                         <td colspan="4">{{appointment.reason}}</td>
                                     </div>
                                 </tr>
-                                <tr>
-                                    <th scope="row">Diagnosis</th>
-                                    <div style="overflow: auto">
-                                        <td colspan="4"> 
-                                            
-                                            {{appointment.report.diagnosis}}
-                                        </td>
-                                    </div>
-                                </tr>
+                                
                                 <tr>
                                     <th scope="row">Medicine </th>
                                     {% for medicine in appointment.prescription.medicine.all %}
@@ -92,6 +84,14 @@
                                 <tr>
                                     <th scope="row">Instructions</th>
                                     <td colspan="4">{{appointment.prescription.instructions}}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Diagnosis</th>
+                                    <div style="overflow: auto">
+                                        <td colspan="4"> 
+                                            {{appointment.report.diagnosis}}
+                                        </td>
+                                    </div>
                                 </tr>
                                 <tr>
                                     <div class=" overflow: auto">
