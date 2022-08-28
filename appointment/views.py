@@ -29,6 +29,7 @@ def test(request):
     print(options)
     return render(request, 'test.html', context=context)
 
+
 @login_required(login_url='accounts:login')
 def appointment_form(request):
     context = {}
@@ -43,6 +44,7 @@ def appointment_form(request):
     doctor = User.objects.get(id=id)
     context = {'doctor': doctor}
     return render(request, 'appointment-form.html', context=context)
+
 
 def appointment_book(request, *args):
     #* Django model instances: https://docs.djangoproject.com/en/4.0/ref/models/instances/#django.db.models.Model.save
@@ -70,6 +72,40 @@ def appointment_book(request, *args):
     context={'appointment':appointment}
     messages.success(request, 'Appointment booked successfully!')
     return render(request, 'home.html', context=context)
+
+
+# Appointment list for patient to view
+def appointment_list(request):
+    context = {}
+    user = request.user
+    if not user.is_patient():
+        return HttpResponse("NOT ALLOWED")
+        #! Display 403 Forbidden page
+    appointments = Appointment.objects.filter(patient=user, status=False)
+    context = {'appointments':appointments}
+    return render(request, 'patient-appointment-list.html', context=context)
+
+
+def cancel_appointment(request):
+    if request.method != 'POST':
+        messages.add_message(request, messages.ERROR, 'Please select an appointment to cancel!')
+        return redirect('appointment:appointment-list')
+
+    app_id = request.POST['app_id']
+    appointment = Appointment.objects.get(pk=app_id)
+    appointment.delete()
+    messages.add_message(request, messages.SUCCESS, 'Appointment cancelled successfully!')
+    return redirect('appointment:appointment-list')
+
+def patient_completed_appointment(request):
+    context = {}
+    user = request.user
+    if not user.is_patient():
+        return HttpResponse("NOT ALLOWED")
+        #! Display 403 Forbidden page
+    appointments = Appointment.objects.filter(patient=user, status=True)
+    context = {'appointments':appointments}
+    return render(request, 'patient-completed-appointment.html', context=context)
 
 def pending_appointments(request, status):
     context = {}

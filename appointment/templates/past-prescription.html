@@ -100,13 +100,13 @@
                                 <tr>
                                     <div class=" overflow: auto">
                                         {% if appointment.report.test_report %}
-                                        <th scope="row">Test report&nbsp;<a class="btn btn-primary" href="{{appointment.report.test_report.url}}">View</a></th>
+                                        <th scope="row" width="33%">Test report<a class="btn btn-primary ml-3" href="{{appointment.report.test_report.url}}">View</a></th>
                                         {% endif %}
                                         {% if appointment.report.xray %}
-                                        <th>X-Ray&nbsp;<a class="btn btn-primary" href="{{appointment.report.xray.url}}">View</a></th>
+                                        <th scope="row" width="33%">X-Ray<a class="btn btn-primary ml-3" href="{{appointment.report.xray.url}}">View</a></th>
                                         {% endif %}
                                         {% if appointment.report.ct %}
-                                        <th>CT Scan&nbsp;<a class="btn btn-primary" href="{{appointment.report.ct.url}}">View</a></th>
+                                        <th scope="row" width="33%">CT Scan<a class="btn btn-primary ml-3" href="{{appointment.report.ct.url}}">View</a></th>
                                         {% endif %}
                                     </div>
                                 </tr>
