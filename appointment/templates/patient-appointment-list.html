@@ -1,4 +1,6 @@
 {% load static %}
+{% load bootstrap4 %}
+{% bootstrap_javascript jquery='full' %}
 <!DOCTYPE html>
 <html>
     <head>
@@ -10,8 +12,8 @@
     <body>
 
         {% include 'navbar-simple.html' %}
-        {% include 'messages.html' %} <!--! BUG MESSAGES DO NOT FADE OR CLOSE-->
-
+        {% include 'messages.html' %}
+        
         <section style="height: auto;">
             <div class="container-fluid">
                 <div class="row pt-3" style="background-color: #8889a347;">
