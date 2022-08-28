@@ -55,8 +55,8 @@ class Report(models.Model):
         db_table = 'report'
         ordering = ['appointment__date', 'appointment__start_time']
 
-    appointment = models.OneToOneField(Appointment, on_delete=models.CASCADE, related_name='appointment')
-    test_report = models.FileField(null=True, blank=True, upload_to=partial(path_and_rename, 'files/report', 'report'))
+    appointment = models.OneToOneField(Appointment, on_delete=models.CASCADE)
+    test_report = models.FileField(null=True, blank=True, upload_to=partial(path_and_rename, upload_to='files/report', field_name='report' ))
     xray = models.FileField(null=True, blank=True, upload_to=partial(path_and_rename, 'files/xray', 'xray'))
     ct = models.FileField(null=True, blank=True, upload_to=partial(path_and_rename, 'files/ct', 'ct'))
     diagnosis = models.TextField()
