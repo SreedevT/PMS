@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html>
 
@@ -32,15 +33,15 @@
                             <tbody>
                                 <tr>
                                     <th scope="row">Name</th>
-                                    <td>patient 1</td>
+                                    <td>{{appointment.patient.get_full_name}}</td>
                                 </tr>
                                 <tr>
                                     <th scope="row">Gender</th>
-                                    <td>male</td>
+                                    <td>{{appointment.patient.get_gender}}</td>
                                 </tr>
                                 <tr>
                                     <th scope="row">Age</th>
-                                    <td>19</td>
+                                    <td>{{appointment.patient.get_age}}</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -50,51 +51,47 @@
                                 <tr>
                                     <th class="w-25" scope="row">Doctor</th>
                                     <div>
-                                        <td style="width: 174px">Marco J
+                                        <td style="width: 174px">{{appointment.doctor.get_full_name}}</td>
                                         </td>
                                         <th style="width: 174px">Department</th>
-                                        <td>ENT</td>
+                                        <td>{{appointment.doctor.docprofile.department.name}}</td>
                                     </div>
                                 </tr>
                                 <tr>
                                     <th scope="row" style="width:174px">Appointment date</th>
                                     <div>
-                                        <td style="width:174px">12/5/2022
+                                        <td style="width:174px">{{appointment.date}}
                                         </td>
                                         <th style="width: 170px">Time</th>
-                                        <td>11 a.m</td>
+                                        <td>{{appointment.start_time}} to {{appointment.end_time}}</td>
                                     </div>
                                 </tr>
                                 <tr>
                                     <th scope="row">Reason for visit</th>
                                     <div style="overflow: auto">
-                                        <td colspan="4"> pain</td>
+                                        <td colspan="4">{{appointment.reason}}</td>
                                     </div>
                                 </tr>
                                 <tr>
                                     <th scope="row">Diagnosis</th>
                                     <div style="overflow: auto">
-                                        <td colspan="4"> In publishing and graphic design, Lorem ipsum is a placeholder
-                                            text commonly
-                                            used to demonstrate the
-                                            visual form of a document or a typeface without relying on meaningful
-                                            content.
-                                            Lorem ipsum may be used
-                                            as a placeholder before final copy is available.
+                                        <td colspan="4"> 
+                                            
+                                            {{appointment.report.diagnosis}}
                                         </td>
                                     </div>
                                 </tr>
                                 <tr>
                                     <th scope="row">Medicine </th>
+                                    {% for medicine in appointment.prescription.medicine.all %}
                                     <td colspan="4">
-                                        <span class="badge badge-secondary">Metphormin</span>
-                                        <span class="badge badge-secondary">Crestor</span>
-                                        <span class="badge badge-secondary">Penicillin </span>
+                                        {{medicine}}
                                     </td>
+                                    {% endfor %}
                                 </tr>
                                 <tr>
                                     <th scope="row">Instructions</th>
-                                    <td colspan="4">2 times a day</td>
+                                    <td colspan="4">{{appointment.prescription.instructions}}</td>
                                 </tr>
                                 <tr>
                                     <div class=" overflow: auto">

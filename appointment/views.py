@@ -177,4 +177,9 @@ def past_history(request):
 
 
 def past_prescription(request):
-   return render(request,'past-prescription.html')
+    context = {}
+    appointment_id = request.POST['app_id']
+    appointment = Appointment.objects.get(pk=appointment_id)
+    context = {'appointment':appointment}
+    
+    return render(request,'past-prescription.html',context=context)
