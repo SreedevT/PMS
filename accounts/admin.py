@@ -10,6 +10,5 @@ UserAdmin.fieldsets = tuple(fields)
 
 
 class UserAdminModel(UserAdmin):
-    UserAdmin.list_display += ('user_type', )
     UserAdmin.list_filter += ('user_type',)
 admin.site.register(User, UserAdminModel) 
