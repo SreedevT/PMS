@@ -54,10 +54,17 @@
                                     <td>{{appointment.date}}</td>
                                     <td>{{appointment.start_time}}</td>
                                     <td>
-                                        <form action="{% url 'appointment:view-appointment' %}" method="post">
-                                            {% csrf_token %}
-                                            <button class="btn btn-primary" type="submit" name="id" value={{appointment.id}}>View</button>
-                                        </form>
+                                        {% if status %}
+                                            <form action="{% url 'appointment:past-prescription' %}" method="post">
+                                                {% csrf_token %}
+                                                <button class="btn btn-primary" type="submit" name="app_id" value={{appointment.id}}>View</button>
+                                            </form>
+                                        {% else %}
+                                            <form action="{% url 'appointment:view-appointment' %}" method="post">
+                                                {% csrf_token %}
+                                                <button class="btn btn-primary" type="submit" name="id" value={{appointment.id}}>View</button>
+                                            </form>
+                                        {% endif %}
                                     </td>
                                 </tr>
 {% endfor %}

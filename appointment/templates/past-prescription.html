@@ -25,7 +25,11 @@
                     <div class="col-md-12 mx-auto">
                         <div class="col-md-2">
                             <img class="profile"
-                                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT9Z9vjM-_Ww_rUHKOYFQ3brhBsKWniGSN7jembYtImHkPzHReyZ4zNBlPF550WjI8a_eE&usqp=CAU"
+                            {% if appointment.patient.patprofile.profile_pic %}
+                                src="{{appointment.patient.patprofile.profile_pic.url}}"
+                            {% else %}
+                                src="{% static 'images/default_pic.jpg' %}"
+                            {% endif %}
                                 alt="profile-picture" class="image-fluid">
                         </div>
 
@@ -95,9 +99,15 @@
                                 </tr>
                                 <tr>
                                     <div class=" overflow: auto">
-                                        <th scope="row">Test report&nbsp;<button class="btn">view file</button></th>
-                                        <th>X-Ray&nbsp;<button class="btn">view file</button></th>
-                                        <th>CT Scan&nbsp;<button class="btn">view file</button></th>
+                                        {% if appointment.report.test_report %}
+                                        <th scope="row">Test report&nbsp;<a class="btn btn-primary" href="{{appointment.report.test_report.url}}">View</a></th>
+                                        {% endif %}
+                                        {% if appointment.report.xray %}
+                                        <th>X-Ray&nbsp;<a class="btn btn-primary" href="{{appointment.report.xray.url}}">View</a></th>
+                                        {% endif %}
+                                        {% if appointment.report.ct %}
+                                        <th>CT Scan&nbsp;<a class="btn btn-primary" href="{{appointment.report.ct.url}}">View</a></th>
+                                        {% endif %}
                                     </div>
                                 </tr>
                             </tbody>

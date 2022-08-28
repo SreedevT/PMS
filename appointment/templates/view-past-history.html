@@ -94,8 +94,7 @@
                   <form action="{% url 'appointment:past-prescription' %}" method="post">
                     {% csrf_token %}
                   <td>
-                    <input type="hidden" name="app_id" value="{{appointment.id}}">
-                    <button class="btn btn-primary" >view</button></td>
+                    <button class="btn btn-primary" name="app_id" value="{{appointment.id}}">View</button></td>
                 </form>
               </tr>
 {% endfor %}
