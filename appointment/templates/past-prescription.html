@@ -50,23 +50,22 @@
                             </tbody>
                         </table>
 
-                        <table class="table table-bordered table-hover" style="margin-top: -9px;">
+                        <table class="table table-bordered table-hover" style="margin-top: 9px;">
                             <tbody>
                                 <tr>
-                                    <th class="w-25" scope="row">Doctor</th>
+                                    <th  scope="row">Doctor</th>
                                     <div>
-                                        <td style="width: 174px">{{appointment.doctor.get_full_name}}</td>
+                                        <td>{{appointment.doctor.get_full_name}}</td>
                                         </td>
-                                        <th style="width: 174px">Department</th>
+                                        <th >Department</th>
                                         <td>{{appointment.doctor.docprofile.department.name}}</td>
                                     </div>
                                 </tr>
                                 <tr>
-                                    <th scope="row" style="width:174px">Appointment date</th>
+                                    <th scope="row" >Appointment date</th>
                                     <div>
-                                        <td style="width:174px">{{appointment.date}}
-                                        </td>
-                                        <th style="width: 170px">Time</th>
+                                        <td >{{appointment.date}}</td>
+                                        <th >Time</th>
                                         <td>{{appointment.start_time}} to {{appointment.end_time}}</td>
                                     </div>
                                 </tr>
@@ -79,11 +78,11 @@
                                 
                                 <tr>
                                     <th scope="row">Medicine </th>
-                                    {% for medicine in appointment.prescription.medicine.all %}
                                     <td colspan="4">
-                                        {{medicine}}
-                                    </td>
+                                    {% for medicine in appointment.prescription.medicine.all %}
+                                        <span class="badge badge-secondary">{{medicine}}</span>
                                     {% endfor %}
+                                    </td>
                                 </tr>
                                 <tr>
                                     <th scope="row">Instructions</th>
@@ -153,15 +152,6 @@
             width: 133px;
             margin-left: -2px;
             margin-bottom: 5px;
-        }
-
-        .badge {
-            width: 90px;
-        }
-
-        .badge-secondary {
-            color: #000;
-            background-color: #cdd8e1;
         }
 
         .btn {
