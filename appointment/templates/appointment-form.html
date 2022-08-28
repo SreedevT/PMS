@@ -36,7 +36,7 @@
                             <input type="hidden" name="doctor" value="{{doctor.id}}">
                             <div class="form-group">
                                 <label for="date"><b>Appointment Date:</b></label>
-                                <input type="date" id="date" name="date">
+                                <input type="date" id="date" name="date" required>
                             </div>
 
                             <div class="form-group">
@@ -44,18 +44,17 @@
                                 <br>
                                 <div class="btn-group btn-group-toggle" data-toggle="buttons">
                                     {% for _,slot in time_slot%} <!-- * Tuple unpacking  -->
-                                        <label class="btn btn-warning">
-                                          <input type="radio" name="slot" id="slot{{forloop.counter}}" autocomplete="off" value="{{slot}}">{{slot}}
-                                        </label>
+                                        <div class="btn btn-warning">
+                                          <input type="radio" name="slot" id="slot{{forloop.counter}}" required value="{{slot}}">{{slot}}
+                                        </div>
                                     {% endfor %}
                                 </div>
                             </div>
                         <b> Reason for taking appointment</b>
-                                        <div id="reason" class="form-input-wide" style="height: 35px;">
-                                            <textarea id="input_21" class="form-textarea" name="reason" cols="40" rows="6" data-component="textarea"></textarea>
-                                        </div>
-                        <br><br><br><br><br><br><br><br>
-                                        <button class="button1">Book Appointment</button>
+                            <div id="reason" class="form-input-wide">
+                                <textarea id="input_21" class="form-textarea" name="reason" cols="40" rows="6" data-component="textarea" required></textarea>
+                            </div>
+                            <button class="btn btn-success">Book Appointment</button>
                         </form>
                         </div>
                     </div>
@@ -95,24 +94,13 @@
             color: white;
         }
 
-        .button1 {
-            background-color: #08d405;
-            border: none;
+        .btn-success {
             color: white;
             border-radius: 12px;
             padding: 16px 32px;
-            text-align: center;
             font-size: 16px;
-            margin: 4px 2px;
-            opacity: 0.6;
-            transition: 0.1s;
-            display: inline-block;
-            text-decoration: none;
-            cursor: pointer;
+            margin-top: 2rem;
         }
         
-        .button1:hover {
-            box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
-        }
     </style>
 </html>

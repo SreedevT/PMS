@@ -22,6 +22,9 @@ class User(AbstractUser):
         (OTHER, 'Other'),
         (PREFER_NOT_TO_SAY, 'Prefer not to say')
     ]
+
+    class Meta:
+        db_table = 'user'
     
     user_type = models.CharField(choices=USER_TYPES, max_length=1, default=PATIENT)
     gender = models.CharField(choices=GENDER,  max_length=1, default=PREFER_NOT_TO_SAY)

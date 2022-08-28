@@ -24,20 +24,19 @@
             <a class="navbar-brand" href="{% url 'appointment:pending-appointment'%}"
                 background="#343a40">
                 <i class="fa fa-calendar" aria-hidden="true"></i>
-                PENDING APPOINTMENTS
+                PENDING APPOINTMENTS <div class="badge badge-pill badge-danger">{{ pending_count }}</div>
             </a>
 
 
-            <a class="navbar-brand" href="#"
+            <a class="navbar-brand" href="{% url 'appointment:completed-appointment'%}"
                background="#343a40">
                <i class="fa fa-calendar-check-o" aria-hidden="true"></i>
-               COMPLETED APPOINTMENTS
+               COMPLETED APPOINTMENTS <span class="badge badge-pill badge-danger">{{ completed_count }}</span>
             </a>
 
 {% if user.is_authenticated %}
             <a class="navbar-brand" href="{% url 'accounts:logout' %}"
-            background="#343a40" onmouseover="this.style.background='  #264445';"
-            onmouseout="this.style.background= '';">
+            background="#343a40">
             <i class="fa fa-sign-out" aria-hidden="true"></i>
             LOGOUT
             </a>
@@ -48,6 +47,9 @@
 </nav>
 
 <style>
+    #navbarSupportedContent > ul > a:nth-child(4):hover {
+        background-color: #dc3545;
+    }
     .brand {
         color: #fff;
         font-size: 1.5em;

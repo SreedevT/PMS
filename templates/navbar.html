@@ -33,6 +33,11 @@
             <i class="fa fa-user" aria-hidden="true"></i>
             PROFILE
             </a>
+            <a class="navbar-brand" href="{% url 'appointment:test' %}"
+            background="#343a40">
+            <i class="fa fa-calendar-check-o" aria-hidden="true"></i>
+            VIEW APPOINTMENTS
+            </a>
 {% endif %}
 
             <a class="navbar-brand" href="{% url 'appointment:doc-list'%}"
@@ -53,25 +58,19 @@
                 <div class="dropdown-menu width:30px text-dark bg-info"
                     aria-labelledby="navbarDropdown">
 
-                    <a class="dropdown-item" href="#">
+                    <a class="dropdown-item" href="#phone">
                         Call
                     </a>
 
-                    <a class="dropdown-item" href="mailto:yadukrishna2240@gmail.com">
+                    <a class="dropdown-item" href="#email">
                         Email
                     </a>
 
                 </div>
             </li>
 
-            <a class="navbar-brand" href="#"
-               background="#343a40">
-               <i class="fa fa-ambulance" aria-hidden="true"></i>
-               EMERGENCY
-            </a>
-
 {% if user.is_authenticated %}
-            <a class="navbar-brand" href="{% url 'accounts:logout' %}"
+            <a class="navbar-brand logout" href="{% url 'accounts:logout' %}"
             background="#343a40">
             <i class="fa fa-sign-out" aria-hidden="true"></i>
             LOGOUT
@@ -89,6 +88,10 @@
 </nav>
 
 <style>
+    #navbarSupportedContent > ul > a.navbar-brand.logout:hover { /* Logout button in navbar*/
+        background-color: #dc3545;
+    }
+
     .brand {
         color: #fff;
         font-size: 1.5em;
@@ -142,7 +145,11 @@
     .fa {
         margin-right: 4px;
         font-size:17px;
+<<<<<<< HEAD
         color:rgb(254, 255, 255);
+=======
+        color:rgb(226, 223, 223);
+>>>>>>> c142d0f6bd20a25632d9d6f1c1cebf80665b08f8
     }
 
     .emg {
