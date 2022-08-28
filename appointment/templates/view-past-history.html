@@ -90,7 +90,13 @@
                         {% endif %}
                     {% endfor %}
                 </td>
-                <td><a href="{% url 'appointment:past-prescription' %}"  ><button class="btn btn-primary">view</button></a></td>
+               
+                  <form action="{% url 'appointment:past-prescription' %}" method="post">
+                    {% csrf_token %}
+                  <td>
+                    <input type="hidden" name="app_id" value="{{appointment.id}}">
+                    <button class="btn btn-primary" >view</button></td>
+                </form>
               </tr>
 {% endfor %}
               
