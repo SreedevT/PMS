@@ -28,50 +28,16 @@
           <h4 class="pt-2 pb-3 text-center">PAST MEDICAL RECORDS</h4>
         </div>
       </div>
-
-      <img class="profile"
-        {% if appointment.patient.patprofile.profile_pic %}
-        src="{{appointment.patient.patprofile.profile_pic.url}}"
-        {% else %}
-        src="{% static 'images/default_pic.jpg' %}"
-        {% endif %}
-        alt="profile-picture" class="image-fluid">
-
-      <body class="bg">
-        <div class="table1">
-          <div class="table-responsive">
-            <table class="table table-hover" style=" width: 49%;">
-              <tbody>
-                <tr>
-                  <th scope="row">NAME</th>
-                  <td>{{patient.get_full_name}}</td>
-                </tr>
-                <tr>
-                  <th scope="row">GENDER</th>
-                  <td>{{patient.get_gender}} </td>
-                </tr>
-                <tr>
-                  <th scope="row">AGE</th>
-                  <td>{{patient.patprofile.get_age}}</td>
-                </tr>
-              </tbody>
-            </table>
-            </table>
-          </div>
-        </div>
-
-
-
         <div class="table-responsive">
           <table class="table table-hover">
             <thead class="thead">
               <tr>
                 <th scope="col">NO</th>
                 <th scope="col">DATE</th>
+                <th scope="col">PHOTO</th>
                 <th scope="col">DOCTOR</th>
                 <th scope="col">DEPARTMENT</th>
-                <th scope="col" width="20%">PRESCRIPTION</th>
-                <th scope="col"></th>
+                <th scope="col">DETAILS</th>
               </tr>
             </thead>
             <tbody>
@@ -79,17 +45,15 @@
               <tr>
                 <td>{{forloop.counter}}</td>
                 <td>{{appointment.date}}</td>
+                <td>
+                    {%if appointment.doctor.docprofile.profile_pic %}
+                        <img src="{{appointment.doctor.docprofile.profile_pic.url}}" class="photo">
+                    {% else %}
+                        <img src="{% static 'images\doctor_default.jpg' %}" class="photo">
+                    {% endif %}
+                </td>
                 <td>{{appointment.doctor.get_full_name}}</td>
                 <td>{{appointment.doctor.docprofile.department.name}}</td>
-                <td>
-                    {% for medicine in appointment.prescription.medicine.all %}
-                        {% if medicine %}
-                            {{medicine}}
-                        {% else %}
-                            No medicine prescribed
-                        {% endif %}
-                    {% endfor %}
-                </td>
                
                   <form action="{% url 'appointment:past-prescription' %}" method="post">
                     {% csrf_token %}
@@ -125,11 +89,8 @@
     border-radius: 10px;
   }
 
-  .table .thead {
-    color: #fff;
-    background-color: #5c5b5d;
-
-  }
+  
+  
 
   .table td,
   .table th {
@@ -142,6 +103,12 @@
     margin-left: 189px;
     margin-top: -149px;
   }
+
+  .photo{
+    width: 100px;
+
+    border-radius: 50%;
+}
 </style>
 
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"

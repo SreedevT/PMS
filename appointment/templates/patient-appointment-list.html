@@ -28,23 +28,22 @@
                 <br>
                 <br>            
                     <div class="col-md-12 col-12" style="align-items: center;">
-                        <table class="table table-striped">
-                            <thead>
-                              <tr>
-                                <th scope="col" width="10%">#</th>
-                                <th scope="col"  width="10%"><h4>No</h4></th>
-                                <th scope="col" width="15%"><h4>Photo</h4></th>
-                                <th scope="col" width="20%"><h4>Doctor Name</h4></th>
-                                <th scope="col" width="10%"><h4>Date</h4></th>
-                                <th scope="col" width="10%"><h4>Time</h4></th>
-                                <th scope="col"><h4>Cancel</h4></th>
-                              </tr>
-                            </thead>
+                            <div class="table-responsive table-striped">
+                                <table class="table table-hover">
+                                  <thead class="thead">
+                                    <tr>
+                                      <th scope="col" width="10%">NO</th>
+                                      <th scope="col" width="15%">PHOTO</th>
+                                      <th scope="col" width="20%">DOCTOR</th>
+                                      <th scope="col" width="15%">DATE</th>
+                                      <th scope="col">TIME</th>
+                                      <th scope="col">CANCEL</th>
+                                    </tr>
+                                  </thead>
                             <tbody>
 {% for appointment in appointments %}
                                 <tr>
                                     <th scope="row">{{forloop.counter}}</th>
-                                    <td>{{appointment.id}}</td>
                                     <td>
                                         {%if appointment.doctor.docprofile.profile_pic %}
                                             <img src="{{appointment.doctor.docprofile.profile_pic.url}}" class="photo">
@@ -79,6 +78,12 @@
     th, td{
         text-align: center;
     }
+
+    .table .thead {
+        color: #fff;
+        background-color: #5c5b5d;
+    
+      }
 
     .photo{
         width: 100px;
