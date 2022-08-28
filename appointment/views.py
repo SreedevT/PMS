@@ -6,7 +6,7 @@ from accounts.models import User
 from .models import Appointment, Prescription, Report
 from .forms import ReportForm
 from hospital.models import Medicine
-from django.db import connection
+from django.db import connection, IntegrityError
 from django.contrib import messages
 
 def doctor_list(request):
@@ -58,16 +58,23 @@ def appointment_book(request, *args):
     list_slot = strslot.split('-') #!['9:00', '10:00']
     
     doctor_id = request.POST['doctor']
+    doctor = User.objects.get(pk=doctor_id)
+    date = request.POST['date']
 
-    appointment = Appointment.objects.create(
-        doctor = User.objects.get(pk=doctor_id),
-        patient = request.user,
-        date = request.POST['date'],
-        reason = request.POST['reason'],
-        start_time=list_slot[0],
-        end_time=list_slot[1],
-        status=False,
-    )
+    try:
+        appointment = Appointment.objects.create(
+            doctor = doctor,
+            patient = request.user,
+            date = date,
+            reason = request.POST['reason'],
+            start_time=list_slot[0],
+            end_time=list_slot[1],
+            status=False,
+        )
+    except IntegrityError:
+        messages.add_message(request, messages.ERROR, f'Already booked an appointment for {doctor.get_full_name()} on {date}!')
+        return redirect('appointment:doc-list')
+
 
     context={'appointment':appointment}
     messages.success(request, 'Appointment booked successfully!')
@@ -92,8 +99,14 @@ def cancel_appointment(request):
         return redirect('appointment:appointment-list')
 
     app_id = request.POST['app_id']
-    appointment = Appointment.objects.get(pk=app_id)
-    appointment.delete()
+    # appointment = Appointment.objects.get(pk=app_id)
+    # appointment.delete()
+    cursor = connection.cursor()
+    cursor.execute('''
+        DELETE FROM appointment
+        WHERE id = %s
+    ''', [app_id])
+    cursor.close()
     messages.add_message(request, messages.SUCCESS, 'Appointment cancelled successfully!')
     return redirect('appointment:appointment-list')
 
