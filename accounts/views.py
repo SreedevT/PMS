@@ -42,8 +42,15 @@ def home(request):
                             WHERE appointment.doctor_id = %s
                             GROUP BY appointment.status''', [user.id])
         row = cursor.fetchall() #* fetchall() returns a list of tuples [(False, 4), (True, 2)]
-        pending_count = row[False][1]
-        completed_count = row[True][1]
+        try:
+            pending_count = row[False][1]
+        except IndexError:
+            pending_count = 0
+        try:
+            completed_count = row[True][1]
+        except IndexError:
+            completed_count = 0
+            
         context = {'pending_count': pending_count, 'completed_count': completed_count}
         return render(request, 'home.html', context=context)
         
