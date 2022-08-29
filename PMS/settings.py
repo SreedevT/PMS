@@ -41,7 +41,11 @@ SECRET_KEY = 'django-insecure-4+rk+bptb#n^m0h_es3v%fwjp(5*vlwnwc-@01a@l=$=2^h@ee
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+  'localhost',
+  '127.0.0.1',
+  '111.222.333.444',
+  'mywebsite.example']
 
 # Phone numeber field
 PHONENUMBER_DEFAULT_REGION = 'IN'
