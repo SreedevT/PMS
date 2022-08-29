@@ -26,13 +26,6 @@ def doctor_list(request):
     return render(request, 'doc.html', context=context)
 
 
-def test(request):
-    context = {}
-    options = request.POST.getlist('test')
-    print(options)
-    return render(request, 'test.html', context=context)
-
-
 @login_required(login_url='accounts:login')
 def appointment_form(request):
     context = {}
