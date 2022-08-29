@@ -30,8 +30,7 @@
                         <table class="table table-striped">
                             <thead>
                               <tr>
-                                <th scope="col" width="10%">#</th>
-                                <th scope="col"  width="10%"><h4>No</h4></th>
+                                <th scope="col" width="10%">No.</th>
                                 <th scope="col" width="15%"><h4>Photo</h4></th>
                                 <th scope="col" width="20%"><h4>Name</h4></th>
                                 <th scope="col" width="10%"><h4>Date</h4></th>
@@ -43,7 +42,6 @@
 {% for appointment in appointments %}
                                 <tr>
                                     <th scope="row">{{forloop.counter}}</th>
-                                    <td>{{appointment.id}}</td>
                                     <td>
                                         {%if appointment.patient.patprofile.profile_pic %}
                                             <img src="{{appointment.patient.patprofile.profile_pic.url}}" class="photo">
@@ -89,7 +87,7 @@
     .photo{
         width: 100px;
 
-        border-radius: 50%;
+       /* border-radius: 50%;*/
     }
 </style>
 </html>

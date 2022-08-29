@@ -88,6 +88,7 @@ def appointment_list(request):
         return HttpResponse("NOT ALLOWED")
         #! Display 403 Forbidden page
     appointments = Appointment.objects.filter(patient=user, status=False)
+    print(connection.queries)
     context = {'appointments':appointments}
     return render(request, 'patient-appointment-list.html', context=context)
 
