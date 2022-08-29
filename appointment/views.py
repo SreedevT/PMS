@@ -13,6 +13,8 @@ def doctor_list(request):
     user = request.user
     if user.is_doctor():
         messages.add_message(request, messages.ERROR, 'Please sign in as patient to view this page!')
+        return redirect('accounts:home')
+    
     context = {}
     depts = Department.objects.all()
     doctors = User.objects.filter(user_type='D')
