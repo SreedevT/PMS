@@ -13,4 +13,5 @@ urlpatterns = [
             name='login'),
     path('logout', views.LogoutFormView.as_view(next_page='accounts:home'), name='logout'),
     path('sign-up', views.register, name='register'),
+    path("password_reset", views.password_reset_request, name="password_reset")
 ]

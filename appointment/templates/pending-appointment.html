@@ -1,4 +1,6 @@
 {% load static %}
+{% load bootstrap4 %}
+{% bootstrap_javascript jquery='full' %}
 <!DOCTYPE html>
 <html>
     <head>
@@ -10,16 +12,15 @@
     <body>
 
         {% include 'navbar-simple.html' %}
-        {% include 'messages.html' %} <!--! BUG MESSAGES DO NOT FADE OR CLOSE-->
-
+        {% include 'messages.html' %} 
         <section style="height: auto;">
             <div class="container-fluid">
                 <div class="row " style="background-color: #8889a347;">
                     
                     {% if status %}
-                    <div class="col-md-12" style="align-items: center;"><h3><b>Completed Apppointments</b></h3></div>
+                    <div class="col-md-12" style="align-items: center;"><h3><b>Completed Appointments</b></h3></div>
                     {% else %}
-                    <div class="col-md-12" style="align-items: center;"><h3><b>Pending Apppointments</b></h3></div>
+                    <div class="col-md-12" style="align-items: center;"><h3><b>Pending Appointments</b></h3></div>
                     {% endif %}
 
                 <br>
@@ -54,10 +55,17 @@
                                     <td>{{appointment.date}}</td>
                                     <td>{{appointment.start_time}}</td>
                                     <td>
-                                        <form action="{% url 'appointment:view-appointment' %}" method="post">
-                                            {% csrf_token %}
-                                            <button class="btn btn-primary" type="submit" name="id" value={{appointment.id}}>View</button>
-                                        </form>
+                                        {% if status %}
+                                            <form action="{% url 'appointment:past-prescription' %}" method="post">
+                                                {% csrf_token %}
+                                                <button class="btn btn-primary" type="submit" name="app_id" value={{appointment.id}}>View</button>
+                                            </form>
+                                        {% else %}
+                                            <form action="{% url 'appointment:view-appointment' %}" method="post">
+                                                {% csrf_token %}
+                                                <button class="btn btn-primary" type="submit" name="id" value={{appointment.id}}>View</button>
+                                            </form>
+                                        {% endif %}
                                     </td>
                                 </tr>
 {% endfor %}

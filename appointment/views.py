@@ -6,10 +6,13 @@ from accounts.models import User
 from .models import Appointment, Prescription, Report
 from .forms import ReportForm
 from hospital.models import Medicine
-from django.db import connection
+from django.db import connection, IntegrityError
 from django.contrib import messages
 
 def doctor_list(request):
+    user = request.user
+    if user.is_doctor():
+        messages.add_message(request, messages.ERROR, 'Please sign in as patient to view this page!')
     context = {}
     depts = Department.objects.all()
     doctors = User.objects.filter(user_type='D')
@@ -29,6 +32,7 @@ def test(request):
     print(options)
     return render(request, 'test.html', context=context)
 
+
 @login_required(login_url='accounts:login')
 def appointment_form(request):
     context = {}
@@ -44,6 +48,7 @@ def appointment_form(request):
     context = {'doctor': doctor}
     return render(request, 'appointment-form.html', context=context)
 
+
 def appointment_book(request, *args):
     #* Django model instances: https://docs.djangoproject.com/en/4.0/ref/models/instances/#django.db.models.Model.save
     context = {}
@@ -53,23 +58,70 @@ def appointment_book(request, *args):
 
     # if POST request
     strslot = request.POST['slot']
-    list_slot = strslot.split('-') #!['9:00', '10:00']
+    list_slot = strslot.split('-') #!Like ['9:00', '10:00']
     
     doctor_id = request.POST['doctor']
+    doctor = User.objects.get(pk=doctor_id)
+    date = request.POST['date']
 
-    appointment = Appointment.objects.create(
-        doctor = User.objects.get(pk=doctor_id),
-        patient = request.user,
-        date = request.POST['date'],
-        reason = request.POST['reason'],
-        start_time=list_slot[0],
-        end_time=list_slot[1],
-        status=False,
-    )
+    try:
+        appointment = Appointment.objects.create(
+            doctor = doctor,
+            patient = request.user,
+            date = date,
+            reason = request.POST['reason'],
+            start_time=list_slot[0],
+            end_time=list_slot[1],
+            status=False,
+        )
+    except IntegrityError:
+        messages.add_message(request, messages.ERROR, f'Already booked an appointment for {doctor.get_full_name()} on {date}!')
+        return redirect('appointment:doc-list')
+
 
     context={'appointment':appointment}
     messages.success(request, 'Appointment booked successfully!')
     return render(request, 'home.html', context=context)
+
+
+# Appointment list for patient to view
+def appointment_list(request):
+    context = {}
+    user = request.user
+    if not user.is_patient():
+        return HttpResponse("NOT ALLOWED")
+        #! Display 403 Forbidden page
+    appointments = Appointment.objects.filter(patient=user, status=False)
+    context = {'appointments':appointments}
+    return render(request, 'patient-appointment-list.html', context=context)
+
+
+def cancel_appointment(request):
+    if request.method != 'POST':
+        messages.add_message(request, messages.ERROR, 'Please select an appointment to cancel!')
+        return redirect('appointment:appointment-list')
+
+    app_id = request.POST['app_id']
+    # appointment = Appointment.objects.get(pk=app_id)
+    # appointment.delete()
+    cursor = connection.cursor()
+    cursor.execute('''
+        DELETE FROM appointment
+        WHERE id = %s
+    ''', [app_id])
+    cursor.close()
+    messages.add_message(request, messages.SUCCESS, 'Appointment cancelled successfully!')
+    return redirect('appointment:appointment-list')
+
+def patient_completed_appointment(request):
+    context = {}
+    user = request.user
+    if not user.is_patient():
+        return HttpResponse("NOT ALLOWED")
+        #! Display 403 Forbidden page
+    appointments = Appointment.objects.filter(patient=user, status=True)
+    context = {'appointments':appointments}
+    return render(request, 'patient-completed-appointment.html', context=context)
 
 def pending_appointments(request, status):
     context = {}
@@ -152,19 +204,24 @@ def follow_book(request):
     doctor = prev_appointment.doctor
     patient = prev_appointment.patient
     reason = prev_appointment.reason
+    date = request.post['date']
     #! IF timeslots are implemented for each doctor, use doctor_id to get timeslots
-    start_time = "9:00"
-    end_time = "10:00"
-    Appointment.objects.create(
-        doctor = doctor,
-        patient = patient,
-        date = request.POST['date'],
-        reason = reason,
-        start_time = start_time,
-        end_time = end_time,
-        status = False,
-    )
-    messages.success(request, 'Appointment booked successfully!')
+    strslot = request.POST['slot']
+    list_slot = strslot.split('-') #!Like ['9:00', '10:00']
+    try:
+        Appointment.objects.create(
+            doctor = doctor,
+            patient = patient,
+            date = date,
+            reason = reason,
+            start_time = list_slot[0],
+            end_time = list_slot[1],
+            status = False,
+        )
+    except IntegrityError:
+        messages.add_message(request, messages.ERROR, f'Booking already exists on {date}!')
+        return redirect('appointment:pending-appointment')
+    messages.success(request, 'Follow up appointment booked successfully!')
     return redirect('appointment:view-appointment')
 
 def past_history(request):

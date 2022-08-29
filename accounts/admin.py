@@ -8,4 +8,8 @@ fields = list(UserAdmin.fieldsets)
 fields.insert(2, ('Other Info', {'fields': ('user_type', 'gender', 'phone')}))
 UserAdmin.fieldsets = tuple(fields)
 
-admin.site.register(User, UserAdmin) 
+
+class UserAdminModel(UserAdmin):
+    UserAdmin.list_display += ('user_type', )
+    UserAdmin.list_filter += ('user_type',)
+admin.site.register(User, UserAdminModel) 

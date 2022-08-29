@@ -155,7 +155,7 @@
                                             <input type="date" id="date" name="date" disabled="True">
                                         </td>
                                     </tr>
-                                    <tr id="slot-row">
+                                    <tr id="slot-row" style="display: none;">
                                         <th scope="row">SLOT</th>
                                         <td colspan="2">
                                             <div class="btn-group btn-group-toggle" data-toggle="buttons">
@@ -255,18 +255,11 @@
         today = yyyy + '-' + mm + '-' + dd;
         $('#date').attr('min',today);
 
-        const checkbox = document.getElementById('follow');
-        const box = document.getElementById('slot-row');
 
-        checkbox.addEventListener('click', function handleClick() {
-        if (checkbox.checked) {
-            const slot = document.getElementByName('slot');
-            slot.required = true;
-            box.style.display = 'block';
-        } else {
-            slot.required = false;
-            box.style.display = 'none';
-        }
+        $(document).ready(function() {
+            $('input[type="checkbox"]').click(function() {
+                $('tr[id="slot-row"]').toggle();
+            });
         });
     </script>
 

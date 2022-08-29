@@ -9,6 +9,15 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+    integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+    crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
 </head>
 
 
@@ -25,7 +34,11 @@
                     <div class="col-md-12 mx-auto">
                         <div class="col-md-2">
                             <img class="profile"
-                                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT9Z9vjM-_Ww_rUHKOYFQ3brhBsKWniGSN7jembYtImHkPzHReyZ4zNBlPF550WjI8a_eE&usqp=CAU"
+                            {% if appointment.patient.patprofile.profile_pic %}
+                                src="{{appointment.patient.patprofile.profile_pic.url}}"
+                            {% else %}
+                                src="{% static 'images/default_pic.jpg' %}"
+                            {% endif %}
                                 alt="profile-picture" class="image-fluid">
                         </div>
 
@@ -41,28 +54,27 @@
                                 </tr>
                                 <tr>
                                     <th scope="row">Age</th>
-                                    <td>{{appointment.patient.get_age}}</td>
+                                    <td>{{appointment.patient.patprofile.get_age}}</td>
                                 </tr>
                             </tbody>
                         </table>
 
-                        <table class="table table-borderless table-hover" style="margin-top: -9px;">
+                        <table class="table table-bordered table-hover" style="margin-top: 9px;">
                             <tbody>
                                 <tr>
-                                    <th class="w-25" scope="row">Doctor</th>
+                                    <th  scope="row">Doctor</th>
                                     <div>
-                                        <td style="width: 174px">{{appointment.doctor.get_full_name}}</td>
+                                        <td>{{appointment.doctor.get_full_name}}</td>
                                         </td>
-                                        <th style="width: 174px">Department</th>
+                                        <th >Department</th>
                                         <td>{{appointment.doctor.docprofile.department.name}}</td>
                                     </div>
                                 </tr>
                                 <tr>
-                                    <th scope="row" style="width:174px">Appointment date</th>
+                                    <th scope="row" >Appointment date</th>
                                     <div>
-                                        <td style="width:174px">{{appointment.date}}
-                                        </td>
-                                        <th style="width: 170px">Time</th>
+                                        <td >{{appointment.date}}</td>
+                                        <th >Time</th>
                                         <td>{{appointment.start_time}} to {{appointment.end_time}}</td>
                                     </div>
                                 </tr>
@@ -72,32 +84,38 @@
                                         <td colspan="4">{{appointment.reason}}</td>
                                     </div>
                                 </tr>
-                                <tr>
-                                    <th scope="row">Diagnosis</th>
-                                    <div style="overflow: auto">
-                                        <td colspan="4"> 
-                                            
-                                            {{appointment.report.diagnosis}}
-                                        </td>
-                                    </div>
-                                </tr>
+                                
                                 <tr>
                                     <th scope="row">Medicine </th>
-                                    {% for medicine in appointment.prescription.medicine.all %}
                                     <td colspan="4">
-                                        {{medicine}}
-                                    </td>
+                                    {% for medicine in appointment.prescription.medicine.all %}
+                                        <span class="badge badge-secondary">{{medicine}}</span>
                                     {% endfor %}
+                                    </td>
                                 </tr>
                                 <tr>
                                     <th scope="row">Instructions</th>
                                     <td colspan="4">{{appointment.prescription.instructions}}</td>
                                 </tr>
                                 <tr>
+                                    <th scope="row">Diagnosis</th>
+                                    <div style="overflow: auto">
+                                        <td colspan="4"> 
+                                            {{appointment.report.diagnosis}}
+                                        </td>
+                                    </div>
+                                </tr>
+                                <tr>
                                     <div class=" overflow: auto">
-                                        <th scope="row">Test report&nbsp;<button class="btn">view file</button></th>
-                                        <th>X-Ray&nbsp;<button class="btn">view file</button></th>
-                                        <th>CT Scan&nbsp;<button class="btn">view file</button></th>
+                                        {% if appointment.report.test_report %}
+                                        <th scope="row" width="33%">Test report<a class="btn btn-primary ml-3" href="{{appointment.report.test_report.url}}">View</a></th>
+                                        {% endif %}
+                                        {% if appointment.report.xray %}
+                                        <th scope="row" width="33%">X-Ray<a class="btn btn-primary ml-3" href="{{appointment.report.xray.url}}">View</a></th>
+                                        {% endif %}
+                                        {% if appointment.report.ct %}
+                                        <th scope="row" width="33%">CT Scan<a class="btn btn-primary ml-3" href="{{appointment.report.ct.url}}">View</a></th>
+                                        {% endif %}
                                     </div>
                                 </tr>
                             </tbody>
@@ -111,6 +129,7 @@
     <style>
         .bg {
             background: rgb(109, 111, 111);
+            height: 100vh;
             padding-top: 1px;
             padding-bottom: 25px;
         }
@@ -145,32 +164,12 @@
             margin-bottom: 5px;
         }
 
-        .badge {
-            width: 90px;
-        }
-
-        .badge-secondary {
-            color: #000;
-            background-color: #cdd8e1;
-        }
-
         .btn {
             padding: 6px;
             border-color: black;
         }
     </style>
 </body>
-
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-    integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-    crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
-    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-    crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
-    integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-    crossorigin="anonymous"></script>
-
 </body>
 
 </html>
