@@ -26,6 +26,15 @@ MEDIA_ROOT = BASE_DIR / 'uploads'
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
+# Email settings
+# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'foursygroup@gmail.com'
+EMAIL_HOST_PASSWORD = 'pxjxpszkmbzsqvpl'
+
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-4+rk+bptb#n^m0h_es3v%fwjp(5*vlwnwc-@01a@l=$=2^h@ee'
 
