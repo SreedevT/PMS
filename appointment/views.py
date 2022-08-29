@@ -197,7 +197,7 @@ def follow_book(request):
     doctor = prev_appointment.doctor
     patient = prev_appointment.patient
     reason = prev_appointment.reason
-    date = request.post['date']
+    date = request.POST['date']
     #! IF timeslots are implemented for each doctor, use doctor_id to get timeslots
     strslot = request.POST['slot']
     list_slot = strslot.split('-') #!Like ['9:00', '10:00']
