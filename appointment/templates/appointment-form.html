@@ -65,10 +65,11 @@
 
     <!--* This script diables previous dates using JQuery, more info: https://devnote.in/how-to-disable-previous-dates-in-date-picker-using-jquery/ -->
     <script language="javascript">
-        var today = new Date();
-        var dd = String(today.getDate()).padStart(2, '0');
-        var mm = String(today.getMonth() + 1).padStart(2, '0');
-        var yyyy = today.getFullYear();
+        var tomorrow = new Date();
+        tomorrow.setDate(tomorrow.getDate() + 1);
+        var dd = String(tomorrow.getDate()).padStart(2, '0');
+        var mm = String(tomorrow.getMonth() + 1).padStart(2, '0');
+        var yyyy = tomorrow.getFullYear();
     
         today = yyyy + '-' + mm + '-' + dd;
         $('#date').attr('min',today);
