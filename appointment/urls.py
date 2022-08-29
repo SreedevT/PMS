@@ -3,8 +3,7 @@ from . import views
 
 app_name = 'appointment'
 urlpatterns = [
-    path('select-doctor', views.doctor_list, name='doc-list'),
-    path('test', views.test, name='test'), #?TODO - remove this
+    path('select-doctor', views.doctor_list, name='doc-list'),\
     path('appointment-form', views.appointment_form, name='appointment-form'),
     path('appointment-book', views.appointment_book, name='appointment-book'),
     path('appointment-list', views.appointment_list, name='appointment-list'),
