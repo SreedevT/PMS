@@ -9,10 +9,10 @@ from hospital.models import Medicine
 from django.db import connection, IntegrityError
 from django.contrib import messages
 
-@login_required(login_url='accounts:login')
+
 def doctor_list(request):
     user = request.user
-    if user.is_doctor():
+    if user.is_authenticated and user.is_doctor():
         messages.add_message(request, messages.ERROR, 'Please sign in as patient to view this page!')
         return redirect('accounts:home')
     

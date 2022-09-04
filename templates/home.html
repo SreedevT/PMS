@@ -54,7 +54,7 @@
                             <h1> <b>Making Health<br>Care Better Together</b></h1>
                             <h4 style="color: #000000e3;">"Hospitals are about healing" -Irwin Redlener</h4>
                             <h5>Every day we bring hope and smile to the patients we serve</h5>
-                            {% if user.is_patient %}
+                            {% if not user.is_doctor %}
                             <a class="btn btn-primary" href="{% url 'appointment:doc-list' %}">Book an appointment</a>
                             {% endif %}
                             {% if user.is_authenticated %}
