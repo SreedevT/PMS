@@ -27,10 +27,10 @@
                 <br>
                 <br>            
                     <div class="col-md-12 col-12" style="align-items: center;">
-                        <table class="table table-striped">
+                        <!-- <table class="table table-striped">
                             <thead>
                               <tr>
-                                <th scope="col" width="10%">No.</th>
+                                <th scope="col" width="10%"><h4>No.</h4></th>
                                 <th scope="col" width="15%"><h4>Photo</h4></th>
                                 <th scope="col" width="20%"><h4>Name</h4></th>
                                 <th scope="col" width="10%"><h4>Date</h4></th>
@@ -38,6 +38,19 @@
                                 <th scope="col"><h4>View Details</h4></th>
                               </tr>
                             </thead>
+                            <tbody> -->
+                            <div class="table-responsive table-striped">
+                                <table class="table table-hover">
+                                <thead class="thead">
+                                <tr>
+                                    <th scope="col" width="10%">No.</th>
+                                    <th scope="col" width="15%">Photo</th>
+                                    <th scope="col" width="20%">Name<</th>
+                                    <th scope="col" width="10%">Date</th>
+                                    <th scope="col" width="10%">Time</th>
+                                    <th scope="col">View Details</th>
+                                </tr>
+                                </thead>
                             <tbody>
 {% for appointment in appointments %}
                                 <tr>
@@ -83,6 +96,12 @@
     th, td{
         text-align: center;
     }
+
+    .table .thead {
+        color: #fff;
+        background-color: #5c5b5d;
+    
+      }
 
     .photo{
         width: 100px;
