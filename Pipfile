@@ -11,7 +11,7 @@ django-widget-tweaks = "*"
 django-debug-toolbar = "*"
 django-cleanup = "*"
 django-extensions = "*"
-django = "==4.0.6"
+django = "*"
 python-decouple = "*"
 
 [dev-packages]
