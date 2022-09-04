@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 import os
 from pathlib import Path
+from decouple import config
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -33,10 +34,9 @@ EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'foursygroup@gmail.com'
-EMAIL_HOST_PASSWORD = 'pxjxpszkmbzsqvpl'
-
+EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-4+rk+bptb#n^m0h_es3v%fwjp(5*vlwnwc-@01a@l=$=2^h@ee'
+SECRET_KEY = config("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -44,10 +44,9 @@ DEBUG = True
 ALLOWED_HOSTS = [
   'localhost',
   '127.0.0.1',
-  '111.222.333.444',
-  'mywebsite.example']
+  ]
 
-# Phone numeber field
+# Phone number field
 PHONENUMBER_DEFAULT_REGION = 'IN'
 PHONENUMBER_DB_FORMAT = 'NATIONAL'
 
