@@ -164,6 +164,9 @@ def result(request):
         messages.add_message(request, messages.SUCCESS, 'Report & Prescription added successfully!')
         return redirect('appointment:pending-appointment')
 
+    return render(request, 'view-appointment.html')
+    
+
 
 
 def report(request):
