@@ -39,12 +39,15 @@ EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
 SECRET_KEY = config("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = [
   'localhost',
   '127.0.0.1',
+  '*',
   ]
+
+CSRF_TRUSTED_ORIGINS = ['https://sait-django-production.up.railway.app',]
 
 # Phone number field
 PHONENUMBER_DEFAULT_REGION = 'IN'
@@ -114,13 +117,16 @@ INTERNAL_IPS = [
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
+import dj_database_url
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+    'default': dj_database_url.parse(config('DATABASE_URL'))
 }
-
 AUTH_USER_MODEL = 'accounts.User'
 
 # Password validation
