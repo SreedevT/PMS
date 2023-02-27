@@ -47,7 +47,7 @@ ALLOWED_HOSTS = [
   '*',
   ]
 
-CSRF_TRUSTED_ORIGINS = ['https://sait-django-production.up.railway.app',]
+CSRF_TRUSTED_ORIGINS = ['https://pms.up.railway.app',]
 
 # Phone number field
 PHONENUMBER_DEFAULT_REGION = 'IN'
